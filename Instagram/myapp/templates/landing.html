@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+  <head>
+    <title>Elevate Trend</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{% static 'css/landing.css' %}" />
+  </head>
+  <body>
+    <section class="banner">
+      <header class="sticky">
+        <div class="container">
+          <div class="header-content">
+            <div class="logo-container">
+              <img src="{% static 'images/logo.png' %}" class="image" />
+              <h2 class="logo">Elevate Trend</h2>
+            </div>
+            <div class="hoverEffect">
+              <button class="btn" id="registerButton">Register</button>
+              <button class="btn" id="signInButton">SignIn</button>
+            </div>
+          </div>
+        </div>
+      </header>
+    </section>
+
+    <div class="afterheader">
+        <div id="tagline">
+          <p id="tagp" class="centered">
+            Your ultimate social media monitoring tool.
+          </p>
+          <p id="tagp">
+            Track, analyze, and elevate your social media presence with real-time
+            data insights and comprehensive analytics. Unlock the power of social
+            media with Elevate Trend.
+          </p>
+        </div>
+        <div id="imagean">
+          <video id="myVideo" width="550" controls>
+            <source src="{% static 'images/logovideo.mp4' %}" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        </div>
+  
+        {% comment %} <div class="video-container">
+          <div class="video">
+            <iframe width="550" height="300" src="https://www.youtube.com/embed/3Bxcx55uYVY" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+      </div>  {% endcomment %}                                                                                                           </div>
+
+    <div class="features-intro">
+        <h2>These are some features of Elevate Trend</h2>
+      </div>
+  
+      <div class="feature-section">
+        <div class="feature-box">
+          <h2 class="feature-title">Comprehensive Audience Insights</h2>
+          <p class="feature-description">
+            "Understand Your Audience with In-Depth Insights"
+          </p>
+        </div>
+        <div class="feature-box">
+          <h2 class="feature-title">Unveiling Trends with Visual Insights</h2>
+          <p class="feature-description">
+            "Immersive visualizations reveal hidden trends, transforming complex
+            data into insights."
+          </p>
+        </div>
+        <div class="feature-box">
+          <h2 class="feature-title">Automated Data Collection and Aggregation</h2>
+          <p class="feature-description">
+            "Streamline Your Insights with Automated Data Collection"
+          </p>
+        </div>
+    </div>
+
+    <div class="how-it-works-section">
+        <h2>How It Works</h2>
+        <div class="steps-container">
+          <div class="step-box">
+            <h3>1. Connect Your Accounts</h3>
+            <p>Securely integrate your social media platforms in a few clicks.</p>
+          </div>
+          <div class="step-box">
+            <h3>2. Analyze Performance</h3>
+            <p>Gain real-time insights into your campaigns and audience behavior.</p>
+          </div>
+          <div class="step-box">
+            <h3>3. Empower Your Growth</h3>
+            <p>Leverage powerful insights to make smarter, data-driven decisions and scale your social media impact effortlessly.</p>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="footer-container">
+          <!-- Left Column -->
+          <div class="footer-column">
+            <img src="{% static 'images/logo.png' %}" class="logo" alt="Logo" />
+            <ul class="footer-links">
+              <li><a href="#">Customers</a></li>
+              <li><a href="#">Why Elevate Trend</a></li>
+            </ul>
+          </div>
+      
+          <!-- Right Column -->
+          <div class="footer-column">
+            <ul class="footer-links">
+              <li><a href="#">Need Help?</a></li>
+              <li><a href="#">Product Updates</a></li>
+              <li><a href="#">Contact Sales</a></li>
+              <li><a href="#">FAQ</a></li>
+            </ul>
+          </div>
+        </div>
+      
+        <!-- Social Media Row -->
+        <div class="social-media">
+          <a href="https://www.facebook.com/profile.php?id=61561488003906" class="social-icon">
+            <img src="{% static 'images/facebook.png' %}" alt="Facebook" />
+          </a>
+          <a href="https://x.com/home?lang=en" class="social-icon">
+            <img src="{% static 'images/twitter.png' %}" alt="Twitter" />
+          </a>
+        <a href="https://www.youtube.com/channel/UCWxAv8Aw3O6qMXm0WfPsEvg" class="social-icon">
+          <img src="{% static 'images/yt.png' %}" alt="YouTube" />
+        </a>
+        <a href="#" class="social-icon">
+          <img src="{% static 'images/linkedin.png' %}" alt="LinkedIn" />
+        </a>
+        <a href="https://www.instagram.com/_elevate_trend_/" class="social-icon">
+          <img src="{% static 'images/instagram.png' %}" alt="Instagram" />
+        </a>
+      </div>
+    </footer>
+    
+    
+    <script>
+    
+            // Redirect
+            registerButton.addEventListener("click", function () {
+              window.location.href = "{% url 'signup' %}";  // Navigates to the Sign Up page
+            });
+    
+            signInButton.addEventListener("click", function () {
+              window.location.href = "{% url 'signin' %}";  // Navigates to the Sign In page
+            });
+    
+        </script>
+      </body>
+    </html>
+    
+
+
+          
+

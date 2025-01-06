@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Page Reviews</title>
+</head>
+<body>
+    <h1>Reviews for Page: {{ page_name }}</h1>
+
+    {% if reviews %}
+        <ul>
+            {% for review in reviews %}
+                <li>
+                    <strong>Reviewer:</strong> {{ review.reviewer.name }}<br>
+                    <strong>Recommendation:</strong> {{ review.recommendation_type }}<br>
+                    <strong>Review:</strong> {{ review.review_text }}<br>
+                    <strong>Created Time:</strong> {{ review.created_time }}
+                </li>
+                <hr>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No reviews found for this page.</p>
+    {% endif %}
+
+    <a href="/select_page_reviews/">Go Back to Select Another Page</a>
+</body>
+</html>

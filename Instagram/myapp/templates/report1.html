@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <title> Report </title>
+    <!-- Boxicons CDN Link -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/report.css' %}" />
+   </head>
+<body>
+  <div class="sidebar">
+    <div class="logo-details">
+      <i class='bx bx-leaf'></i>
+      <span class="logo_name">Elevate Trend</span>
+    </div>
+      <ul class="nav-links">
+        <li>
+          <a href="{% url 'dashboard1' %}">
+            <i class='bx bx-grid-alt' ></i>
+            <span class="links_name">Dashboard</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'account1' %}">
+            <i class='bx bxs-user-account' ></i>
+            <span class="links_name">Account</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'report1' %}" class="active">
+            <i class='bx bx-trending-up'></i>
+            <span class="links_name">Review</span>
+          </a>
+        </li>
+        <li>
+ <a href="{% url 'analytics1' %}">
+            <i class='bx bx-pie-chart-alt-2' ></i>
+            <span class="links_name">Analytics</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'support1' %}">
+            <i class='bx bx-support' ></i>
+            <span class="links_name">Support</span>
+          </a>
+        </li>
+        <li class="log_out">
+          <a href="{% url 'logout_view' %}">
+            <i class="bx bx-log-out"></i>
+            <span class="links_name">Log out</span>
+          </a>
+        </li>
+      </ul>
+  </div>
+  <section class="home-section">
+    <nav>
+      <div class="sidebar-button">
+        <i class='bx bx-menu sidebarBtn'></i>
+        <span class="dashboard">Review</span>
+      </div>
+      <div class="search-box">
+        <input type="text" placeholder="Search...">
+        <i class='bx bx-search' ></i>
+      </div>
+      <div class="profile-details">
+          <img src="{% static 'images/logo.png' %}" alt="Logo" />
+          <span class="admin_name">{{  request.session.user_name }}</span>
+      </div>
+    </nav>
+<div class="home-content">
+                  <div class="feedback-container">
+        <h1>We Value Your Feedback!</h1>
+        <form id="feedback-form" action="{% url 'submit_feedback' %}" method="POST">
+            {% csrf_token %}
+            <label for="website-experience">How do you like our website?</label>
+            <div class="options">
+                <input type="radio" id="option1" name="experience" value="Excellent" required>
+                <label for="option1">Excellent</label>
+                <br>
+                <input type="radio" id="option2" name="experience" value="Good">
+                <label for="option2">Good</label>
+                <br>
+                <input type="radio" id="option3" name="experience" value="Average">
+                <label for="option3">Average</label>
+                <br>
+                <input type="radio" id="option4" name="experience" value="Poor">
+                <label for="option4">Poor</label>
+            </div>
+
+            <label for="user-review">Write your review:</label>
+            <textarea id="user-review" name="review" rows="5" placeholder="Type your feedback here..." required></textarea>
+
+            <button type="submit">Submit Feedback</button>
+        </form>
+    </div>
+</div>
+    </section>
+  <script>
+   let sidebar = document.querySelector(".sidebar");
+let sidebarBtn = document.querySelector(".sidebarBtn");
+sidebarBtn.onclick = function() {
+  sidebar.classList.toggle("active");
+  if(sidebar.classList.contains("active")){
+  sidebarBtn.classList.replace("bx-menu" ,"bx-menu-alt-right");
+}else
+  sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
+}
+ </script>
+
+</body>
+</html>
