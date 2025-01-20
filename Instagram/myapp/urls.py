@@ -2,6 +2,7 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
+    path('post/metrics/', views.post_metrics, name='post_metrics'),
 path('request_password_reset/', views.request_password_reset, name='request_password_reset'),
     path('reset_password/<uidb64>/<token>/', views.reset_password, name='reset_password'),
 
