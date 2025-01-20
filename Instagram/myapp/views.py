@@ -87,6 +87,121 @@ from django.template.loader import render_to_string
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from .models import CustomUser  # Importing CustomUser model
 from django.conf import settings
+def facebook_insights(request):
+    if request.method == 'POST':
+        page_id = request.POST.get('page_id')
+        access_token = request.POST.get('access_token')
+        period = request.POST.get('period', 'day')  # Default to 'day'
+
+        if not page_id or not access_token:
+            return JsonResponse({'error': 'Page ID or access token missing.'}, status=400)
+
+        # Get page access token
+        pages_url = f"https://graph.facebook.com/me/accounts?access_token={access_token}"
+        pages_response = requests.get(pages_url)
+        pages_data = pages_response.json()
+
+        page_access_token = None
+        for page in pages_data.get('data', []):
+            if page['id'] == page_id:
+                page_access_token = page.get('access_token')
+                break
+
+        if not page_access_token:
+            return JsonResponse({'error': 'Page access token not found.'}, status=400)
+
+        # Calculate default `since` and `until` dates based on the selected period
+        since_date, until_date = calculate_dates(period)
+        since = since_date.strftime('%Y-%m-%d') if since_date else None
+        until = until_date.strftime('%Y-%m-%d')
+
+        # Fetch insights
+        page_insights = get_page_insights(page_access_token, page_id,'day', since, until)
+#        return JsonResponse(page_insights)
+        # Extract relevant data for graphing
+        metrics_data = {}
+        for item in page_insights.get('data', []):
+            metric_name = item['name']
+            metrics_data[metric_name] = [
+                {"date": value["end_time"][:10], "value": value["value"]}
+                  for value in item.get("values", [])
+            ]
+
+        return render(request, 'facebook_insights.html', {
+            'metrics': metrics_data,
+            'page_id': page_id,
+            'period': period,
+            'since': since,
+            'until': until
+        })
+
+    # For GET requests, render a form for user input
+    return render(request, 'insights_form.html')
+def calculate_dates(period):
+    """Calculate default since and until dates based on the selected period."""
+    today = date.today()
+    if period == 'day':
+        since = today - timedelta(days=1)
+    elif period == 'week':
+        since = today - timedelta(days=7)
+    elif period == 'days_28':
+        since = today - timedelta(days=28)
+    else:
+        since = None
+
+    until = today
+    return since, until
+def get_page_insights(page_access_token, page_id, period, since=None, until=None):
+    insights_url = f"https://graph.facebook.com/v17.0/{page_id}/insights"
+    params = {
+        'metric': 'page_impressions,page_posts_impressions,page_fan_adds,page_fan_removes,page_post_engagements,page_views_total,page_daily_follows,page_daaily_unfollows_unique',        'period': period,
+        'access_token': page_access_token
+    }
+
+    # Add default or calculated date range
+    if since and until:
+        params['since'] = since
+        params['until'] = until
+
+    response = requests.get(insights_url, params=params)
+    return response.json()
+
+def get_page_insightsp(page_access_token, post_id, period, since, until):
+    """
+    Fetch insights from Facebook Graph API with since/until.
+    """
+    insights_url = f"https://graph.facebook.com/v21.0/{post_id}/insights"
+    params = {
+        'metric': 'page_posts_impressions,page_posts_impressions_unique',
+        'period': period,
+        'access_token': page_access_token,
+        'since': since,
+        'until': until,
+    }
+    response = requests.get(insights_url, params=params)
+    return response.json()
+def post_metrics(request):
+    if request.method == "POST":
+        post_id = request.POST.get('post_id')  # Get post_id from the POST request
+        time_period = request.POST.get('time_period', 'day')  # Default to 'day'
+
+        # Calculate 'since' and 'until' based on the selected time period
+        since_date, until_date = calculate_dates(time_period)
+        since = since_date.strftime('%Y-%m-%d') if since_date else None
+        until = until_date.strftime('%Y-%m-%d')
+
+        # Get the page access token from the session
+        page_access_token = request.session.get('facebook_page_token')
+
+        # Fetch page insights (replace `get_page_insightsp` with your actual function)
+        page_insights = get_page_insightsp(page_access_token, post_id,'day', since, until)
+
+        # Return the insights as a JSON response
+        return JsonResponse(page_insights)
+
+    # If not POST, handle invalid access
+    return JsonResponse({'error': 'Invalid request method'}, status=400)
+
 
 # Request Password Reset (View)
 """def request_password_reset(request):
