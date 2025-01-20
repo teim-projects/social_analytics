@@ -158,5 +158,36 @@
         <input type="hidden" name="access_token" value="{{ access_token }}">
         <button type="submit">Get Page Insights</button>
     </form>-->
+<form method="POST" action="/get_page_insights/">
+    {% csrf_token %}
+
+    <!-- Page Selector -->
+    <label for="page_id">Select Page for Insights:</label>
+    <select name="page_id">
+        {% for page in pages %}
+            <option value="{{ page.id }}">{{ page.name }}</option>
+        {% endfor %}
+    </select>
+
+    <!-- Period Selector -->
+    <label for="period">Select Period:</label>
+    <select name="period" id="period">
+        <option value="day">Day</option>
+        <option value="week">Week</option>
+        <option value="days_28">28 Days</option>
+    </select>
+     <!-- Calendar Inputs for Custom Date Range -->
+<!---    <label for="since">Start Date:</label>
+    <input type="date" name="since" id="since">
+
+    <label for="until">End Date:</label>
+    <input type="date" name="until" id="until">
+
+    <!-- Hidden Access Token -->
+    <input type="hidden" name="access_token" value="{{ access_token }}">
+
+    <button type="submit">Get Page Insights</button>
+</form>
+    
 </body>
 </html>
