@@ -4,124 +4,57 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Facebook Insights</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        h1, h2 {
-            text-align: center;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: center;
-        }
-        th {
-            background-color: #f4f4f4;
-        }
-        canvas {
-            display: block;
-            margin: 0 auto;
-        }
-    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    <h1>Facebook Insights</h1>
-    <h2>Page: {{ page_name }}</h2>
+    <h1>Facebook Insights for Page ID: {{ page_id }}</h1>
+    <h2>Period: {{ period }}</h2>
+    <p>From: {{ since }} To: {{ until }}</p>
 
-    <!-- Text Data in Table Format -->
-    <table>
-        <thead>
-            <tr>
-                <th>Metric</th>
-                <th>Period</th>
-                <th>Value</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for metric, values in metrics.items %}
-                {% for item in values %}
-                    <tr>
-                        <td>{{ metric }}</td>
-                        <td>{{ item.period }}</td>
-                        <td>{{ item.value }}</td>
-                    </tr>
-                {% endfor %}
-            {% endfor %}
-        </tbody>
-    </table>
-    <!-- Graphical Representation -->
-    <canvas id="insightsChart" width="800" height="400"></canvas>
+    {% for metric_name, values in metrics.items %}
+        <h3>{{ metric_name }}</h3>
+        <canvas id="chart-{{ forloop.counter }}" width="400" height="200"></canvas>
+        <script>
+            // Prepare data for the chart
+            var chartData = {
+                labels: [{% for item in values %}'{{ item.date }}',{% endfor %}],
+                datasets: [{
+                    label: '{{ metric_name }}',
+                    data: [{% for item in values %}{{ item.value }},{% endfor %}],
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1,
+                    fill: false
+                }]
+            };
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script>
-        // Prepare data for Chart.js visualization
-        const metricsData = {{ metrics_json|safe }};
-        const labels = [];
-        const datasets = [];
+            // Render the chart
+            var ctx = document.getElementById('chart-{{ forloop.counter }}').getContext('2d');
+            new Chart(ctx, {
+                type: 'line', // Line chart type
+                data: chartData,
+                options: {
+                    responsive: true,
+                    scales: {
 
-        // Process metrics for graphing
-        Object.keys(metricsData).forEach(metric => {
-            const dataPoints = metricsData[metric].map(item => ({
-                period: item.period,
-                value: item.value
-            }));
-
-            labels.push(...dataPoints.map(dp => dp.period));
-            datasets.push({
-                label: metric,
-                data: dataPoints.map(dp => dp.value),
-                fill: false,
-                borderColor: `#${Math.floor(Math.random() * 16777215).toString(16)}`,
-                borderWidth: 1
-            });
-        });
-
-        // Remove duplicate labels
-        const uniqueLabels = [...new Set(labels)];
-
-        // Initialize Chart.js
-        const ctx = document.getElementById('insightsChart').getContext('2d');
-        new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: uniqueLabels,
-                datasets: datasets
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'top',
-                    },
-                    tooltip: {
-                        mode: 'index',
-                        intersect: false,
-                    }
-                },
-                scales: {
-                    x: {
-                        title: {
-                            display: true,
-                            text: 'Period'
-                        }
-                    },
-                    y: {
-                        title: {
-                            display: true,
-                            text: 'Value'
+                   x: {
+                            title: {
+                                display: true,
+                                text: 'Date'
+                            }
                         },
-                        beginAtZero: true
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Value'
+                            },
+                            beginAtZero: true
+                        }
                     }
                 }
-            }
-        });
-    </script>
+            });
+        </script>
+    {% endfor %}
 </body>
 </html>
+
+
