@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.conf import settings
 import os
+from dotenv import load_dotenv
 import random
 import string
 import hashlib
@@ -76,9 +77,7 @@ from django.utils import timezone
 
 from django.shortcuts import render
 from .models import CustomUser
-ADMIN_EMAIL = "admin@example.com"
 
-ADMIN_PASSWORD = "admin123"
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.tokens import default_token_generator
@@ -89,6 +88,11 @@ from .models import CustomUser  # Importing CustomUser model
 from django.conf import settings
 import plotly.express as px
 import pandas as pd
+
+load_dotenv()  # Load environment variables from .env file
+
+ADMIN_EMAIL = os.getenv("ADMIN_EMAIL")
+ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD")
 
 def instagram_analytics(request):
     return render(request, 'instagram_analytics.html')
@@ -470,7 +474,7 @@ def optimal_posting_time(posts_with_insights):
 
 
 def youtube_loginn(request):
-    youtube_client_id = '513519953353-rrj92bnn76cengjlg9f09b6a3oma7trq.apps.googleusercontent.com'
+    youtube_client_id = os.getenv('YOUTUBE_CLIENT_ID')  
     redirect_uri = 'https://www.marketinganalytics.live/callbackyoutube/'
     scopes = ['https://www.googleapis.com/auth/youtube.readonly', 'https://www.googleapis.com/auth/analytics' ,'https://www.googleapis.com/auth/yt-analytics.readonly','https://www.googleapis.com/auth/yt-analytics-monetary.readonly','https://www.googleapis.c.com/auth/youtube','https://www.googleapis.com/auth/youtubepartner','https://www.googleapis.com/auth/youtube.force-ssl'] 
     
@@ -502,8 +506,8 @@ def youtube_callbackn(request):
     if not code:
         return HttpResponse("Error: Authorization code is missing.")
 
-    youtube_client_id =  '513519953353-rrj92bnn76cengjlg9f09b6a3oma7trq.apps.googleusercontent.com'
-    youtube_client_secret = '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'
+    youtube_client_id =  os.getenv('YOUTUBE_CLIENT_ID')
+    youtube_client_secret = os.getenv('YOUTUBE_CLIENT_SECRET')
     redirect_uri = 'https://www.marketinganalytics.live/callbackyoutube/'
 
     # Exchange authorization code for access token
@@ -950,7 +954,7 @@ def sign_in(request):
             return render(request, 'sign_in.html')  # Render sign-in template again
 
 def linkedin_login(request):
-    client_id = '77uiswwhp0ihms'
+    linkedin_client_id = os.getenv('LINKEDIN_CLIENT_ID')
     redirect_uri = 'http://127.0.0.1:8000/callbacklin/'
     # redirect_uri = 'https://www.marketinganalytics.live/callbacklin/'
     scope = 'email openid profile   '  # Corrected scope
@@ -961,7 +965,7 @@ def linkedin_login(request):
     # Prepare the parameters as a dictionary
     params = {
         'response_type': 'code',
-        'client_id': client_id,
+        'client_id': linkedin_client_id,
         'redirect_uri': redirect_uri,
         'state': state,  # Add the state parameter for security
         'scope': scope,
@@ -992,8 +996,9 @@ def linkedin_callback(request):
     if not session_state or state != session_state:
         return HttpResponse("Error: Invalid state parameter. Possible CSRF attack.")
 
-    client_id = '77uiswwhp0ihms'
-    client_secret = 'WPL_AP1.6rMQQEq2pHGZiVpp.pT3bbA=='
+    linkedin_client_id = os.getenv('LINKEDIN_CLIENT_ID')
+    linkedin_client_secret = os.getenv('LINKEDIN_CLIENT_SECRET')
+     # Use the same redirect URI as in the login view
     redirect_uri = 'http://127.0.0.1:8000/callbacklin/'
     # redirect_uri = 'https://www.marketinganalytics.live/callbacklin/'
     
@@ -1003,8 +1008,8 @@ def linkedin_callback(request):
         'grant_type': 'authorization_code',
         'code': code,
         'redirect_uri': redirect_uri,
-        'client_id': client_id,
-        'client_secret': client_secret,
+        'client_id': linkedin_client_id,
+        'client_secret': linkedin_client_secret,
     }
 
     # Make a POST request to exchange the authorization code for an access token
@@ -1051,7 +1056,7 @@ def facebook_login(request):
    
 
     # Define the Facebook Login URL with required parameters
-    client_id = '447494395121756'  
+    facebook_client_id = os.getenv('FACEBOOK_CLIENT_ID') 
     # Your Facebook App ID
     redirect_uri = 'https://www.marketinganalytics.live/callbackii/'
     scope = 'instagram_basic,instagram_content_publish,instagram_manage_comments,instagram_manage_insights,pages_show_list,pages_read_engagement'
@@ -1059,7 +1064,7 @@ def facebook_login(request):
 
     auth_url = (
         f"https://www.facebook.com/v14.0/dialog/oauth?"
-        f"client_id={client_id}&"
+        f"client_id={facebook_client_id}&"
         f"redirect_uri={redirect_uri}&"
         f"scope={scope}&"
         f"response_type={response_type}"
@@ -1077,14 +1082,14 @@ def facebook_callback(request):
     if not code:
         return JsonResponse({'error': 'Authorization code not provided.'}, status=400)
 
-    client_id = '447494395121756'
-    client_secret = '407b50fd96694a9de782217358e945d1'
+    facebook_client_id = os.getenv('FACEBOOK_CLIENT_ID')
+    facebook_client_secret = os.getenv('FACEBOOK_CLIENT_SECRET')
     redirect_uri = 'https://www.marketinganalytics.live/callbackii/'
     token_url = (
         f"https://graph.facebook.com/v14.0/oauth/access_token?"
-        f"client_id={client_id}&"
+        f"client_id={facebook_client_id}&"
         f"redirect_uri={redirect_uri}&"
-        f"client_secret={client_secret}&"
+        f"client_secret={facebook_client_secret}&"
         f"code={code}"
     )
 
@@ -1107,7 +1112,7 @@ def about_view(request):
     return render(request, 'about.html')
 # URL to start the OAuth2 process
 def youtube_login(request):
-    youtube_client_id = '513519953353-rrj92bnn76cengjlg9f09b6a3oma7trq.apps.googleusercontent.com'
+    youtube_client_id = os.getenv('YOUTUBE_CLIENT_ID')
     redirect_uri = 'https://www.marketinganalytics.live/callbackyoutube/'
     scopes = ['https://www.googleapis.com/auth/youtube.readonly', 'https://www.googleapis.com/auth/analytics' , 'https://www.googleapis.com/auth/yt-analytics.readonly','https://www.googleapis.com/auth/yt-analytics-monetary.readonly','https://www.googleapis.com/auth/youtube','https://www.googleapis.com/auth/youtubepartner','https://www.googleapis.com/auth/youtube.force-ssl']       
     # Construct the OAuth2 authorization URL
@@ -1132,8 +1137,8 @@ def youtube_login(request):
 
 def youtube_callback(request):
     code = request.GET.get('code')
-    youtube_client_id =  '513519953353-rrj92bnn76cengjlg9f09b6a3oma7trq.apps.googleusercontent.com'
-    youtube_client_secret = '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'
+    youtube_client_id = os.getenv('YOUTUBE_CLIENT_ID')
+    youtube_client_secret = os.getenv('YOUTUBE_CLIENT_SECRET')
     redirect_uri = 'https://www.marketinganalytics.live/callbackyoutube/'
 
     # Exchange authorization code for access token
@@ -1303,8 +1308,8 @@ from django.shortcuts import redirect, render
 from django.http import HttpResponse
 
 # Your Twitter API credentials
-CLIENT_ID = 'M0c5bncwMGROdHlFd1hqUUJPRGY6MTpjaQ'
-CLIENT_SECRET = 'KRA_gxUIydi_dCn8oeJvvn9HIJiPyhPfyLbKBJyc7P_dTPM5Hl'
+TWITTER_CLIENT_ID = os.getenv('TWITTER_CLIENT_ID')
+TWITTER_CLIENT_SECRET = os.getenv('TWITTER_CLIENT_SECRET')
 REDIRECT_URI = 'https://www.marketinganalytics.live/callback/'  # Ensure this matches your Twitter App's callback URL
 AUTH_URL = 'https://twitter.com/i/oauth2/authorize'
 TOKEN_URL = 'https://api.twitter.com/2/oauth2/token'
@@ -1331,7 +1336,7 @@ def login_page(request):
     request.session['code_verifier'] = verifier
     params = {
         'response_type': 'code',
-        'client_id': CLIENT_ID,
+        'client_id': TWITTER_CLIENT_ID,
         'redirect_uri': REDIRECT_URI,
         'scope': 'tweet.read users.read',  # Define the permissions you need
         'state': ''.join(random.choices(string.ascii_letters + string.digits, k=8)),  # Random state
@@ -1351,7 +1356,7 @@ def twitter_callback(request):
         return HttpResponse("Error: Missing code or verifier", status=400)
 
     # Prepare client credentials for Basic Auth (client_id:client_secret)
-    credentials = f"{CLIENT_ID}:{CLIENT_SECRET}"
+    credentials = f"{TWITTER_CLIENT_ID}:{TWITTER_CLIENT_SECRET}"
     encoded_credentials = base64.b64encode(credentials.encode('ascii')).decode('ascii')
 
     # Step 3: Exchange authorization code for access token
@@ -1501,8 +1506,8 @@ import requests
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
 
-CLIENT_IDi = '969834388286582'
-CLIENT_SECRETi = '44f3a7a9a696f4dd9b047a1cdca5cb6b'
+INSTAGRAM_CLIENT_ID = os.getenv('INSTAGRAM_CLIENT_ID')
+INSTAGRAM_CLIENT_SECRET = os.getenv('INSTAGRAM_CLIENT_SECRET')
 REDIRECT_URIi = 'https://www.marketinganalytics.live/callbacki/'
 SCOPESi = 'user_profile,user_media'
 ACCESS_TOKEN = None  # Store access token here
@@ -1517,8 +1522,8 @@ def instagram_callback(request):
     if code:
         token_url = 'https://api.instagram.com/oauth/access_token'
         data = {
-            'client_id': CLIENT_IDi,
-            'client_secret': CLIENT_SECRETi,
+            'client_id': INSTAGRAM_CLIENT_ID,
+            'client_secret': INSTAGRAM_CLIENT_SECRET,
             'grant_type': 'authorization_code',
             'redirect_uri': REDIRECT_URIi,
             'code': code
@@ -1656,15 +1661,15 @@ from django.conf import settings
 from django.utils import timezone
 import datetime
 # Reddit OAuth settings
-CLIENT_IDr = 'dTLw8IlTrCrLPC-JlzoiuQ'
-CLIENT_SECRETr = '48Pel_cyETGInCWkux97gIWpSoWf0A'
+REDDIT_CLIENT_ID = os.getenv('REDDIT_CLIENT_ID')
+REDDIT_CLIENT_SECRET = os.getenv('REDDIT_CLIENT_SECRET')
 REDIRECT_URIR = 'https://www.marketinganalytics.live/callbackreddit/'
 SCOPESR = 'identity read history'  # Adding 'history' scope to fetch user's posts
 AUTH_URLR = 'https://www.reddit.com/api/v1/authorize'
 
 def reddit_login(request):
     params = {
-        'client_id': CLIENT_IDr,
+        'client_id': REDDIT_CLIENT_ID,
         'response_type': 'code',
         'state': ''.join(random.choices(string.ascii_letters + string.digits, k=8)),
         'redirect_uri': REDIRECT_URIR,
@@ -1684,7 +1689,7 @@ def reddit_callback(request):
             'code': code,
             'redirect_uri': REDIRECT_URIR,
         }
-        auth = (CLIENT_IDr, CLIENT_SECRETr)
+        auth = (REDDIT_CLIENT_ID, REDDIT_CLIENT_SECRET)
         headers = {'User-Agent': 'TestApp'}
 
         response = requests.post(token_url, data=data, auth=auth, headers=headers)
@@ -1955,14 +1960,14 @@ def predict_engagement(posts_with_insights):
 
 # Facebook Login View
 def facebook_login_view(request):
-    client_id = '3840398266198802'  # Your Facebook App ID
+    facebook_client_id2 = os.getenv('FACEBOOK_CLIENT_ID2')  # Your Facebook App ID
     redirect_uri = 'https://www.marketinganalytics.live/callbackfacebook/'
     scope = 'pages_read_engagement,pages_read_user_content,read_insights'
     response_type = 'code'
 
     auth_url = (
         f"https://www.facebook.com/v14.0/dialog/oauth?"
-        f"client_id={client_id}&"
+        f"client_id={facebook_client_id2}&"
         f"redirect_uri={redirect_uri}&"
         f"scope={scope}&"
         f"response_type={response_type}"
@@ -1992,14 +1997,14 @@ def facebook_callback_view(request):
      # Handle the case where 'code' is None 
     if not code:
         return JsonResponse({'error': 'Authorization code not provided.'}, status=400)
-    client_id = '3840398266198802'
-    client_secret = '265e570ce78f7ac85ab76a3d1036445c'
+    facebook_client_id2 = os.getenv('FACEBOOK_CLIENT_ID2')
+    facebook_client_secret2 = os.getenv('FACEBOOK_CLIENT_SECRET2')
     redirect_uri = 'https://www.marketinganalytics.live/callbackfacebook/'
     token_url = (
         f"https://graph.facebook.com/v14.0/oauth/access_token?"
-        f"client_id={client_id}&"
+        f"client_id={facebook_client_id2}&"
         f"redirect_uri={redirect_uri}&"
-        f"client_secret={client_secret}&"
+        f"client_secret={facebook_client_secret2}&"
         f"code={code}"
     )
     print(token_url)  # Debugging line to check the token URL
