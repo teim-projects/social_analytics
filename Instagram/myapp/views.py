@@ -87,6 +87,21 @@ from django.template.loader import render_to_string
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from .models import CustomUser  # Importing CustomUser model
 from django.conf import settings
+import plotly.express as px
+import pandas as pd
+
+def instagram_analytics(request):
+    return render(request, 'instagram_analytics.html')
+
+def instagram_engagement(request):
+    return render(request, 'instagram_engagement.html')
+
+def engagement_rate(request):
+    return render(request, 'engagement_rate.html')
+
+def top_posts(request):
+    return render(request, 'top_posts.html')
+    
 def facebook_insights(request):
     if request.method == 'POST':
         page_id = request.POST.get('page_id')
@@ -251,16 +266,16 @@ def request_password_reset(request):
             # Send reset link to the user's email
             subject = "Password Reset Request"
             message = f"""
-Hi {user.name},
+                Hi {user.name},
 
-We received a request to reset your password. You can reset your password by clicking the link below:
+                We received a request to reset your password. You can reset your password by clicking the link below:
 
-{reset_url}
-If you didn’t request this change, you can safely ignore this email.
+                {reset_url}
+                If you didn’t request this change, you can safely ignore this email.
 
-Thank you,
-Marketing Analytics Team
-"""
+                Thank you,
+                Marketing Analytics Team
+                """   
             send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [email])
 
             messages.success(request, "Password reset link has been sent to your email.")
@@ -767,6 +782,7 @@ def facebook_login1(request):
 def forgot_password(request):
     return render(request, 'forgot_password.html')
 def instagram_login(request):
+    print(request.session.get('is_authenticated'))
     if request.session.get('is_authenticated', False):
         return render(request, 'index.html')  # Create this template
     else :
@@ -934,8 +950,9 @@ def sign_in(request):
             return render(request, 'sign_in.html')  # Render sign-in template again
 
 def linkedin_login(request):
-    client_id = '778vogm5f7alzm'
-    redirect_uri = 'https://www.marketinganalytics.live/callbacklin/'
+    client_id = '77uiswwhp0ihms'
+    redirect_uri = 'http://127.0.0.1:8000/callbacklin/'
+    # redirect_uri = 'https://www.marketinganalytics.live/callbacklin/'
     scope = 'email openid profile   '  # Corrected scope
 
     # Generate a random state parameter to prevent CSRF attacks
@@ -975,9 +992,10 @@ def linkedin_callback(request):
     if not session_state or state != session_state:
         return HttpResponse("Error: Invalid state parameter. Possible CSRF attack.")
 
-    client_id = '778vogm5f7alzm'
-    client_secret = 'WPL_AP1.4b5Vgkayem7KJECH.Gd+7vA=='
-    redirect_uri = 'https://www.marketinganalytics.live/callbacklin/'
+    client_id = '77uiswwhp0ihms'
+    client_secret = 'WPL_AP1.6rMQQEq2pHGZiVpp.pT3bbA=='
+    redirect_uri = 'http://127.0.0.1:8000/callbacklin/'
+    # redirect_uri = 'https://www.marketinganalytics.live/callbacklin/'
     
      # Prepare token request data
     token_url = 'https://www.linkedin.com/oauth/v2/accessToken'
@@ -1970,6 +1988,8 @@ def get_shares_for_post(post_id, access_token):
         return 0
 def facebook_callback_view(request):
     code = request.GET.get('code')
+    print(code)  # Debugging line to check the received code
+     # Handle the case where 'code' is None 
     if not code:
         return JsonResponse({'error': 'Authorization code not provided.'}, status=400)
     client_id = '3840398266198802'
@@ -1982,6 +2002,7 @@ def facebook_callback_view(request):
         f"client_secret={client_secret}&"
         f"code={code}"
     )
+    print(token_url)  # Debugging line to check the token URL
 
     response = requests.get(token_url)
     token_info = response.json()

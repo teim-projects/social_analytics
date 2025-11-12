@@ -1,5 +1,36 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
 
+/* Make the whole box clickable but preserve layout */
+.box-link {
+  display: inline-block;
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Remove unwanted underline or blue text */
+.box-link .box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Hover effect */
+.box-link .box:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+}
+
+/* Ensure image sizing and alignment stay the same */
+.box-link .acc {
+  width: 40px;
+  height: 40px;
+}
+
 * {
   margin: 0;
   padding: 0;

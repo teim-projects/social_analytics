@@ -71,41 +71,43 @@
     </nav>
     <div class="home-content">
       <h1>We Provide Analytics</h1>
-      <p>Discover insights about your social media performance through our tools:</p>
+      <p>Discover insights about your social media performance:</p>
       <ul>
-        <li>Sentimental Analysis: Understand emotional tones in your audience's responses.</li>
+        <li>Prediction: Predict performance of posts.</li>
         <li>Engagement Rate: Track and improve user interactions on your posts.</li>
+        <li>Top Performing Posts: Track top performing posts.</li>
       </ul>
-      <h2>Steps to Get Started:</h2>
+      <h2 style="margin-left: 60px;">Steps to Get Started:</h2>
       <ol>
         <li>Go to the <b>Account</b> section on the dashboard.</li>
         <li>Login to your social media accounts.</li>
         <li>Access your detailed analytics.</li>
       </ol>
       <div class="overview-boxes">
-        <div class="box">
+        <a href="{% url 'instagram_engagement' %}" style="text-decoration: none; color: inherit;" class="box">
           <div class="right-side">
-            <div class="box-topic">Sentimental Analysis</div>
-            <div class="descriptive_text">Understanding Emotional Tone</div>
+            <div class="box-topic">Prediction</div>
+            <div class="descriptive_text">Predict performance of posts</div>
           </div>
-          <img src="/static/images/sentimental.png" class="acc" alt="Sentimental Analysis">
-        </div>
-        <div class="box">
+          <img src="/static/images/sentimental.png" class="acc" alt="Sentimental Analysis" />
+        </a>
+
+        <a href="{% url 'engagement_rate' %}" style="text-decoration: none; color: inherit;" class="box">
           <div class="right-side">
             <div class="box-topic">Engagement Rate</div>
             <div class="descriptive_text">Tracking User Interactions</div>
           </div>
-          <img src="/static/images/content.png" class="acc" alt="Engagement Rate">
-        </div>
-<div class="box">
-    <div class="right-side">
-        <div class="box-topic">Top Performing Posts</div>
-        <div class="descriptive_text">
-            <span class="dtext">Highlights of the Best Posts</span>
-        </div>
-    </div>
-    <img src="/static/images/predictive.png" class="acc" alt="Top Performing Posts" />
-</div>
+          <img src="/static/images/content.png" class="acc" alt="Engagement Rate" />
+        </a>
+        <a href="{% url 'top_posts' %}" style="text-decoration: none; color: inherit;" class="box">
+            <div class="right-side">
+                <div class="box-topic">Top Performing Posts</div>
+                <div class="descriptive_text">
+                    <span class="dtext">Highlights of the Best Posts</span>
+                </div>
+            </div>
+            <img src="/static/images/predictive.png" class="acc" alt="Top Performing Posts" />
+        </a>
 
       </div>
     </div>

@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-ma8x4v7%zpo38em=@0^2^!()ox56wosr6bu*2dq4#9^=578afw
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["www.marketinganalytics.live","marketinganalytics.live"]
+ALLOWED_HOSTS = ["www.marketinganalytics.live","marketinganalytics.live", '127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -83,14 +83,21 @@ WSGI_APPLICATION = 'Instagram.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'u955483809_Project',         # Your database name
+#         'USER': 'u955483809_elevate',         # Your database username
+#         'PASSWORD': 'MaSS@2024', # Your database password
+#         'HOST': 'srv1090.hstgr.io',           # Hostinger MySQL hostname
+#         'PORT': '3306',
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'u955483809_Project',         # Your database name
-        'USER': 'u955483809_elevate',         # Your database username
-        'PASSWORD': 'MaSS@2024', # Your database password
-        'HOST': 'srv1090.hstgr.io',           # Hostinger MySQL hostname
-        'PORT': '3306',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
@@ -134,12 +141,24 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 # Optionally, add directories to search for static files
-STATICFILES_DIRS = [
-    BASE_DIR / 'static',
-]
+# STATICFILES_DIRS = [
+#     BASE_DIR / 'static',
+# ]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # settings.py
+
+# INSTALLED_APPS += ['corsheaders']
+MIDDLEWARE = ['corsheaders.middleware.CorsMiddleware'] + MIDDLEWARE
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:8501",  # Streamlit
+]
+
+# settings.py
+X_FRAME_OPTIONS = 'ALLOWALL'
+CSRF_TRUSTED_ORIGINS = [
+    "http://localhost:8501",  # Streamlit
+]

@@ -83,12 +83,23 @@
             </div>
             <img src="{% static 'images/facebook.png' %}" alt="" class="acc" />
           </div>
-          <div class="box">
+          <a href="{% url 'instagram_analytics' %}" style="text-decoration: none; color: inherit;" class="box">
+            <div class="right-side">
+              <div class="box-topic">Instagram</div>
+            </div>
+            <img
+              src="{% static 'images/instagram.png' %}"
+              alt="Instagram"
+              class="acc"
+            />
+          </a>
+
+          <!-- <div class="box">
             <div class="right-side">
               <div class="box-topic">Instagram</div>
             </div>
             <img src="{% static 'images/instagram.png' %}" alt="" class="acc" />
-          </div>
+          </div> -->
           <div class="box">
             <div class="right-side">
               <div class="box-topic">Twitter</div>
@@ -116,11 +127,7 @@
             <div class="right-side">
               <div class="box-topic">LinkedIn</div>
             </div>
-            <img
-              src="{% static 'images/linkedin.png' %}"
-              alt=""
-              class="acc"
-            />
+            <img src="{% static 'images/linkedin.png' %}" alt="" class="acc" />
           </div>
         </div>
       </div>
