@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Video Analytics</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+    <h1>YouTube Video Analytics</h1>
+
+    {% for video in videos %}
+        <!-- Time period dropdown for each video -->
+        <label for="timePeriodDropdown_{{ video.video_id }}">Select Time Period for Video: {{ video.title }}</label>
+        <select id="timePeriodDropdown_{{ video.video_id }}">
+            <option value="7">Last 7 days</option>
+            <option value="28" selected>Last 28 days</option>
+            <option value="90">Last 90 days</option>
+            <option value="365">Last 365 days</option>
+        </select>
+
+        <input type="hidden" id="videoId_{{ video.video_id }}" value="{{ video.video_id }}">
+
+        <!-- Canvas for the different analytics (Initial Graph Rendering)-->
+        <canvas id="viewsChart_{{ video.video_id }}" width="800" height="400"></canvas>
+        <canvas id="estimatedMinutesWatchedChart_{{ video.video_id }}" width="800" height="400"></canvas>
+        <canvas id="averageViewDurationChart_{{ video.video_id }}" width="800" height="400"></canvas>
+        <canvas id="averageViewPercentageChart_{{ video.video_id }}" width="800" height="400"></canvas>
+
+        <script>
+            const videoData_{{ video.video_id }} = {{ video.analytics|safe }}; // Data for this video
+
+            // Function to draw a chart for each video
+            function drawChart(chartId, label, data, color) {
+                const ctx = document.getElementById(chartId).getContext('2d');
+                new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: videoData_{{ video.video_id }}.labels, // Dates
+                        datasets: [{
+                            label: label,
+                            data: data, // Metric data
+                            borderColor: color,
+                            backgroundColor: color.replace('1)', '0.2)'), // Translucent background
+                            borderWidth: 2,
+                            tension: 0.4,
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            x: {
+                                title: {
+                                    display: true,
+                                    text: 'Date',
+                                },
+                            },
+                            y: {
+                                title: {
+                                    display: true,
+                                    text: label,
+                                },
+                                beginAtZero: true,
+                            }
+                        },
+                    }
+                });
+            }
+
+            // Initial render of the charts with the data passed from the backend
+            drawChart('viewsChart_{{ video.video_id }}', 'Views', videoData_{{ video.video_id }}.views, 'rgba(75, 192, 192, 1)');
+            drawChart('estimatedMinutesWatchedChart_{{ video.video_id }}', 'Estimated Minutes Watched', videoData_{{ video.video_id }}.estimatedMinutesWatched, 'rgba(153, 102, 255, 1)');
+            drawChart('averageViewDurationChart_{{ video.video_id }}', 'Average View Duration', videoData_{{ video.video_id }}.averageViewDuration, 'rgba(255, 159, 64, 1)');
+            drawChart('averageViewPercentageChart_{{ video.video_id }}', 'Average View Percentage', videoData_{{ video.video_id }}.averageViewPercentage, 'rgba(54, 162, 235, 1)');
+
+            // Function to fetch updated analytics data for a video based on time period
+            function fetchAnalytics(videoId, timePeriod, chartId) {
+                fetch('/youtube/video-analytics/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': getCookie('csrftoken') // CSRF token for Django
+                    },
+                    body: JSON.stringify({ video_id: videoId, time_period: timePeriod })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    updateChart(data.analytics, chartId);
+                })
+                .catch(error => console.error('Error fetching data:', error));
+            }
+
+            // Function to update the chart with new data
+            function updateChart(data, chartId) {
+                const ctx = document.getElementById(chartId).getContext('2d');
+                if (window[chartId]) {
+                    window[chartId].destroy(); // Destroy existing chart before creating a new one
+                }
+                window[chartId] = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: videoData_{{ video.video_id }}.labels, // Dates
+                        datasets: [{
+                            label: label,
+                            data: data, // Metric data
+                            borderColor: color,
+                            backgroundColor: color.replace('1)', '0.2)'), // Translucent background
+                            borderWidth: 2,
+                            tension: 0.4,
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            x: {
+                                title: {
+                                    display: true,
+                                    text: 'Date',
+                                },
+                            },
+                            y: {
+                                title: {
+                                    display: true,
+                                    text: 'Views',
+                                },
+                                beginAtZero: true,
+                            }
+                        },
+                    },
+                });
+            }
+
+            // Helper function to get CSRF token
+            function getCookie(name) {
+                let cookieValue = null;
+                if (document.cookie && document.cookie !== '') {
+                    const cookies = document.cookie.split(';');
+                    for (let i = 0; i < cookies.length; i++) {
+                        const cookie = cookies[i].trim();
+                        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                            break;
+                        }
+                    }
+                }
+                return cookieValue;
+
+            }
+
+// Set up event listeners for each dropdown to change the time period
+document.getElementById('timePeriodDropdown_{{ video.video_id }}').addEventListener('change', (event) => {
+    const timePeriod = event.target.value; // e.g., 7, 28, 90, 365
+    const videoId = document.getElementById('videoId_{{ video.video_id }}').value; // Video ID
+    const chartId = `viewsChart_{{ video.video_id }}`; // Chart ID
+    fetchAnalytics(videoId, timePeriod, chartId);
+});
+
+// Initial fetch for the default 28-day data for this video
+const initialVideoId_{{ video.video_id }} = document.getElementById('videoId_{{ video.video_id }}').value;
+const initialTimePeriod_{{ video.video_id }} = document.getElementById('timePeriodDropdown_{{ video.video_id }}').value;
+const initialChartId_{{ video.video_id }} = `viewsChart_{{ video.video_id }}`;
+fetchAnalytics(initialVideoId_{{ video.video_id }}, initialTimePeriod_{{ video.video_id }}, initialChartId_{{ video.video_id }});
+</script>
+{% endfor %}
+
+</body>
+</html>

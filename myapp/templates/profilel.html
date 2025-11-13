@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>LinkedIn Profile</title>
+</head>
+<body>
+    <h1>Welcome, {{ profile.given_name }} {{ profile.family_name }}</h1>
+    <h2>Profile Information</h2>
+<p>ID: {{ profile.sub }}</p>
+ <p>ID: {{ profile.name }}</p>
+ <p>ID: {{ profile.picture }}</p>
+ <p>ID: {{ profile.locale }}</p>
+ <p>ID: {{ profile.email }}</p>
+ <p>ID: {{ profile.email_verified }}</p>
+    <h2>Your Posts</h2>
+    <ul>
+        {% for post in posts %}
+            <li>{{ post.text.text }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

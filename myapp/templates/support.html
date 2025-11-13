@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Support</title>
+
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'css/support.css' %}" />
+  </head>
+  <body>
+    <div class="sidebar">
+      <div class="logo-details">
+        <i class="bx bx-leaf"></i>
+        <span class="logo_name">Elevate Trend</span>
+      </div>
+      <ul class="nav-links">
+        <li>
+          <a href="{% url 'dashboard' %}">
+            <i class="bx bx-grid-alt"></i>
+            <span class="links_name">Dashboard</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'account' %}">
+            <i class="bx bxs-user-account"></i>
+            <span class="links_name">Account</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'report' %}">
+            <i class="bx bx-trending-up"></i>
+            <span class="links_name">Review</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'analytics' %}">
+            <i class="bx bx-pie-chart-alt-2"></i>
+            <span class="links_name">Analytics</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'support' %}" class="active">
+            <i class="bx bx-support"></i>
+            <span class="links_name">Support</span>
+          </a>
+        </li>
+        <li class="log_out">
+          <a href="{% url 'logout_view' %}">
+            <i class="bx bx-log-out"></i>
+            <span class="links_name">Log out</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <section class="home-section">
+        <nav>
+          <div class="sidebar-button">
+            <i class="bx bx-menu sidebarBtn"></i>
+            <span class="dashboard">Support</span>
+          </div>
+          <div class="search-box">
+            <input type="text" placeholder="Search..." />
+            <i class="bx bx-search"></i>
+          </div>
+          <div class="profile-details">
+            <img src="{% static 'images/logo.png' %}" alt="">
+            <span class="admin_name">{{  request.session.user_name}}</span>
+          </div>
+        </nav>
+  
+        <div class="home-content">
+          <p>Support Center</p>
+          <div class="overview-boxes">
+            <div class="box">
+              <div class="right-side">
+                <div class="box-topic">Getting Started</div>
+                <div class="descriptive_text">
+                    <span class="dtext">Basic guide for new users</span>
+                </div>
+                    <a href="{% url 'getting_started' %}" class="learn-more">Learn More</a>
+                </div>
+                  <img src="{% static 'images/rocket.png' %}" class="acc" alt="" />
+            </div>
+  
+  
+              <div class="box">
+                  <div class="right-side">
+                      <div class="box-topic">Troubleshooting</div>
+                      <div class="descriptive_text">
+                          <span class="dtext">Fix common issues</span>
+                      </div>
+                      <a href="{% url 'troubleshooting' %}" class="learn-more">Learn More</a>
+                  </div>
+                  <img src="{% static 'images/troubleshooting.png' %}" class="acc" alt="" />
+              </div>
+  
+              <div class="box">
+                  <div class="right-side">
+                      <div class="box-topic">Contact Support</div>
+                      <div class="descriptive_text">
+                          <span class="dtext">Get in touch with us</span>
+                      </div>
+                      <a href="{% url 'contact_support' %}" class="learn-more">Learn More</a>
+                  </div>
+                  <img src="{% static 'images/customer-service.png' %}" class="acc" alt="" />
+              </div>
+          </div>
+      </div>
+  
+      </section>
+  
+      <script>
+      let sidebar = document.querySelector(".sidebar");
+      let sidebarBtn = document.querySelector(".sidebarBtn");
+      sidebarBtn.onclick = function () {
+        sidebar.classList.toggle("active");
+        if (sidebar.classList.contains("active")) {
+          sidebarBtn.classList.replace("bx-menu", "bx-menu-alt-right");
+        } else {
+          sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
+        }
+      };
+    </script>
+  </body>
+</html>
+  

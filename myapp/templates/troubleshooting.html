@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Troubleshooting</title>
+
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'css/troubleshooting.css' %}" />
+  </head>
+  <body>
+    <div class="sidebar">
+      <div class="logo-details">
+        <i class="bx bx-leaf"></i>
+        <span class="logo_name">Elevate Trend</span>
+      </div>
+      <ul class="nav-links">
+        <li>
+          <a href="{% url 'dashboard' %}">
+            <i class="bx bx-grid-alt"></i>
+            <span class="links_name">Dashboard</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'account' %}">
+            <i class="bx bxs-user-account"></i>
+            <span class="links_name">Account</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'report' %}">
+            <i class="bx bx-trending-up"></i>
+            <span class="links_name">Review</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'analytics' %}">
+            <i class="bx bx-pie-chart-alt-2"></i>
+            <span class="links_name">Analytics</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'support' %}" class="active">
+            <i class="bx bx-support"></i>
+            <span class="links_name">Support</span>
+          </a>
+        </li>
+        <li class="log_out">
+          <a href="{% url 'logout_view' %}">
+            <i class="bx bx-log-out"></i>
+            <span class="links_name">Log out</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <section class="home-section">
+        <nav>
+          <div class="sidebar-button">
+            <i class="bx bx-menu sidebarBtn"></i>
+            <span class="dashboard">Troubleshooting</span>
+          </div>
+          <div class="search-box">
+            <input type="text" placeholder="Search..." />
+            <i class="bx bx-search"></i>
+          </div>
+          <div class="profile-details">
+            <img src="{% static 'images/logo.png' %}" alt="">
+             <span class="admin_name">{{  request.session.user_name }}</span>
+          </div>
+        </nav>
+  
+        <div class="home-content">
+          <h1>Troubleshooting Center</h1>
+          <p>Here are some common issues and solutions you can try.</p>
+  
+          <div class="troubleshooting-detail-content">
+            <h2>Common Issues and Fixes</h2>
+  
+            <div class="issue">
+              <h3>Issue 1 :  Unable to Login</h3>
+              <p>If you're unable to log in, try the following steps:</p>
+              <ul>
+                <li>Ensure your username and password are correct.</li>
+                <li>Check if your internet connection is stable.</li>
+                <li>Clear your browser cache and cookies.</li>
+              </ul>
+            </div>
+  
+            <div class="issue">
+              <h3>Issue 2 :  Slow Performance</h3>
+              <p>If the platform is slow, try the following:</p>
+              <ul>
+                <li>Clear your browser cache.</li>
+                <li>Ensure you're not running heavy programs in the background.</li>
+                <li>Try using a different browser.</li>
+                <li>Check for any ongoing maintenance or outages on the platform.</li>
+              </ul>
+            </div>
+  
+            <div class="issue">
+              <h3>Issue 3 :  Connectivity Problems</h3>
+              <p>If you're experiencing connectivity issues, try the following:</p>
+              <ul>
+                <li>Ensure your internet connection is stable.</li>
+                <li>Try restarting your router.</li>
+                <li>Check for network congestion in your area.</li>
+                <li>Contact your ISP if the problem persists.</li>
+              </ul>
+            </div>
+            <div class="issue">
+                <h3>Issue 4 :  Feature Not Working as Expected</h3>
+                <p>If a feature isn't working as expected, try the following:</p>
+                <ul>
+                  <li>Check if there are any updates or bug fixes available for the platform.</li>
+                  <li>Clear your browser's cache and refresh the page.</li>
+                  <li>Re-log into the platform to reset any potential session issues.</li>
+                  <li>If the issue persists, contact support for assistance.</li>
+                </ul>
+              </div>
+    
+              <h2>Steps to Fix Issues</h2>
+              <div class="issue">
+              <p>If you're unable to resolve the issue using the above steps, follow these general troubleshooting steps:</p>
+              <ol>
+                <li>Check your internet connection.</li>
+                <li>Clear your browser cache and cookies.</li>
+                <li>Restart the application or refresh the page.</li>
+                <li>Contact support if the problem persists.</li>
+              </ol>
+            </div>
+    
+              <div class="contact-support">
+                <p>If the issue remains unresolved, please <a href="{% url 'contact_support' %}">contact our support team</a> for further assistance.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+    
+        <script>
+          let sidebar = document.querySelector(".sidebar");
+          let sidebarBtn = document.querySelector(".sidebarBtn");
+          sidebarBtn.onclick = function () {
+            sidebar.classList.toggle("active");
+            if (sidebar.classList.contains("active")) {
+              sidebarBtn.classList.replace("bx-menu", "bx-menu-alt-right");
+            } else {
+              sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
+            }
+          };
+        </script>
+      </body>
+    </html>
+      

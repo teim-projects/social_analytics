@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Instagram Post</title>
+</head>
+<body>
+    <h2>Create a Post on Instagram</h2>
+
+    <form method="POST">
+        {% csrf_token %}
+        <label for="image_url">Image URL:</label><br>
+        <input type="text" id="image_url" name="image_url" required><br><br>
+
+        <label for="caption">Caption:</label><br>
+        <textarea id="caption" name="caption" required></textarea><br><br>
+
+        <button type="submit">Create Post</button>
+    </form>
+</body>
+</html>

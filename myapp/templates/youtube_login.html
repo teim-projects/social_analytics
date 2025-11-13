@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Login</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f8f8;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            background-color: #ff0000;
+            color: #fff;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 1.8rem;
+            text-align: center;
+        }
+
+        .back-button {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: #fff;
+            color: #ff0000;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .back-button:hover {
+            background-color: #f8f8f8;
+            color: #cc0000;
+        }
+
+        .content {
+            margin: 3rem auto;
+            text-align: center;
+            max-width: 90%;
+            padding: 2rem;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease;
+        }
+
+        .content h2 {
+            font-size: 1.6rem;
+            margin-bottom: 1.5rem;
+            color: #444;
+        }
+
+        .btn-login {
+            background-color: #ff0000;
+            color: #fff;
+            padding: 0.6rem 1.2rem;
+            border: none;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 6px;
+            display: inline-block;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .btn-login:hover {
+            background-color: #cc0000;
+            transform: translateY(-2px);
+        }
+
+        /* Media Queries */
+        @media (min-width: 768px) {
+            .header {
+                padding: 1.5rem;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .content {
+                max-width: 600px;
+                padding: 2rem;
+            }
+
+            .btn-login {
+                padding: 0.8rem 1.5rem;
+                font-size: 1.1rem;
+            }
+        }
+        .btn-login:hover {
+            background-color: #cc0000;
+            transform: translateY(-2px);
+        }
+
+        /* Media Queries */
+        @media (min-width: 768px) {
+            .header {
+                padding: 1.5rem;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .content {
+                max-width: 600px;
+                padding: 2rem;
+            }
+
+            .btn-login {
+                padding: 0.8rem 1.5rem;
+                font-size: 1.1rem;
+            }
+        }
+
+        /* For very small screens */
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 1.5rem;
+            }
+
+            .content h2 {
+                font-size: 1.2rem;
+                margin-bottom: 1rem;
+            }
+
+            .btn-login {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="/dashboard" class="back-button">Back</a>
+        <h1>YouTube Login</h1>
+    </header>
+    <section class="content">
+        <h2>Welcome! Click the button below to log in to YouTube</h2>
+        <a href="{{ auth_url }}" class="btn-login">Login with YouTube</a>
+    </section>
+</body>
+</html>

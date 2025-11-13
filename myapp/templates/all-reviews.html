@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>All Reviews</title>
+    <link rel="stylesheet" href="{% static 'css/all-reviews.css' %}" />
+  </head>
+  <body>
+    <header>
+      <h1>All Reviews</h1>
+    </header>
+    <main class="reviews-section">
+      <div id="all-reviews-container">
+        <!-- All feedback items will be dynamically inserted here -->
+      </div>
+    </main>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const reviews = [
+          {
+            name: "John Doe",
+            feedback: "Great product! It exceeded my expectations.",
+          },
+          {
+            name: "Jane Smith",
+            feedback: "Good value for money. I’m satisfied with the purchase.",
+          },
+          {
+            name: "Alice Johnson",
+            feedback: "The quality is top-notch. Highly recommend it.",
+          },
+          {
+            name: "Bob Brown",
+            feedback: "Decent product but could use some improvements.",
+          },
+          {
+            name: "Charlie Davis",
+            feedback: "Fantastic! Will definitely buy again.",
+          },
+          {
+            name: "Eva Adams",
+            feedback: "Absolutely loved it! Worth every penny.",
+          },
+          {
+            name: "Mike Brown",
+            feedback: "The product is okay, but the service was excellent.",
+          },
+          {
+            name: "Linda Carter",
+            feedback: "I am very pleased with my purchase.",
+          },
+          {
+            name: "James Wilson",
+            feedback: "It's a great product, but delivery was slow.",
+          },
+        ];
+        const allReviewsContainer = document.getElementById(
+          "all-reviews-container"
+        );
+
+        // Function to create review boxes
+        function createReviewBox(review) {
+          const reviewBox = document.createElement("div");
+          reviewBox.className = "review-box";
+          reviewBox.innerHTML = `<h3>${review.name}</h3><p>${review.feedback}</p>`;
+          return reviewBox;
+        }
+
+        // Display all reviews
+        reviews.forEach((review) => {
+          allReviewsContainer.appendChild(createReviewBox(review));
+        });
+      });
+    </script>
+  </body>
+</html>

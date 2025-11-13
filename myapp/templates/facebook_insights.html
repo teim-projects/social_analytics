@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facebook Insights</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <h1>Facebook Insights for Page ID: {{ page_id }}</h1>
+    <h2>Period: {{ period }}</h2>
+    <p>From: {{ since }} To: {{ until }}</p>
+
+    {% for metric_name, values in metrics.items %}
+        <h3>{{ metric_name }}</h3>
+        <canvas id="chart-{{ forloop.counter }}" width="400" height="200"></canvas>
+        <script>
+            // Prepare data for the chart
+            var chartData = {
+                labels: [{% for item in values %}'{{ item.date }}',{% endfor %}],
+                datasets: [{
+                    label: '{{ metric_name }}',
+                    data: [{% for item in values %}{{ item.value }},{% endfor %}],
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1,
+                    fill: false
+                }]
+            };
+
+            // Render the chart
+            var ctx = document.getElementById('chart-{{ forloop.counter }}').getContext('2d');
+            new Chart(ctx, {
+                type: 'line', // Line chart type
+                data: chartData,
+                options: {
+                    responsive: true,
+                    scales: {
+
+                   x: {
+                            title: {
+                                display: true,
+                                text: 'Date'
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Value'
+                            },
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        </script>
+    {% endfor %}
+</body>
+</html>
+
+
