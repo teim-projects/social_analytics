@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Page Details</title>
+</head>
+<body>
+    <h1>Details for Page: {{ page_id }}</h1>
+    <p>About: {{ page_details.about }}</p>
+    <p>Email: {{ page_details.emails|join:", " }}</p>
+    <p>Location: {{ page_details.location }}</p>
+    <p>Website: {{ page_details.website }}</p>
+
+    <h2>Update About Section</h2>
+    <form method="POST" action="/update_page_details/{{ page_id }}/">
+        {% csrf_token %}
+        <input type="hidden" name="access_token" value="{{ access_token }}">
+        <textarea name="about">{{ page_details.about }}</textarea>
+        <button type="submit">Update</button>
+    </form>
+</body>
+</html>

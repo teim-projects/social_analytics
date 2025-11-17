@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Data Insights</title>
+ <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        h1, h2 {
+            color: #FF0000; /* YouTube Red */
+            font-family: 'Roboto', sans-serif;
+            font-weight: bold;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-top: 30px;
+        }
+
+        p {
+            font-size: 1rem;
+            line-height: 1.6;
+            margin: 10px 0;
+        }
+ .details strong {
+            color: #555;
+            font-weight: normal;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            background-color: #fff;
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        a {
+            color: #FF0000; /* YouTube Red */
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .table-container {
+            margin-top: 30px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+   margin-top: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #FF0000;
+            color: white;
+            padding: 12px;
+            text-align: left;
+        }
+
+        td {
+            padding: 12px;
+            text-align: left;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            li {
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h2>Channel Details</h2>
+    {% if channel.items %}
+        <p><strong>Title:</strong> {{ channel.items.0.snippet.title }}</p>
+        <p><strong>Description:</strong> {{ channel.items.0.snippet.description }}</p>
+        <p><strong>Subscribers:</strong> {{ channel.items.0.statistics.subscriberCount }}</p>
+        <p><strong>Videos:</strong> {{ channel.items.0.statistics.videoCount }}</p>
+        <p><strong>Views:</strong> {{ channel.items.0.statistics.viewCount }}</p>
+    {% else %}
+        <p>No channel details available.</p>
+    {% endif %}
+
+    <h2>Videos</h2>
+    {% if video_details.items %}
+        <ul>
+            {% for video in video_details.items %}
+                <li class="details">
+ <strong>id:</strong> {{ video.id }}<br>
+                    <strong>Title:</strong> {{ video.snippet.title }}<br>
+                    <strong>Description:</strong> {{ video.snippet.description }}<br>
+                    <strong>Tags:</strong> {{ video.snippet.tags|join:", " }}<br>
+                    <strong>Published At:</strong> {{ video.snippet.publishedAt }}<br>
+                    <strong>Duration:</strong> {{ video.contentDetails.duration }}<br>
+                    <strong>Definition:</strong> {{ video.contentDetails.definition }}<br>
+                    <strong>Dimension:</strong> {{ video.contentDetails.dimension }}<br>
+                    <strong>Views:</strong> {{ video.statistics.viewCount }}<br>
+                    <strong>Likes:</strong> {{ video.statistics.likeCount }}<br>
+                    <strong>Comments:</strong> {{ video.statistics.commentCount }}<br>
+                    {% if video.recordingDetails.location %}
+                        Latitude: {{ video.recordingDetails.location.latitude }},
+                        Longitude: {{ video.recordingDetails.location.longitude }}
+                    {% else %}
+                        Not available
+                    {% endif %}<br>
+                    <strong>Topics:</strong>
+                    {% if video.topicDetails.topicCategories %}
+                        {% for topic in video.topicDetails.topicCategories %}
+                            <a href="{{ topic }}" target="_blank">{{ topic }}</a>{% if not forloop.last %}, {% endif %}
+                        {% endfor %}
+ {% else %}
+                        Not available
+                    {% endif %}<br>
+                    <strong>Video Link:</strong>
+                    <a href="https://www.youtube.com/watch?v={{ video.id }}" target="_blank">Watch Video</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No video details available.</p>
+    {% endif %}
+<h1>YouTube Video Analytics</h1>
+{% for video in video_data_combined %}
+<h2>Video Title: {{ video.details.snippet.title }}</h2>
+
+<p><strong>Description:</strong> {{ video.details.snippet.description }}</p>
+<p><strong>Published At:</strong> {{ video.details.snippet.publishedAt }}</p>
+<p><strong>Views:</strong> {{ video.details.statistics.viewCount }}</p>
+<p><strong>Likes:</strong> {{ video.details.statistics.likeCount }}</p>
+<h3>Comments</h3>
+<ul>
+{% for comment in video.comments %}
+<li>
+    <p><strong>{{ comment.author }}</strong>: {{ comment.text }}</p>
+    <p>Likes: {{ comment.likes }}</p>
+    <p>Published At: {{ comment.published_at }}</p>
+    {% if comment.replies %}
+        <p>Replies:</p>
+        <ul>
+            {% for reply in comment.replies %}
+                <li>{{ reply }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</li>
+{% endfor %}
+</ul>
+
+  <!-- Graphs for each video -->
+  <h3>Video Analytics</h3>
+
+  <canvas id="viewsChart_{{ video.video_id }}" width="800" height="400"></canvas>
+  <canvas id="estimatedMinutesWatchedChart_{{ video.video_id }}" width="800" height="400"></canvas>
+  <canvas id="averageViewDurationChart_{{ video.video_id }}" width="800" height="400"></canvas>
+  <canvas id="averageViewPercentageChart_{{ video.video_id }}" width="800" height="400"></canvas>
+
+  <script>
+      const videoData_{{ video.video_id }} = {{ video.analytics|safe }}; // Data for this video
+
+      // Function to draw a chart for each video
+      function drawChart(chartId, label, data, color) {
+          const ctx = document.getElementById(chartId).getContext('2d');
+          new Chart(ctx, {
+              type: 'line',
+              data: {
+                  labels: videoData_{{ video.video_id }}.labels, // Dates
+                  datasets: [{
+                      label: label,
+                      data: data, // Metric data
+                      borderColor: color,
+                      backgroundColor: color.replace('1)', '0.2)'), // Translucent background
+                      borderWidth: 2,
+                      tension: 0.4,
+                  }]
+              },
+              options: {
+                  responsive: true,
+                  scales: {
+                      x: {
+                          title: {
+                              display: true,
+                              text: 'Date',
+                          },
+                      },
+                      y: {
+                          title: {
+                              display: true,
+                              text: label,
+                          },
+                          beginAtZero: true,
+                      }
+                  },
+              }
+          });
+      }
+
+      // Draw all charts for this video
+      drawChart('viewsChart_{{ video.video_id }}', 'Views', videoData_{{ video.video_id }}.views, 'rgba(75, 192, 192, 1)');
+      drawChart('estimatedMinutesWatchedChart_{{ video.video_id }}', 'Estimated Minutes Watched', videoData_{{ video.video_id }}.estimatedMinutesWatched, 'rgba(153, 102, 255, 1)');
+      drawChart('averageViewDurationChart_{{ video.video_id }}', 'Average View Duration', videoData_{{ video.video_id }}.averageViewDuration, 'rgba(255, 159, 64, 1)');
+      drawChart('averageViewPercentageChart_{{ video.video_id }}', 'Average View Percentage', videoData_{{ video.video_id }}.averageViewPercentage, 'rgba(54, 162, 235, 1)');
+  </script>
+
+{% endfor %}
+
+<h1>YouTube Channel Analytics (Last 28 Days)</h1>
+
+   <!-- Chart for Views -->
+   <h2>Views</h2>
+   <canvas id="viewsChart" width="800" height="400"></canvas>
+
+   <!-- Chart for Estimated Minutes Watched -->
+   <h2>Estimated Minutes Watched</h2>
+   <canvas id="estimatedMinutesWatchedChart" width="800" height="400"></canvas>
+
+   <!-- Chart for Average View Duration -->
+   <h2>Average View Duration</h2>
+   <canvas id="averageViewDurationChart" width="800" height="400"></canvas>
+
+   <!-- Chart for Average View Percentage -->
+   <h2>Average View Percentage</h2>
+   <canvas id="averageViewPercentageChart" width="800" height="400"></canvas>
+
+   <!-- Chart for Subscribers Gained -->
+   <h2>Subscribers Gained</h2>
+   <canvas id="subscribersGainedChart" width="800" height="400"></canvas>
+
+   <!-- Chart for Subscribers Lost -->
+   <h2>Subscribers Lost</h2>
+   <canvas id="subscribersLostChart" width="800" height="400"></canvas>
+<script>
+       const chartData = {{ chart_data|safe }}; // Data from Django view
+
+       // Function to draw a chart
+       function drawChart(chartId, label, data, color) {
+           const ctx = document.getElementById(chartId).getContext('2d');
+           new Chart(ctx, {
+               type: 'line',
+               data: {
+                   labels: chartData.labels, // Dates
+                   datasets: [{
+                       label: label,
+                       data: data, // Metric data
+                       borderColor: color,
+                       backgroundColor: color.replace('1)', '0.2)'), // Translucent background
+                       borderWidth: 2,
+                       tension: 0.4,
+                   }]
+               },
+               options: {
+                   responsive: true,
+                   scales: {
+                       x: {
+                           title: {
+                               display: true,
+                               text: 'Date',
+                           },
+                       },
+                       y: {
+                            title: {
+                                display: true,
+                                text: label,
+                            },
+                            beginAtZero: true,
+                        }
+                    },
+                }
+ });
+        }
+
+        // Draw all charts
+        drawChart('viewsChart', 'Views', chartData.views, 'rgba(75, 192, 192, 1)');
+        drawChart('estimatedMinutesWatchedChart', 'Estimated Minutes Watched', chartData.estimatedMinutesWatched, 'rgba(153, 102, 255, 1)');
+        drawChart('averageViewDurationChart', 'Average View Duration', chartData.averageViewDuration, 'rgba(255, 159, 64, 1)');
+        drawChart('averageViewPercentageChart', 'Average View Percentage', chartData.averageViewPercentage, 'rgba(54, 162, 235, 1)');
+        drawChart('subscribersGainedChart', 'Subscribers Gained', chartData.subscribersGained, 'rgba(255, 99, 132, 1)');
+        drawChart('subscribersLostChart', 'Subscribers Lost', chartData.subscribersLost, 'rgba(201, 203, 207, 1)');
+    </script>
+
+
+
+</body>
+</html>
+

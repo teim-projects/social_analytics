@@ -1,0 +1,402 @@
+/* Global Variables */
+:root {
+    --primary-color: #1c7d7e;
+    --secondary-color: #201e43;
+    --accent-color: #2575fc;
+    --background-color: #f9fafa;
+    --text-color: #333;
+    --hover-color: #1c7d7e;
+    --font-family: "Poppins", sans-serif;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --transition: 0.3s ease-in-out;
+  }
+  
+  /* Reset & Global Styles */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--font-family);
+  }
+  
+  body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    font-size: 16px;
+  }
+
+  /* Containers */
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin:0 auto;
+    padding: 20px;
+  }
+  
+  /* Header Styling */
+  .sticky {
+    position: fixed;
+    top: 0;
+    margin: 0; /* Ensure no margin */
+    padding: 0; /* Ensure no padding */
+    width: 100%;
+    background-color: var(--secondary-color);
+    box-shadow: var(--shadow);
+    left: 0;
+    z-index: 1000;
+  }
+  
+  .header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+  }
+
+
+  .logo-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .logo-container img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  
+  .logo {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  .nav {
+    display: flex;
+    gap: 20px;
+  }
+
+  .nav a {
+    text-decoration: none;
+    color: white;
+    font-size: 1rem;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: var(--transition);
+  }
+  
+  .nav a:hover {
+    background-color: var(--accent-color);
+    color: white;
+  }
+  
+  /* Button */
+  .btn {
+    padding: 10px 20px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: var(--transition);
+  }
+  
+  .btn:hover {
+    background-color: var(--accent-color);
+  }
+
+  .hoverEffect {
+    display: flex;
+    justify-content: flex-start; /* Align buttons to the left */
+    gap: 20px; /* Optional: Adds space between the buttons */
+  }
+  
+  #registerButton {
+    margin-right: 20px; /* Adds space between Register and Sign In buttons */
+  }
+  
+  #signInButton {
+    margin-left: 20px; /* Alternatively, you can use margin-left on the Sign In button */
+  }
+  
+  /* Banner Section */
+  .banner {
+    background: linear-gradient(to right, #1c7d7e, #2575fc);
+    color: white;
+    text-align: center;
+    padding: 100px 0;
+    box-shadow: var(--shadow);
+    margin: 0;
+  }
+  
+  .banner h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+  }
+
+
+  .banner p {
+    font-size: 1.2rem;
+  }
+  
+  /* After Header Section */
+  .afterheader {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 20px;
+    gap: 20px;
+  }
+  
+  #tagline {
+    flex: 1 1 50%;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  #tagline p {
+    font-size: 1.2rem;
+  }
+  #imagean {
+    flex: 1 1 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  #imagean video {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+  }
+  
+  /* Features Section */
+  .features-intro {
+    text-align: center;
+    margin: 40px 0;
+    font-size: 1.5rem;
+    color: var(--secondary-color);
+  }
+  
+  .feature-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    padding: 20px;
+  }
+  
+  .feature-box {
+    flex: 1 1 300px;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    text-align: center;
+    transition: var(--transition);
+  }
+  
+  .feature-box:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  }
+  
+  .feature-title {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+  }
+  
+  .feature-description {
+    color: #666;
+  }
+  
+  /* Reviews Section */
+  
+  /* Footer Section */
+  footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .footer-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: auto;
+  }
+  
+  .footer-column {
+    flex: 1 1 200px;
+  }
+  
+  .footer-links {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .footer-links li {
+    margin-bottom: 10px;
+  }
+
+  .footer-links a {
+    text-decoration: none;
+    color: #ccc;
+  }
+  
+  .footer-links a:hover {
+    color: var(--accent-color);
+  }
+  
+  
+  
+  .footer-container .logo {
+    max-width: 150px; /* Logo size */
+    height: auto;
+    margin-bottom: 20px;
+  }
+  
+  /* Social Media */
+  .social-media {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .social-media img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+  }
+  
+  /* Media Queries */
+  @media (max-width: 1024px) {
+    .header-content {
+      flex-direction: column;
+    }
+  
+    .afterheader {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .feature-box {
+      flex: 1 1 100%;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .nav {
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    #tagline {
+        flex: 1 1 100%;
+      }
+    
+      #imagean {
+        flex: 1 1 100%;
+      }
+    
+      #tagline p {
+        font-size: 1rem;
+      }
+    
+      #imagean video {
+        max-width: 100%;
+      }
+    }
+    
+    @media (max-width: 480px) {
+        .banner h1 {
+          font-size: 2rem;
+        }
+      
+        .banner p {
+          font-size: 1rem;
+        }
+      
+        #tagline p {
+          font-size: 0.9rem;
+        }
+      }
+      .how-it-works-section {
+        text-align: center;
+        padding: 2rem;
+        background-color: #f9f9f9;
+        margin: 2rem 0;
+      }
+      
+      .how-it-works-section h2 {
+        font-size: 2rem;
+        font-weight: bold;
+        margin-bottom: 1.5rem;
+        color: #333;
+      }
+
+      .steps-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 2rem;
+      }
+      
+      .step-box {
+        background: #fff;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 1.5rem;
+        width: 300px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+      }
+      
+      .step-box:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+      }
+      
+      .step-box h3 {
+        font-size: 1.5rem;
+        color: #2c3e50;
+        margin-bottom: 0.8rem;
+      }
+
+      .step-box p {
+        font-size: 1rem;
+        color: #555;
+        line-height: 1.5;
+      }
+      
+      /* Responsiveness */
+      @media (max-width: 768px) {
+        .steps-container {
+          flex-direction: column;
+          gap: 1.5rem;
+        }
+      
+        .step-box {
+          width: 100%;
+          max-width: 500px;
+          margin: 0 auto;
+        }
+      }
+      @media (max-width: 480px) {
+        .how-it-works-section h2 {
+          font-size: 1.5rem;
+        }
+      
+        .step-box h3 {
+          font-size: 1.2rem;
+        }
+      
+        .step-box p {
+          font-size: 0.9rem;
+        }
+      }
