@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Posts from {{ page_name }}</title>
+</head>
+<body>
+    <h1>Posts from {{ page_name }}</h1>
+    <ul>
+        {% if posts %}
+            {% for post in posts %}
+                <li>{{ post.message }} ({{ post.created_time }})</li>
+            {% endfor %}
+        {% else %}
+            <li>No posts available for this page.</li>
+        {% endif %}
+    </ul>
+</body>
+</html>

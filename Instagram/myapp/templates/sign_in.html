@@ -1,0 +1,263 @@
+<!--<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign In</title>
+    <link rel="stylesheet" href="{% static 'css/signin.css' %}" />
+  </head>
+  <body>
+    <section class="bg-light py-3 py-md-5">
+      <div class="container">
+        <div class="card">
+          <div class="card-body">
+            <div class="text-center mb-3">
+              <a href="#!">
+                <img
+                  src="{% static 'images/logo.png' %}"
+                  alt="ElevateTrend Logo"
+                  width="80"
+                  height="70"
+                  class="logo"
+                />
+              </a>
+            </div>
+            <h2 class="title">Sign In</h2>
+            <form method="POST" action="/sign_in/">
+              {% csrf_token %}
+              
+              <div class="form-group">
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  class="form-control"
+                  placeholder="Email"
+                  required
+                />
+              </div>
+              
+              <div class="form-group">
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  class="form-control"
+                  placeholder="Password"
+                  required
+                />
+              </div>
+              
+              {% if messages %}
+                <ul class="error">
+                  {% for message in messages %}
+                    <li>{{ message }}</li>
+                  {% endfor %}
+                </ul>
+              {% endif %}
+              
+              <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Sign In</button>
+              </div>
+              
+              <p class="text-center mt-3">
+                Don't have an account?
+                <a href="{% url 'signup' %}" class="link-primary">Sign up</a>
+              </p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html> -->
+<!--<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign In</title>
+    <link rel="stylesheet" href="{% static 'css/signin.css' %}" />
+  </head>
+  <body>
+    <section class="bg-light py-3 py-md-5">
+      <div class="container">
+        <div class="card">
+          <div class="card-body">
+            <div class="text-center mb-3">
+              <a href="#!">
+                <img
+                  src="{% static 'images/logo.png' %}"
+                  alt="ElevateTrend Logo"
+                  width="80"
+                  height="70"
+                  class="logo"
+                />
+              </a>
+            </div>
+            <h2 class="title">Sign In</h2>
+            <form method="POST" action="/sign_in/">
+              {% csrf_token %}
+
+              <div class="form-group">
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  class="form-control"
+                  placeholder="Email"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <input
+                  type="password"
+                  id="password"
+                       name="password"
+                  class="form-control"
+                  placeholder="Password"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <input
+                  type="checkbox"
+                  id="show-password"
+                  class="form-check-input"
+                  onclick="togglePasswordVisibility()"
+                />
+                <label for="show-password" class="form-check-label">Show Password</label>
+              </div>
+
+              {% if messages %}
+                <ul class="error">
+                  {% for message in messages %}
+                    <li>{{ message }}</li>
+                  {% endfor %}
+                </ul>
+              {% endif %}
+
+              <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Sign In</button>
+              </div>
+
+              <p class="text-center mt-3">
+                Don't have an account?
+                <a href="{% url 'signup' %}" class="link-primary">Sign up</a>
+              </p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      function togglePasswordVisibility() {
+        const passwordField = document.getElementById('password');
+        const checkBox = document.getElementById('show-password');
+        passwordField.type = checkBox.checked ? 'text' : 'password';
+      }
+    </script>
+  </body>
+</html>-->
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign In</title>
+    <link rel="stylesheet" href="{% static 'css/signin.css' %}" />
+  </head>
+  <body>
+    <section class="bg-light py-3 py-md-5">
+      <div class="container">
+        <div class="card">
+          <div class="card-body">
+            <div class="text-center mb-3">
+              <a href="#!">
+                <img
+                  src="{% static 'images/logo.png' %}"
+                  alt="ElevateTrend Logo"
+                  width="80"
+                  height="70"
+                  class="logo"
+                />
+              </a>
+            </div>
+            <h2 class="title">Sign In</h2>
+            <form method="POST" action="/sign_in/">
+              {% csrf_token %}
+
+              <div class="form-group">
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  class="form-control"
+                  placeholder="Email"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  class="form-control"
+                  placeholder="Password"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <input
+                  type="checkbox"
+                  id="show-password"
+                  class="form-check-input"
+                  onclick="togglePasswordVisibility()"
+                />
+                <label for="show-password" class="form-check-label">Show Password</label>
+              </div>
+
+              <div class="form-group text-right">
+                <a href="{% url 'forgot_password' %}" class="link-primary">Forgot Password?</a>
+              </div>
+
+              {% if messages %}
+                <ul class="error">
+                  {% for message in messages %}
+                    <li>{{ message }}</li>
+                  {% endfor %}
+                </ul>
+              {% endif %}
+
+              <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Sign In</button>
+              </div>
+
+              <p class="text-center mt-3">
+                Don't have an account?
+                <a href="{% url 'signup' %}" class="link-primary">Sign up</a>
+              </p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+    <script>
+        function togglePasswordVisibility() {
+          const passwordField = document.getElementById('password');
+          const checkBox = document.getElementById('show-password');
+          passwordField.type = checkBox.checked ? 'text' : 'password';
+        }
+      </script>
+    </body>
+  </html>
+  
+  

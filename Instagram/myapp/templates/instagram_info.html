@@ -1,0 +1,163 @@
+GNU nano 6.2                                             instagram_info.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram Insights</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        h1, h2 {
+            text-align: center;
+            color: #4CAF50;
+            margin-bottom: 10px;
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin-top: 20px;
+        }
+        h2 {
+            font-size: 1.8rem;
+            margin-top: 10px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        .user-info {
+            text-align: center;
+            padding: 20px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        .user-info p {
+            font-size: 1.2rem;
+            margin: 5px 0;
+        }
+        .posts {
+            margin-top: 20px;
+        }
+        .post {
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .post h3 {
+            font-size: 1.5rem;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .post img {
+            width: 100%;
+            max-width: 200px;
+            border-radius: 10px;
+            margin: 10px 0;
+        }
+        .post ul {
+            list-style: none;
+            padding: 0;
+            margin: 10px 0;
+        }
+        .post ul li {
+            font-size: 1rem;
+            color: #555;
+            margin-bottom: 5px;
+        }
+        a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .debug {
+            margin-top: 20px;
+            padding: 15px;
+            background: #ffe6e6;
+            border: 1px solid #f5c2c2;
+            border-radius: 10px;
+        }
+        .debug h3 {
+            color: #d9534f;
+        }
+        footer {
+            text-align: center;
+            padding: 10px;
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+    </style>
+</head>
+<body>
+    <h1>Instagram Insights Dashboard</h1>
+
+    <div class="container">
+        <div class="user-info">
+            <h2>User Info</h2>
+            <p><strong>Username:</strong> {{ user_info.username }}</p>
+            <p><strong>Account Type:</strong> {{ user_info.account_type }}</p>
+            <p><strong>Total Media:</strong> {{ user_info.media_count }}</p>
+            <p><strong>ID:</strong> {{ user_info.id }}</p>
+        </div>
+
+        <div class="posts">
+            <h2>Post Insights</h2>
+            {% if media_insights %}
+            {% for media in media_insights %}
+                    <div class="post">
+                        <h3>Post Details</h3>
+                        <p><strong>Caption:</strong> {{ media.caption }}</p>
+                        <p><strong>Type:</strong> {{ media.media_type }}</p>
+                        <p><strong>Permalink:</strong>
+                            <a href="{{ media.permalink }}" target="_blank">{{ media.permalink }}</a>
+                        </p>
+                        <img src="{{ media.media_url }}" alt="Post image">
+
+                        <h4>Insights</h4>
+                        {% if media.insights.data %}
+                            <ul>
+                                {% for insight in media.insights.data %}
+                                    <li><strong>{{ insight.title }}:</strong> {{ insight.values.0.value }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% else %}
+                            <p>No insights available for this post.</p>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>No media available.</p>
+            {% endif %}
+        </div>
+
+        <div class="debug">
+            <h3>Debug Information</h3>
+            {% if debug_info %}
+                <ul>
+                    {% for message in debug_info %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No debug messages available.</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2024 Marketing Analytics Dashboard. All rights reserved.
+    </footer>
+</body>
+</html>

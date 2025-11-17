@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Information</title>
+</head>
+<body>
+    <h2>Facebook User Information</h2>
+
+    {% if user_data %}
+        <h3>Connected Accounts</h3>
+        <ul>
+            {% for account in user_data.data %}
+                <li>
+                    <strong>Page ID:</strong> {{ account.id }}<br>
+                    <strong>Page Name:</strong> {{ account.name }}<br>
+                    <strong>Instagram Business Account ID:</strong> {{ account.instagram_business_account.id }}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No user data available.</p>
+    {% endif %}
+</body>
+</html>

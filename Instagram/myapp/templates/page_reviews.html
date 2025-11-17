@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Page Reviews</title>
+</head>
+<body>
+    <h1>Reviews for Page: {{ page_id }}</h1>
+    <ul>
+        {% for review in reviews %}
+            <li>
+                <strong>{{ review.reviewer.name }}:</strong> {{ review.review_text }} ({{ review.recommendation_type }})
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
