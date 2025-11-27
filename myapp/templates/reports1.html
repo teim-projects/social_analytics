@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post Analysis</title>
+    <style>
+        /* General container for posts */
+        .post-container {
+            width: 100%;
+            max-width: 800px;
+            margin: 20px auto;
+            font-family: Arial, sans-serif;
+            color: #333;
+        }
+
+        /* Individual post styling */
+        .post {
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            margin-bottom: 20px;
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .post h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .post p {
+            font-size: 14px;
+            color: #666;
+        }
+
+        /* Image styling with size control */
+        img {
+            max-width: 300px; /* Limit width */
+            max-height: 300px; /* Limit height */
+            width: auto;
+            height: auto;
+            border-radius: 5px;
+            display: block;
+            margin: 10px auto; /* Center image */
+        }
+
+        /* Progress bar container */
+        .progress-bar-container {
+            width: 100%;
+            height: 25px;
+            margin: 10px 0;
+            border-radius: 5px;
+            background-color: #f0f0f0;
+            max-width: 7cm; /* Bar length limit */
+        }
+
+        /* Progress bars */
+        .progress-bar {
+            height: 100%;
+            border-radius: 5px;
+            text-align: center;
+            line-height: 25px;
+            font-size: 14px;
+            color: black; /* Black text color for bar */
+            font-weight: bold;
+            padding-left: 5px;
+            white-space: nowrap; /* Prevent text wrapping */
+        }
+
+        .engagement-bar { background-color: #4CAF50; } /* Green bar */
+        .likes-bar { background-color: #2196F3; } /* Blue bar */
+        .shares-bar { background-color: #FF9800; } /* Orange bar */
+        /* Bar text styling */
+        .bar-text {
+            text-overflow: ellipsis;
+            overflow: hidden;
+            display: inline-block;
+            max-width: 100%;
+            white-space: nowrap;
+        }
+
+        /* Styling for new sections */
+        .keywords-section, .optimal-time-section, .recommendations-section {
+            margin-top: 40px;
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 8px;
+        }
+
+        .keywords-section h3,
+        .optimal-time-section h3,
+        .recommendations-section h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .keywords-section ul {
+            padding-left: 20px;
+        }
+
+        .keywords-section li {
+            font-size: 16px;
+            color: #333;
+        }
+
+        .optimal-time-section p,
+        .recommendations-section p {
+            font-size: 16px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="post-container">
+        <!-- Loop through posts -->
+        {% for post in posts %}
+        <div class="post">
+            <h3>Post ID: {{ post.id }}</h3>
+            <p>{{ post.message }}</p>
+    
+            <!-- Display photo or video -->
+            {% if post.media_type == "photo" %}
+                <img src="{{ post.media.image.src }}" alt="Post Photo" />
+            {% elif post.media_type == "video" %}
+                <video controls>
+                    <source src="{{ post.media.source }}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            {% endif %}
+    
+            <!-- Engagement bar -->
+            <div class="progress-bar-container">
+                <div class="progress-bar engagement-bar" style="width: {{ post.engagement_percentage }}%;">
+                    Engagement: {{ post.engagement_percentage|floatformat:2 }}%
+                </div>
+            </div>
+    
+            <!-- Likes bar -->
+            <div class="progress-bar-container">
+                <div class="progress-bar likes-bar" style="width: {{ post.likes_percentage }}%;">
+                    Likes: {{ post.likes_percentage|floatformat:2 }}%
+                </div>
+            </div>
+    
+            <!-- Shares bar -->
+            <div class="progress-bar-container">
+                <div class="progress-bar shares-bar" style="width: {{ post.shares_percentage }}%;">
+                    Shares: {{ post.shares_percentage|floatformat:2 }}%
+                </div>
+            </div>
+    
+            <!-- Post Details -->
+            <p><strong>Engagement:</strong> {{ post.engagement }}</p>
+            <p><strong>Likes:</strong> {{ post.likes }}</p>
+            <p><strong>Shares:</strong> {{ post.shares }}</p>
+            <p><strong>Number of Comments:</strong> {{ post.number_of_comments }}</p>
+            <p><strong>Sentiment:</strong> {{ post.sentiment }}</p>
+        </div>
+        {% endfor %}
+    </div>
+    
+<!-- Top Keywords Section -->
+<div class="keywords-section">
+    <h3>Top Keywords for Engagement:</h3>
+    <ul>
+        {% for keyword in top_keywords %}
+            <li>{{ keyword }}</li>
+        {% endfor %}
+    </ul>
+</div>
+
+<!-- Optimal Posting Time Section -->
+<div class="optimal-time-section">
+    <h3>Optimal Posting Time:</h3>
+    <p>Best Hour: {{ best_hour }}:00</p>
+    <p>Best Day: {{ best_day }}</p>
+</div>
+
+<!-- Sentiment and Length Recommendations Section -->
+<div class="recommendations-section">
+    <h3>Recommendations:</h3>
+    <p><strong>Sentiment Recommendation:</strong> {{ sentiment_recommendation }}</p>
+    <p><strong>Post Length Recommendation:</strong> {{ length_recommendation }}</p>
+</div>
+
+</body>
+</html>
+
+    
