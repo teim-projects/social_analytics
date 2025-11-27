@@ -15,6 +15,7 @@ class Command(BaseCommand):
             ("engagement_rate.py", 8503),
             ("top_posts.py", 8504),
             ("instagram_engagement.py", 8505),
+            ("youtube-dashboard.py", 8506),
         ]
 
         processes = []

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Analytics</title>
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/css/analytics.css">
+</head>
+<body>
+  <div class="sidebar">
+    <div class="logo-details">
+      <i class="bx bx-leaf"></i>
+      <span class="logo_name">Elevate Trend</span>
+    </div>
+    <ul class="nav-links">
+        <li>
+          <a href="{% url 'dashboard' %}" class="active">
+            <i class="bx bx-grid-alt"></i>
+            <span class="links_name">Dashboard</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'account' %}">
+            <i class="bx bxs-user-account"></i>
+            <span class="links_name">Account</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'report' %}">
+            <i class="bx bx-trending-up"></i>
+            <span class="links_name">Review</span>
+          </a>
+        </li>
+
+        <!-- <li>
+          <a href="{% url 'analytics' %}">
+            <i class="bx bx-pie-chart-alt-2"></i>
+            <span class="links_name">Analytics</span>
+          </a>
+        </li> -->
+        <li>
+          <a href="{% url 'support' %}">
+            <i class="bx bx-support"></i>
+            <span class="links_name">Support</span>
+          </a>
+        </li>
+        <li class="log_out">
+          <a href="{% url 'logout_view' %}">
+            <i class="bx bx-log-out"></i>
+            <span class="links_name">Log out</span>
+          </a>
+        </li>
+    </ul>
+  </div>
+  <section class="home-section">
+    <nav>
+      <div class="sidebar-button">
+        <i class="bx bx-menu sidebarBtn"></i>
+        <span class="dashboard">Dashboard</span>
+      </div>
+      <div class="search-box">
+        <input type="text" placeholder="Search..." />
+        <i class="bx bx-search"></i>
+      </div>
+<div class="profile-details">
+          <img src="{% static 'images/logo.png' %}" alt="Logo" />
+          <span class="admin_name">{{  request.session.user_name }}</span>
+        </div>
+    </nav>
+    <div class="home-content">
+      <div class="overview-boxes">
+        <a href="{% url 'instagram_insights' %}" style="text-decoration: none; color: inherit;" class="box">
+          <div class="right-side">
+            <div class="box-topic">Prediction</div>
+            <div class="descriptive_text">Predict performance of posts</div>
+          </div>
+          <img src="/static/images/sentimental.png" class="acc" alt="Sentimental Analysis" />
+        </a>
+
+        <a href="{% url 'instagram_engagement' %}" style="text-decoration: none; color: inherit;" class="box">
+          <div class="right-side">
+            <div class="box-topic">Engagement Rate</div>
+            <div class="descriptive_text">Tracking User Interactions</div>
+          </div>
+          <img src="/static/images/content.png" class="acc" alt="Engagement Rate" />
+        </a>
+        <a href="{% url 'instagram_top_posts' %}" style="text-decoration: none; color: inherit;" class="box">
+            <div class="right-side">
+                <div class="box-topic">Top Performing Posts</div>
+                <div class="descriptive_text">
+                    <span class="dtext">Highlights of the Best Posts</span>
+                </div>
+            </div>
+            <img src="/static/images/predictive.png" class="acc" alt="Top Performing Posts" />
+        </a>
+        <a href="{% url 'instagram_analytics' %}" style="text-decoration: none; color: inherit;" class="box">
+            <div class="right-side">
+                <div class="box-topic">Dashboard</div>
+                <div class="descriptive_text">
+                    <span class="dtext">Analysis of current content</span>
+                </div>
+            </div>
+            <img src="/static/images/predictive.png" class="acc" alt="Top Performing Posts" />
+        </a>
+        <a href="{% url 'instagram_analytics' %}" style="text-decoration: none; color: inherit;" class="box">
+            <div class="right-side">
+                <div class="box-topic">Sentiment Analysis</div>
+                <div class="descriptive_text">
+                    <span class="dtext">Analysis sentiment of comments</span>
+                </div>
+            </div>
+            <img src="/static/images/predictive.png" class="acc" alt="Top Performing Posts" />
+        </a>
+
+      </div>
+    </div>
+  </section>
+  <script>
+    let sidebar = document.querySelector(".sidebar");
+    let sidebarBtn = document.querySelector(".sidebarBtn");
+    sidebarBtn.onclick = function () {
+      sidebar.classList.toggle("active");
+      if (sidebar.classList.contains("active")) {
+        sidebarBtn.classList.replace("bx-menu", "bx-menu-alt-right");
+      } else {
+        sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
+      }
+    };
+  </script>
+</body>
+</html>

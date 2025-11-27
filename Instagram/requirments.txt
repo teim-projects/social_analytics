@@ -11,3 +11,4 @@ django-cors-headers
 plotly
 scikit-learn
 python-dotenv
+statsmodels
