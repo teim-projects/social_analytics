@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reddit User Insights</title>
+    <style>
+        body {
+         font-family: Arial, sans-serif;
+         margin: 0;
+         padding: 0;
+         background-color: #dae0e6; /* Reddit background */
+         color: #1c1c1c; /* Dark text for readability */
+        }
+
+        .container {
+         max-width: 1200px;
+         margin: 0 auto;
+         padding: 20px;
+         background-color: #ffffff; /* White background for content */
+         border-radius: 8px;
+         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Header and Titles */
+        h1, h2 {
+         color: #ff4500; /* Reddit orange */
+        margin-bottom: 10px;
+        }
+
+        h1 {
+        text-align: center;
+        font-size: 2rem;
+        }
+
+        h2 {
+         font-size: 1.5rem;
+         border-bottom: 2px solid #ff4500;
+         padding-bottom: 5px;
+        }
+
+        /* User Info Section */
+        .user-info {
+         background-color: #f6f7f8; /* Light gray for user info */
+         border: 1px solid #e4e4e4;
+         padding: 15px;
+         border-radius: 5px;
+        margin-bottom: 20px;
+        }
+
+        .user-info p {
+           margin: 5px 0;
+        }
+
+        /* Post Styles */
+        .post {
+         background-color: #f9f9f9; /* Slightly lighter gray for posts */
+         border: 1px solid #ddd;
+         border-radius: 5px;
+         padding: 15px;
+         margin-bottom: 20px;
+        }
+
+        .post h2 {
+         font-size: 1.25rem;
+         margin-bottom: 10px;
+        }
+
+        .post p {
+         margin: 5px 0;
+         font-size: 0.95rem;
+        }
+
+/* Comments Section */
+.comments {
+    margin-top: 15px;
+    padding-left: 10px;
+    border-left: 2px solid #ff4500;
+}
+
+.comment {
+    background-color: #ffffff;
+    border: 1px solid #e4e4e4;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.comment p {
+    margin: 5px 0;
+}
+
+.comment strong {
+    color: #0079d3; /* Reddit blue for usernames */
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    padding: 10px 0;
+    background-color: #f6f7f8; /* Footer background */
+    border-top: 1px solid #e4e4e4;
+    margin-top: 20px;
+    font-size: 0.85rem;
+}
+/* Images */
+img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 1.75rem;
+    }
+
+    h2 {
+        font-size: 1.25rem;
+    }
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="user-info">
+            <h2>User Information</h2>
+            <p><strong>Username:</strong> {{ user_info.name }}</p>
+            <p><strong>Post Karma:</strong> {{ user_info.link_karma }}</p>
+            <p><strong>Comment Karma:</strong> {{ user_info.comment_karma }}</p>
+            <p><strong>Is Verified:</strong> {{ user_info.verified }}</p>
+<p>Account Age: {{ account_age }}</p>
+        </div>
+
+        <h1>User Posts</h1>
+        {% for post in user_posts %}
+            <div class="post">
+                <h2>{{ post.title }}</h2>
+                <p><strong>Score:</strong> {{ post.score }} |
+                   <strong>Comments:</strong> {{ post.num_comments }} |
+                   <strong>Views:</strong> {{ post.views }} |
+                   <strong>Upvote Ratio:</strong> {{ post.upvote_ratio }} |
+                   <strong>Subreddit:</strong> {{ post.subreddit }} |
+                   <strong>Author:</strong> {{ post.author }}</p>
+                <p><strong>Engagement Rate:</strong> {{ post.engagement_rate }} |
+                   <strong>Created At:</strong> {{ post.created_at|date:"Y-m-d H:i" }}</p>
+                <p><strong>Post Type:</strong> {{ post.content_type }}</p>
+                <p>{{ post.selftext }}</p>
+
+ {% if post.selftext %}
+ <p><strong>Post sentiment:</strong> {{ post.sentiment }}</p>
+ {% endif %}
+ {% if post.image_url %}
+     <img src="{{ post.image_url }}" alt="Post Image">
+ {% endif %}
+ <h3>Comments</h3>
+ <div class="comments">
+     {% for comment in post.comments %}
+         <div class="comment">
+             <p><strong>{{ comment.author }}</strong> - <em>Score:</em> {{ comment.score }}</p>
+             <p>{{ comment.body }}</p>
+         </div>
+     {% endfor %}
+ </div>
+</div>
+{% endfor %}
+</div>
+
+<div class="footer">
+<p>&copy; 2024 Reddit Insights App. All rights reserved.</p>
+</div>
+</body>
+</html>
+

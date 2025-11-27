@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facebook User Information</title>
+</head>
+<body>
+    <h2>Facebook User Information</h2>
+
+    {% if user_data %}
+        <h3>Connected Accounts</h3>
+        <ul>
+            {% for page in user_data %}
+                <li>
+                    <strong>Page ID:</strong> {{ page.id }}<br>
+                    <strong>Page Name:</strong> {{ page.name }}<br>
+                    <strong>Instagram Business Account ID:</strong>
+                    {% if page.instagram_business_account %}
+                        {{ page.instagram_business_account.id }}
+                    {% else %}
+                        No Instagram Business Account linked
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No user data available or no Instagram Business Account linked.</p>
+    {% endif %}
+</body>
+</html>

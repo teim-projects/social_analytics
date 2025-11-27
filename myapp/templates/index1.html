@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LinkedIn Login</title>
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3f2ef;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            background-color: #0077b5;
+            color: #fff;
+            padding: 1.5rem;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .header h1 {
+            margin: 0 auto;
+            font-size: 2rem;
+            text-align: center;
+        }
+
+        .back-button {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: #fff;
+            color: #0077b5;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .back-button:hover {
+            background-color: #e1e9f0;
+            color: #005582; /* Slightly darker LinkedIn blue */
+        }
+
+        .content {
+            margin: 2rem auto;
+            text-align: center;
+            max-width: 600px;
+            padding: 2rem;
+            background: #fff;
+            color: #333;
+            border-radius: 8px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .content h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .btn-login {
+            background-color: #0077b5;
+            color: #fff;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 6px;
+            display: inline-block;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-login:hover {
+            background-color: #005582;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="/dashboard" class="back-button">Back</a>
+        <h1>LinkedIn Login</h1>
+    </header>
+    <section class="content">
+        <h2>Welcome! Click the button below to log in to LinkedIn</h2>
+        <a href="{{ authorization_url }}" class="btn-login">Login with LinkedIn</a>
+    </section>
+</body>
+</html>

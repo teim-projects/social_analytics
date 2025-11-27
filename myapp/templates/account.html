@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Account</title>
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'css/account.css' %}" />
+  </head>
+  <body>
+    <div class="sidebar">
+      <div class="logo-details">
+        <i class="bx bx-leaf"></i>
+        <span class="logo_name">Elevate Trend</span>
+      </div>
+      <ul class="nav-links">
+        <li>
+          <a href="{% url 'dashboard' %}">
+            <i class="bx bx-grid-alt"></i>
+            <span class="links_name">Dashboard</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'account' %}" class="active">
+            <i class="bx bxs-user-account"></i>
+            <span class="links_name">Account</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'report' %}">
+            <i class="bx bx-trending-up"></i>
+            <span class="links_name">Review</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'analytics' %}">
+            <i class="bx bx-pie-chart-alt-2"></i>
+            <span class="links_name">Analytics</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'support' %}">
+            <i class="bx bx-support"></i>
+            <span class="links_name">Support</span>
+          </a>
+        </li>
+        <li class="log_out">
+          <a href="{% url 'logout_view' %}">
+            <i class="bx bx-log-out"></i>
+            <span class="links_name">Log out</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <section class="home-section">
+      <nav>
+        <div class="sidebar-button">
+          <i class="bx bx-menu sidebarBtn"></i>
+          <span class="dashboard">Accounts</span>
+        </div>
+<div class="search-box">
+          <input type="text" placeholder="Search..." />
+          <i class="bx bx-search"></i>
+        </div>
+<div class="profile-details">
+          <img src="{% static 'images/logo.png' %}" alt="Logo" />
+          <span class="admin_name">{{  request.session.user_name }}</span>
+        </div>
+      </nav>
+
+      <div class="home-content">
+        <p>Accounts Management</p>
+        <div class="overview-boxes">
+          <div class="box">
+            <div class="right-side">
+              <div class="box-topic">Facebook</div>
+              <a href="{% url 'facebookll' %}" class="connectButton">LOGIN</a>
+            </div>
+            <img src="{% static 'images/facebook.png' %}" class="acc" alt="Facebook" />
+          </div>
+          <div class="box">
+            <div class="right-side">
+              <div class="box-topic">Instagram</div>
+              <a href="{% url 'instagram_login' %}" class="connectButton">LOGIN</a>
+            </div>
+            <img src="{% static 'images/instagram.png' %}" class="acc" alt="Instagram" />
+          </div>
+          <div class="box">
+            <div class="right-side">
+              <div class="box-topic">Twitter</div>
+              <a href="{% url 'twitters' %}" class="connectButton">LOGIN</a>
+            </div>
+            <img src="{% static 'images/twitter.png' %}" class="acc" alt="Twitter" />
+          </div>
+          <div class="box">
+            <div class="right-side">
+              <div class="box-topic">Reddit</div>
+              <a href="{% url 'reddit_login' %}" class="connectButton">LOGIN</a>
+            </div>
+            <img src="{% static 'images/reddit_img.png' %}" class="acc" alt="Reddit" />
+          </div>
+          <div class="box">
+            <div class="right-side">
+              <div class="box-topic">YouTube</div>
+              <a href="{% url 'youtube_login' %}" class="connectButton">LOGIN</a>
+            </div>
+            <img src="{% static 'images/yt.png' %}" class="acc" alt="YouTube" />
+          </div>
+          <div class="box">
+            <div class="right-side">
+              <div class="box-topic">LinkedIn</div>
+              <a href="{% url 'linkedin_login' %}" class="connectButton">LOGIN</a>
+            </div>
+            <img src="{% static 'images/linkedin.png' %}" class="acc" alt="LinkedIn" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      let sidebar = document.querySelector(".sidebar");
+      let sidebarBtn = document.querySelector(".sidebarBtn");
+      sidebarBtn.onclick = function () {
+        sidebar.classList.toggle("active");
+        if (sidebar.classList.contains("active")) {
+          sidebarBtn.classList.replace("bx-menu", "bx-menu-alt-right");
+        } else {
+          sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
+        }
+      };
+    </script>
+  </body>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Twitter Profile and Insights</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1, h2 {
+            color: #333;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background: #f9f9f9;
+        }
+        .tweet {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+        .metrics {
+            color: #555;
+        }
+        .profile-image {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome, {{ profile.data.name }}</h1>
+    <p><strong>Username:</strong> {{ profile.data.username }}</p>
+    <img src="{{ user_insights.data.profile_image_url }}" alt="Profile Image" class="profile-image" />
+
+    <h2>Your Insights</h2>
+    <p><strong>Followers:</strong> {{ user_insights.data.public_metrics.followers_count }}</p>
+    <p><strong>Following:</strong> {{ user_insights.data.public_metrics.following_count }}</p>
+    <p><strong>Tweet Count:</strong> {{ user_insights.data.public_metrics.tweet_count }}</p>
+
+    <h2>Your Tweets with Insights</h2>
+    <ul>
+        {% for tweet in post_insights %}
+        <li>
+            <p class="tweet"><strong>Tweet:</strong> {{ tweet.text }}</p>
+            <p class="metrics"><strong>Created At:</strong> {{ tweet.created_at }}</p>
+            <p class="metrics"><strong>Likes:</strong> {{ tweet.public_metrics.like_count }}</p>
+            <p class="metrics"><strong>Retweets:</strong> {{ tweet.public_metrics.retweet_count }}</p>
+            <p class="metrics"><strong>Replies:</strong> {{ tweet.public_metrics.reply_count }}</p>
+            <p class="metrics"><strong>Quote Tweets:</strong> {{ tweet.public_metrics.quote_count }}</p>
+            <p class="metrics"><strong>Language:</strong> {{ tweet.lang }}</p>
+            <p class="metrics"><strong>Hashtags:</strong> {% for hashtag in tweet.entities.hashtags %}{{ hashtag.tag }}{% if not for>            <p class="metrics"><strong>Mentions:</strong> {% for mention in tweet.entities.mentions %}{{ mention.username }}{% if no>        </li>
+        {% endfor %}                                                                                                                     </ul>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Twitter Profile and Insights</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1, h2 {
+            color: #333;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background: #f9f9f9;
+        }
+        .tweet {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+        .metrics {
+            color: #555;
+        }
+        .profile-image {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome, {{ profile.data.name }}</h1>
+    <p><strong>Username:</strong> {{ profile.data.username }}</p>
+    <p><strong>Description:</strong> {{ user_insights.data.description }}</p>
+    <p><strong>Location:</strong> {{ user_insights.data.location }}</p>
+    <p><strong>Verified:</strong> {{ user_insights.data.verified }}</p>
+    <img src="{{ user_insights.data.profile_image_url }}" alt="Profile Image" class="profile-image" />
+
+    <h2>Your Insights</h2>
+    <p><strong>Followers:</strong> {{ user_insights.data.public_metrics.followers_count }}</p>
+    <p><strong>Following:</strong> {{ user_insights.data.public_metrics.following_count }}</p>
+    <p><strong>Tweet Count:</strong> {{ user_insights.data.public_metrics.tweet_count }}</p>
+
+    <h2>Your Tweets with Insights</h2>
+    <ul>
+        {% for tweet in post_insights %}
+        <li>
+            <p class="tweet"><strong>Tweet:</strong> {{ tweet.text }}</p>
+            <p class="metrics"><strong>Created At:</strong> {{ tweet.created_at }}</p>
+            <p class="metrics"><strong>Likes:</strong> {{ tweet.public_metrics.like_count }}</p>
+            <p class="metrics"><strong>Retweets:</strong> {{ tweet.public_metrics.retweet_count }}</p>
+            <p class="metrics"><strong>Replies:</strong> {{ tweet.public_metrics.reply_count }}</p>
+            <p class="metrics"><strong>Quote Tweets:</strong> {{ tweet.public_metrics.quote_count }}</p>
+            <p class="metrics"><strong>Language:</strong> {{ tweet.lang }}</p>
+            <p class="metrics"><strong>Hashtags:</strong> {% for hashtag in tweet.entities.hashtags %}{{ hashtag.tag }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
+            <p class="metrics"><strong>Mentions:</strong> {% for mention in tweet.entities.mentions %}{{ mention.username }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
