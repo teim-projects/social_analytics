@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Dashboard</title>
+    <!-- Boxicons CDN Link -->
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}" />
+  </head>
+  <body>
+    <div class="sidebar">
+      <div class="logo-details">
+        <i class="bx bx-leaf"></i>
+        <span class="logo_name">Elevate Trend</span>
+      </div>
+      <ul class="nav-links">
+        <li>
+          <a href="{% url 'dashboard' %}" class="active">
+            <i class="bx bx-grid-alt"></i>
+            <span class="links_name">Dashboard</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'account' %}">
+            <i class="bx bxs-user-account"></i>
+            <span class="links_name">Account</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'report' %}">
+            <i class="bx bx-trending-up"></i>
+            <span class="links_name">Review</span>
+          </a>
+        </li>
+
+<<<<<<< HEAD
+        <li>
+=======
+        <!-- <li>
+>>>>>>> bdd25032e861245c83f7acf2431752f74402aeb1
+          <a href="{% url 'analytics' %}">
+            <i class="bx bx-pie-chart-alt-2"></i>
+            <span class="links_name">Analytics</span>
+          </a>
+<<<<<<< HEAD
+        </li>
+=======
+        </li> -->
+>>>>>>> bdd25032e861245c83f7acf2431752f74402aeb1
+        <li>
+          <a href="{% url 'support' %}">
+            <i class="bx bx-support"></i>
+            <span class="links_name">Support</span>
+          </a>
+        </li>
+        <li class="log_out">
+          <a href="{% url 'logout_view' %}">
+            <i class="bx bx-log-out"></i>
+            <span class="links_name">Log out</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <section class="home-section">
+      <nav>
+        <div class="sidebar-button">
+          <i class="bx bx-menu sidebarBtn"></i>
+          <span class="dashboard">Dashboard</span>
+        </div>
+        <div class="search-box">
+          <input type="text" placeholder="Search..." />
+          <i class="bx bx-search"></i>
+        </div>
+        <div class="profile-details">
+          <img src="{% static 'images/logo.png' %}" alt="" />
+          <span class="admin_name">{{ request.session.user_name }}</span>
+        </div>
+      </nav>
+
+      <div class="home-content">
+        <p>Social Media Platforms</p>
+        <div class="overview-boxes">
+          <div class="box">
+            <div class="right-side">
+              <div class="box-topic">Facebook</div>
+            </div>
+            <img src="{% static 'images/facebook.png' %}" alt="" class="acc" />
+          </div>
+<<<<<<< HEAD
+          <a href="{% url 'instagram_analytics' %}" style="text-decoration: none; color: inherit;" class="box">
+=======
+          <a href="{% url 'instagram_tab' %}" style="text-decoration: none; color: inherit;" class="box">
+>>>>>>> bdd25032e861245c83f7acf2431752f74402aeb1
+            <div class="right-side">
+              <div class="box-topic">Instagram</div>
+            </div>
+            <img
+              src="{% static 'images/instagram.png' %}"
+              alt="Instagram"
+              class="acc"
+            />
+          </a>
+
+          <!-- <div class="box">
+            <div class="right-side">
+              <div class="box-topic">Instagram</div>
+            </div>
+            <img src="{% static 'images/instagram.png' %}" alt="" class="acc" />
+          </div> -->
+          <div class="box">
+            <div class="right-side">
+              <div class="box-topic">Twitter</div>
+            </div>
+            <img src="{% static 'images/twitter.png' %}" alt="" class="acc" />
+          </div>
+
+          <div class="box">
+            <div class="right-side">
+              <div class="box-topic">Reddit</div>
+            </div>
+            <img
+              src="{% static 'images/reddit_img.png' %}"
+              alt=""
+              class="acc"
+            />
+          </div>
+<<<<<<< HEAD
+          <div class="box">
+=======
+          <a href="{% url 'youtube_tab' %}" style="text-decoration: none; color: inherit;" class="box">
+            <div class="right-side">
+              <div class="box-topic">Youtube</div>
+            </div>
+            <img
+              src="{% static 'images/yt.png' %}"
+              alt="Instagram"
+              class="acc"
+            />
+          </a>
+
+          <!-- <div class="box">
+>>>>>>> bdd25032e861245c83f7acf2431752f74402aeb1
+            <div class="right-side">
+              <div class="box-topic">Youtube</div>
+            </div>
+            <img src="{% static 'images/yt.png' %}" alt="" class="acc" />
+<<<<<<< HEAD
+          </div>
+=======
+          </div> -->
+>>>>>>> bdd25032e861245c83f7acf2431752f74402aeb1
+          <div class="box">
+            <div class="right-side">
+              <div class="box-topic">LinkedIn</div>
+            </div>
+            <img src="{% static 'images/linkedin.png' %}" alt="" class="acc" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      let sidebar = document.querySelector(".sidebar");
+      let sidebarBtn = document.querySelector(".sidebarBtn");
+      sidebarBtn.onclick = function () {
+        sidebar.classList.toggle("active");
+        if (sidebar.classList.contains("active")) {
+          sidebarBtn.classList.replace("bx-menu", "bx-menu-alt-right");
+        } else {
+          sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
+        }
+      };
+
+      // Toggle Switch Functionality
+      document.querySelectorAll(".toggleSwitch").forEach((item) => {
+        item.addEventListener("change", function () {
+          var labelId = this.getAttribute("data-label-id");
+          var toggleLabel = document.getElementById(labelId);
+          if (this.checked) {
+            toggleLabel.textContent = "Connected";
+          } else {
+            toggleLabel.textContent = "Connect";
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

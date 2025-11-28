@@ -1,0 +1,14 @@
+[server]
+headless = true
+enableCORS = false
+enableXsrfProtection = false
+port = 8501
+
+[browser]
+serverAddress = "localhost"
+<<<<<<< HEAD
+gatherUsageStats = false
+=======
+gatherUsageStats = false
+
+>>>>>>> bdd25032e861245c83f7acf2431752f74402aeb1

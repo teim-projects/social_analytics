@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Facebook Posts Analysis</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #4a90e2;
+            margin-bottom: 20px;
+        }
+        .post-container {
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px auto;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+        }
+        .chart-container {
+            width: 100%;
+            height: 400px;
+            margin-top: 20px;
+        }
+ img {
+            max-width: 300px; /* Limit width */
+            max-height: 300px; /* Limit height */
+            width: auto;
+            height: auto;
+            border-radius: 5px;
+            display: block;
+            margin: 10px auto; /* Center image */
+        }
+    </style>
+</head>
+<body>
+    <h1>Posts Analysis for {{ page_name }}</h1>
+
+    {% for post in posts %}
+        <div class="post-container">
+            <p><strong>Post ID:</strong> {{ post.id }}</p>
+            <p><strong>Created At:</strong> {{ post.created_time }}</p>
+            <p><strong>Message:</strong> {{ post.message|default:"No content" }}</p>
+
+ {% if post.media_type == "photo" %}
+        <img src="{{ post.media.image.src }}" alt="Post Photo" />
+    {% elif post.media_type == "video" %}
+        <video controls>
+            <source src="{{ post.media.source }}" type="video/mp4">
+        </video>
+    {% endif %}
+    <div class="chart-container">
+        <canvas id="reactionsChart-{{ forloop.counter }}"></canvas>
+    </div>
+    <div class="chart-container">
+        <canvas id="impressionsChart-{{ forloop.counter }}"></canvas>
+    </div>
+</div>
+{% endfor %}
+
+<script>
+// Parse posts data from Django
+const posts = {{ posts_json|safe }};
+
+// Generate charts for each post
+posts.forEach((post, index) => {
+    // Reactions Chart
+    const reactionsCtx = document.getElementById(`reactionsChart-${index + 1}`).getContext('2d');
+    const reactionsData = {
+        like: post.insights.data[0].values[0].value || 0,
+        love: post.insights.data[1].values[0].value || 0,
+        wow: post.insights.data[2].values[0].value || 0,
+        haha: post.insights.data[3].values[0].value || 0,
+        sorry: post.insights.data[4].values[0].value || 0,
+        anger: post.insights.data[5].values[0].value || 0,
+    };
+
+    new Chart(reactionsCtx, {
+        type: 'bar',
+        data: {
+            labels: ['Like', 'Love', 'Wow', 'Haha', 'Sorry', 'Anger'],
+            datasets: [{
+                label: 'Reactions',
+                data: [reactionsData.like, reactionsData.love, reactionsData.wow, reactionsData.haha, reactionsData.sorry, reactionsData.anger],
+                backgroundColor: ['#4caf50', '#f44336', '#ffeb3b', '#ff9800', '#9c27b0', '#2196f3']
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+            // Impressions and Clicks Chart
+            const impressionsCtx = document.getElementById(`impressionsChart-${index + 1}`).getContext('2d');
+            const impressionsData = {
+                clicks: post.insights.data[6].values[0].value || 0,
+                post_impressions: post.insights.data[7].values[0].value || 0,
+                post_impressions_unique: post.insights.data[8].values[0].value || 0,
+                post_impressions_paid: post.insights.data[9].values[0].value || 0,
+                post_impressions_paid_unique: post.insights.data[10].values[0].value || 0,
+                post_impressions_fan: post.insights.data[11].values[0].value || 0,
+                post_impressions_fan_unique: post.insights.data[12].values[0].value || 0,
+                post_impressions_organic: post.insights.data[13].values[0].value || 0,
+                post_impressions_organic_unique: post.insights.data[14].values[0].value || 0,
+                post_impressions_viral: post.insights.data[15].values[0].value || 0,
+                post_impressions_viral_unique: post.insights.data[16].values[0].value || 0,
+                post_impressions_nonviral: post.insights.data[17].values[0].value || 0,
+                post_impressions_nonviral_unique: post.insights.data[18].values[0].value || 0
+            };
+
+            new Chart(impressionsCtx, {
+                type: 'line',
+                data: {
+                    labels: [
+                        'Clicks', 'Total Impressions', 'Unique Impressions', 'Paid Impressions', 'Unique Paid Impressions',
+                        'Fan Impressions', 'Unique Fan Impressions', 'Organic Impressions', 'Unique Organic Impressions',
+                        'Viral Impressions', 'Unique Viral Impressions', 'Nonviral Impressions', 'Unique Nonviral Impressions'
+                    ],
+                    datasets: [{
+                        label: 'Impressions and Clicks',
+                        data: [
+                            impressionsData.clicks, impressionsData.post_impressions, impressionsData.post_impressions_unique,
+                            impressionsData.post_impressions_paid, impressionsData.post_impressions_paid_unique, impressionsData.post_impressions_fan,
+                            impressionsData.post_impressions_fan_unique, impressionsData.post_impressions_organic, impressionsData.post_impressions_organic_unique,
+                            impressionsData.post_impressions_viral, impressionsData.post_impressions_viral_unique, impressionsData.post_impressions_nonviral,
+                            impressionsData.post_impressions_nonviral_unique
+                        ],
+                        borderColor: '#4a90e2',
+                        backgroundColor: 'rgba(74, 144, 226, 0.2)',
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Select Page</title>
+    <style>
+    body {
+        background-color: #F0F2F5;
+        color: #050505;
+        font-family: Arial, sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+        margin: 0;
+    }
+
+    h1 {
+        color: #1877F2;
+        text-align: center;
+        font-size: 1.5em;
+        margin-bottom: 15px;
+    }
+
+    form {
+        background-color: #FFFFFF;
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 400px;
+    }
+
+    label {
+        color: #050505;
+        font-size: 1em;
+        margin-bottom: 5px;
+    }
+
+    select, textarea, button {
+        width: 100%;
+        padding: 10px;
+        margin: 8px 0;
+        border-radius: 5px;
+        border: 1px solid #E4E6EB;
+        font-size: 1em;
+    }
+
+    textarea {
+        resize: vertical;
+    }
+
+    button {
+        background-color: #1877F2;
+        color: #FFFFFF;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        border: none;
+    }
+
+    button:hover {
+        background-color: #166FE5;
+    }
+
+    select, textarea {
+        background-color: #F0F2F5;
+        color: #050505;
+    }
+  </style>
+
+</head>
+<body>
+    <h1>Select a Page</h1>
+
+    <form method="POST" action="/get_page_posts/">
+        {% csrf_token %}
+        <label for="page_id">Select Page:</label>
+        <select name="page_id" id="page_id">
+            {% for page in pages %}
+                <option value="{{ page.id }}">{{ page.name }}</option>
+            {% endfor %}
+        </select>
+        <input type="hidden" name="access_token" value="{{ access_token }}">
+        <button type="submit">Get Posts</button>
+    </form>
+    <form method="POST" action="/get_page_reviews/">
+        {% csrf_token %}
+        <label for="page_id">Select Page for Reviews:</label>
+        <select name="page_id" id="page_id">
+            {% for page in pages %}
+                <option value="{{ page.id }}">{{ page.name }}</option>
+            {% endfor %}
+        </select>
+        <input type="hidden" name="access_token" value="{{ access_token }}">
+        <button type="submit">Get Reviews</button>
+    </form>
+
+    <form method="POST" action="/get_page_postanalysis/">
+        {% csrf_token %}
+        <label for="page_id">Select Page for Post Analysis:</label>
+        <select name="page_id">
+            {% for page in pages %}
+                <option value="{{ page.id }}">{{ page.name }}</option>
+            {% endfor %}
+        </select>
+        <input type="hidden" name="access_token" value="{{ access_token }}">
+        <button type="submit">Get Posts Analysis</button>
+    </form>
+
+    <form method="POST" action="/create_post/" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for="page_id">Select Page to Create Post:</label>
+        <select name="page_id" id="page_id">
+            {% for page in pages %}
+                <option value="{{ page.id }}">{{ page.name }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="message">Post Message:</label>
+        <textarea id="message" name="message" rows="4" required></textarea>
+
+        <input type="hidden" name="access_token" value="{{ access_token }}">
+        <button type="submit">Create Post</button>
+    </form>
+
+    <form method="POST" action="/graphicala/">
+        {% csrf_token %}
+        <label for="page_id">Select Page for Graphical Analysis:</label>
+        <select name="page_id">
+            {% for page in pages %}
+                <option value="{{ page.id }}">{{ page.name }}</option>
+            {% endfor %}
+        </select>
+        <input type="hidden" name="access_token" value="{{ access_token }}">
+        <button type="submit">Posts Graphical Analysis</button>
+
+   </form>
+
+<!-- <form method="POST" action="/get_page_insights/">
+        {% csrf_token %}
+        <label for="page_id">Select Page for Insights:</label>
+        <select name="page_id">
+            {% for page in pages %}
+                <option value="{{ page.id }}">{{ page.name }}</option>
+            {% endfor %}
+        </select>
+
+
+        <label for="period">Select Period:</label>
+        <select name="period">
+            <option value="day">Day</option>
+            <option value="week">Week</option>
+            <option value="days_28">28 Days</option>
+        </select>
+
+        <input type="hidden" name="access_token" value="{{ access_token }}">
+        <button type="submit">Get Page Insights</button>
+    </form>-->
+<form method="POST" action="/get_page_insights/">
+    {% csrf_token %}
+
+    <!-- Page Selector -->
+    <label for="page_id">Select Page for Insights:</label>
+    <select name="page_id">
+        {% for page in pages %}
+            <option value="{{ page.id }}">{{ page.name }}</option>
+        {% endfor %}
+    </select>
+
+    <!-- Period Selector -->
+    <label for="period">Select Period:</label>
+    <select name="period" id="period">
+        <option value="day">Day</option>
+        <option value="week">Week</option>
+        <option value="days_28">28 Days</option>
+    </select>
+     <!-- Calendar Inputs for Custom Date Range -->
+<!---    <label for="since">Start Date:</label>
+    <input type="date" name="since" id="since">
+
+    <label for="until">End Date:</label>
+    <input type="date" name="until" id="until">
+
+    <!-- Hidden Access Token -->
+    <input type="hidden" name="access_token" value="{{ access_token }}">
+
+    <button type="submit">Get Page Insights</button>
+</form>
+    
+</body>
+</html>

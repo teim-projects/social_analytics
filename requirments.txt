@@ -1,0 +1,14 @@
+django
+nltk
+textblob 
+streamlit
+tabulate
+matplotlib 
+openpyexcel 
+openpyxl
+seaborn
+django-cors-headers
+plotly
+scikit-learn
+python-dotenv
+statsmodels

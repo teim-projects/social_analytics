@@ -1,0 +1,47 @@
+/* General styling for the reviews section */
+.reviews-section {
+    padding: 20px;
+    background-color: #f8f9fa; /* Light background */
+    border-radius: 15px; /* Rounded corners */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    text-align: center; /* Center text */
+}
+
+/* Styling for the container holding all reviews */
+#all-reviews-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Create 4 equal columns */
+    gap: 20px; /* Space between review boxes */
+    justify-content: center; /* Center grid items horizontally */
+}
+
+/* Individual review box styling */
+.review-box {
+    background: #ffffff; /* White background for each review box */
+    padding: 15px;
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    text-align: left; /* Align text to the left */
+}
+
+/* Ensure responsive design */
+@media (max-width: 1200px) {
+    #all-reviews-container {
+        grid-template-columns: repeat(3, 1fr); /* 3 columns for medium screens */
+    }
+}
+
+@media (max-width: 900px) {
+    #all-reviews-container {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns for smaller screens */
+    }
+}
+
+@media (max-width: 600px) {
+    #all-reviews-container {
+        grid-template-columns: 1fr; /* 1 column for very small screens */
+    }
+}
+header{
+    justify-content:center ;
+}
