@@ -94,20 +94,6 @@ load_dotenv()  # Load environment variables from .env file
 ADMIN_EMAIL = os.getenv("ADMIN_EMAIL")
 ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD")
 
-<<<<<<< HEAD
-def instagram_analytics(request):
-    return render(request, 'instagram_analytics.html')
-
-def instagram_engagement(request):
-    return render(request, 'instagram_engagement.html')
-
-def engagement_rate(request):
-    return render(request, 'engagement_rate.html')
-
-def top_posts(request):
-    return render(request, 'top_posts.html')
-    
-=======
 # View for YouTube Tab
 def youtube_tab(request):
     return render(request, 'youtube_tab.html')
@@ -206,7 +192,6 @@ def get_youtube_channel(request):
     r = requests.get(url, headers=headers)
     return JsonResponse(r.json())
 
->>>>>>> bdd25032e861245c83f7acf2431752f74402aeb1
 def facebook_insights(request):
     if request.method == 'POST':
         page_id = request.POST.get('page_id')
@@ -887,13 +872,6 @@ def facebook_login1(request):
 def forgot_password(request):
     return render(request, 'forgot_password.html')
 def instagram_login(request):
-<<<<<<< HEAD
-    print(request.session.get('is_authenticated'))
-    if request.session.get('is_authenticated', False):
-        return render(request, 'index.html')  # Create this template
-    else :
-        return render(request, 'sign_in.html')
-=======
     if request.session.get('is_authenticated', False):
         auth_url = (
             "https://www.instagram.com/oauth/authorize"
@@ -909,7 +887,6 @@ def instagram_login(request):
     else:
         return render(request, "sign_in.html")
     
->>>>>>> bdd25032e861245c83f7acf2431752f74402aeb1
 def twitter_login(request):
     if request.session.get('is_authenticated', False):
         return render(request, 'login.html')  # Create this template
@@ -921,18 +898,6 @@ def reddit_login(request):
     else :
         return render(request, 'sign_in.html')
     
-<<<<<<< HEAD
-def youtube_login(request):
-    if request.session.get('is_authenticated', False):
-        return render(request, 'youtube_login.html')
-    else :
-        return render(request, 'sign_in.html')
-def linkedin_login(request):
-    if request.session.get('is_authenticated', False):
-        return render(request, 'linkedin_login.html')
-    else :
-        return render(request, 'sign_in.html')
-=======
 # def youtube_login(request):
 #     if request.session.get('is_authenticated', False):
 #         return render(request, 'youtube_login.html')
@@ -943,7 +908,6 @@ def linkedin_login(request):
 #         return render(request, 'linkedin_login.html')
 #     else :
 #         return render(request, 'sign_in.html')
->>>>>>> bdd25032e861245c83f7acf2431752f74402aeb1
 def dashboard(request):
     if request.session.get('is_authenticated', False):
         return render(request, 'dashboard.html')
@@ -1087,13 +1051,8 @@ def sign_in(request):
 
 def linkedin_login(request):
     linkedin_client_id = os.getenv('LINKEDIN_CLIENT_ID')
-<<<<<<< HEAD
-    redirect_uri = 'http://127.0.0.1:8000/callbacklin/'
-    # redirect_uri = 'https://www.marketinganalytics.live/callbacklin/'
-=======
     # redirect_uri = 'http://127.0.0.1:8000/callbacklin/'
     redirect_uri = "https://socialalytics.in/callbacklin/"
->>>>>>> bdd25032e861245c83f7acf2431752f74402aeb1
     scope = 'email openid profile   '  # Corrected scope
 
     # Generate a random state parameter to prevent CSRF attacks
@@ -1136,17 +1095,10 @@ def linkedin_callback(request):
     linkedin_client_id = os.getenv('LINKEDIN_CLIENT_ID')
     linkedin_client_secret = os.getenv('LINKEDIN_CLIENT_SECRET')
      # Use the same redirect URI as in the login view
-<<<<<<< HEAD
-    redirect_uri = 'http://127.0.0.1:8000/callbacklin/'
-    # redirect_uri = 'https://www.marketinganalytics.live/callbacklin/'
-    
-     # Prepare token request data
-=======
     # redirect_uri = 'http://127.0.0.1:8000/callbacklin/'
     redirect_uri = "https://socialalytics.in/callbacklin/"
     
     # Prepare token request data
->>>>>>> bdd25032e861245c83f7acf2431752f74402aeb1
     token_url = 'https://www.linkedin.com/oauth/v2/accessToken'
     token_data = {
         'grant_type': 'authorization_code',
@@ -1171,17 +1123,11 @@ def linkedin_callback(request):
     # Save the access token in the session for future API calls
     request.session['access_token'] = access_token
     
-<<<<<<< HEAD
-     # Redirect the user to their profile page
-    return redirect('profilel')
-
-=======
     # # Redirect the user to their profile page
     # return redirect('profilel')
 
     # REDIRECT TO YOUTUBE AFTER SUCCESS
     return redirect("https://www.linkedin.com/")
->>>>>>> bdd25032e861245c83f7acf2431752f74402aeb1
 
 def profile_view(request):
     access_token = request.session.get('access_token')
@@ -1263,159 +1209,6 @@ def facebook_callback(request):
 def about_view(request):
     return render(request, 'about.html')
 # URL to start the OAuth2 process
-<<<<<<< HEAD
-def youtube_login(request):
-    youtube_client_id = os.getenv('YOUTUBE_CLIENT_ID')
-    redirect_uri = 'https://www.marketinganalytics.live/callbackyoutube/'
-    scopes = ['https://www.googleapis.com/auth/youtube.readonly', 'https://www.googleapis.com/auth/analytics' , 'https://www.googleapis.com/auth/yt-analytics.readonly','https://www.googleapis.com/auth/yt-analytics-monetary.readonly','https://www.googleapis.com/auth/youtube','https://www.googleapis.com/auth/youtubepartner','https://www.googleapis.com/auth/youtube.force-ssl']       
-    # Construct the OAuth2 authorization URL
-    auth_url = (
-        f"https://accounts.google.com/o/oauth2/v2/auth?"
-        f"client_id={youtube_client_id}&"
-        f"redirect_uri={redirect_uri}&"
-        f"response_type=code&"
-        f"scope={' '.join(scopes)}&"
-        f"access_type=offline"
-    )
-
-
-    # Pass the login URL to the template
-    context = {
-        'auth_url': auth_url
-    }
-
-    return render(request, 'youtube_login.html', context)
-
-# This view handles the callback after the user authenticates
-
-def youtube_callback(request):
-    code = request.GET.get('code')
-    youtube_client_id = os.getenv('YOUTUBE_CLIENT_ID')
-    youtube_client_secret = os.getenv('YOUTUBE_CLIENT_SECRET')
-    redirect_uri = 'https://www.marketinganalytics.live/callbackyoutube/'
-
-    # Exchange authorization code for access token
-    token_url = 'https://oauth2.googleapis.com/token'
-    token_data = {
-        'code': code,
-        'client_id': youtube_client_id,
-        'client_secret': youtube_client_secret,
-        'redirect_uri': redirect_uri,
-        'grant_type': 'authorization_code'
-    }
-    token_response = requests.post(token_url, data=token_data)
-    token_json = token_response.json()
-
-    # Check if access token is available
-    access_token = token_json.get('access_token')
-    if not access_token:
-        return JsonResponse({'error': 'Failed to retrieve access token'})
-
-    headers = {'Authorization': f'Bearer {access_token}'}
-
-    # Fetch channel information
-    channel_info_url = "https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics&mine=true"
-    channel_info_response = requests.get(channel_info_url, headers=headers)
-    channel_info = channel_info_response.json()
-
-    # Fetch uploaded videos
-    videos_list_url = "https://www.googleapis.com/youtube/v3/search?part=snippet&forMine=true&type=video&maxResults=50"
-    videos_list_response = requests.get(videos_list_url, headers=headers)
-    videos_list = videos_list_response.json()
-
-    # Extract video IDs
-    video_ids = [item['id']['videoId'] for item in videos_list.get('items', []) if 'videoId' in item['id']]
-
-    # Fetch detailed information for each video
-    video_details = []
-    if video_ids:
-        # Use comma-separated video IDs for batch processing
-        video_ids_str = ','.join(video_ids)
-        video_details_url = "https://www.googleapis.com/youtube/v3/videos"
-        video_params = {
-            'part': 'snippet,contentDetails,statistics,status,player,topicDetails,recordingDetails',
-            'id': video_ids_str
-        }
-        video_details_response = requests.get(video_details_url, headers=headers, params=video_params)
-        video_details = video_details_response.json()
-        
-    analytics_url = "https://youtubeanalytics.googleapis.com/v2/reports"
-    today = date.today()
-    start_date = today - timedelta(days=28)  # Past 28 days
-    end_date = today # Yesterday to ensure data availability
-    analytics_params = {
-        'ids': 'channel==MINE',
-        'startDate': start_date.strftime('%Y-%m-%d'),
-        'endDate': end_date.strftime('%Y-%m-%d'),
-        'metrics': 'views,estimatedMinutesWatched,averageViewDuration,averageViewPercentage,subscribersGained,subscribersLost',
-        'dimensions': 'day',
-        'sort': 'day',
-    }
-    analytics_response = requests.get(analytics_url, headers=headers, params=analytics_params)
-    def fetch_video_comments(video_id):
-        comments = []
-        url = "https://www.googleapis.com/youtube/v3/commentThreads"
-        params = {
-            'part': 'snippet,replies',
-            'videoId': video_id,
-            'maxResults': 100,  # Fetch up to 100 comments per request
-
-        }
-
-        while True:
-            response = requests.get(url, headers=headers, params=params,)
-            data = response.json()
-      # Process the comments
-            for item in data.get('items', []):
-                top_level_comment = item['snippet']['topLevelComment']['snippet']
-                comments.append({
-                    'author': top_level_comment.get('authorDisplayName'),
-                    'text': top_level_comment.get('textDisplay'),
-                    'likes': top_level_comment.get('likeCount'),
-                    'published_at': top_level_comment.get('publishedAt'),
-                    'replies': [reply['snippet']['textDisplay'] for reply in item.get('replies', {}).get('comments', [])]
-                })
-
-        # Check if there's another page of comments
-            next_page_token = data.get('nextPageToken')
-            if not next_page_token:
-                break
-            params['pageToken'] = next_page_token
-
-        return comments
-    video_data_combined = []
-    for video in video_details.get('items', []):
-        video_id = video['id']
-        
-        comments = fetch_video_comments(video_id)
-        video_analytics_params = {
-            'ids': 'channel==MINE',
-            'filters': f'video=={video_id}',
-            'startDate': start_date.strftime('%Y-%m-%d'),
-            'endDate': end_date.strftime('%Y-%m-%d'),
-            'metrics': 'views,estimatedMinutesWatched,averageViewDuration,averageViewPercentage',
-            'dimensions': 'day',
-            'sort': 'day',
-        }
-
-        video_analytics_response = requests.get(analytics_url, headers=headers, params=video_analytics_params)
-        video_analytics_data = video_analytics_response.json()
-  # Prepare the combined video data
-        combined_video = {
-            'video_id': video_id,
-            'details': video,
-            'comments': comments,
-            'analytics': {
-                'labels': [row[0] for row in video_analytics_data.get('rows', [])],  # Dates
-                'views': [row[1] for row in video_analytics_data.get('rows', [])],
-                'estimatedMinutesWatched': [row[2] for row in video_analytics_data.get('rows', [])],
-                'averageViewDuration': [row[3] for row in video_analytics_data.get('rows', [])],
-                'averageViewPercentage': [row[4] for row in video_analytics_data.get('rows', [])],
-            }
-        }
-
-        video_data_combined.append(combined_video)  # Store combined data in the list
-=======
 # def youtube_login(request):
 #     youtube_client_id = os.getenv('YOUTUBE_CLIENT_ID')
 #     redirect_uri = 'https://www.marketinganalytics.live/callbackyoutube/'
@@ -1567,33 +1360,10 @@ def youtube_callback(request):
 #         }
 
 #         video_data_combined.append(combined_video)  # Store combined data in the list
->>>>>>> bdd25032e861245c83f7acf2431752f74402aeb1
 
 
 
 
-<<<<<<< HEAD
-    analytics_data = analytics_response.json()
-    chart_data = {
-        'labels': [row[0] for row in analytics_data.get('rows', [])],  # Dates
-        'views': [row[1] for row in analytics_data.get('rows', [])],
-        'estimatedMinutesWatched': [row[2] for row in analytics_data.get('rows', [])],
-        'averageViewDuration': [row[3] for row in analytics_data.get('rows', [])],
-        'averageViewPercentage': [row[4] for row in analytics_data.get('rows', [])],
-        'subscribersGained': [row[5] for row in analytics_data.get('rows', [])],
-        'subscribersLost': [row[6] for row in analytics_data.get('rows', [])],
-    }
-    context = {
-        'channel': channel_info,
-        'videos': videos_list,
-        'video_details': video_details,
-        'analytics': analytics_data,
-        'chart_data': chart_data,
-        'video_data_combined': video_data_combined,
-    }
-
-    return render(request, 'youtube_data.html', context)
-=======
 #     analytics_data = analytics_response.json()
 #     chart_data = {
 #         'labels': [row[0] for row in analytics_data.get('rows', [])],  # Dates
@@ -1614,7 +1384,6 @@ def youtube_callback(request):
 #     }
 
 #     return render(request, 'youtube_data.html', context)
->>>>>>> bdd25032e861245c83f7acf2431752f74402aeb1
 
 import os
 import random
@@ -1841,11 +1610,6 @@ REDIRECT_URIi = 'https://www.marketinganalytics.live/callbacki/'
 SCOPESi = 'user_profile,user_media'
 ACCESS_TOKEN = None  # Store access token here
 def index(request):
-<<<<<<< HEAD
-    # Generate Instagram OAuth URL for user login
-    auth_url = "https://www.instagram.com/oauth/authorize?enable_fb_login=0&force_authentication=1&client_id=969834388286582&redirect_uri=https://www.marketinganalytics.live/callbacki/&response_type=code&scope=instagram_business_basic%2Cinstagram_business__manage_messages%2Cinstagram_business_manage_comments%2Cinstagram_business_content_publish"                                         
-    return render(request, 'index.html', {'auth_url': auth_url})
-=======
     if request.session.get('is_authenticated', False):
         auth_url = (
             "https://www.instagram.com/oauth/authorize"
@@ -1860,7 +1624,6 @@ def index(request):
         return render(request, 'index.html', {"auth_url": auth_url})
     else:
         return render(request, "sign_in.html")
->>>>>>> bdd25032e861245c83f7acf2431752f74402aeb1
 
 def instagram_callback(request):
     code = request.GET.get('code')
@@ -2306,14 +2069,9 @@ def predict_engagement(posts_with_insights):
 
 # Facebook Login View
 def facebook_login_view(request):
-<<<<<<< HEAD
-    facebook_client_id2 = os.getenv('FACEBOOK_CLIENT_ID2')  # Your Facebook App ID
-    redirect_uri = 'https://www.marketinganalytics.live/callbackfacebook/'
-=======
     facebook_client_id2 = os.getenv('FACEBOOK_CLIENT_ID')  # Your Facebook App ID
     # redirect_uri = 'https://www.marketinganalytics.live/callbackfacebook/'
     redirect_uri = 'https://socialalytics.in/callbackfacebook/'
->>>>>>> bdd25032e861245c83f7acf2431752f74402aeb1
     scope = 'pages_read_engagement,pages_read_user_content,read_insights'
     response_type = 'code'
 

@@ -11,14 +11,16 @@ st.set_page_config(page_title="YouTube Dashboard", page_icon="🎥", layout="wid
 st.title("🎥 YouTube Dashboard")
 
 # ------------------ Load dataset ------------------
-load_dotenv()
-default_file_path = os.getenv("Youtube_video_data")
+CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
+DATA_DIR = os.path.join(CURRENT_DIR, "data")
+DATA_PATH = os.path.join(DATA_DIR, "ALL_VIDEO_DETAILS.csv")
 
 try:
-    df = pd.read_csv(default_file_path)
+    df = pd.read_csv(DATA_PATH)
 except Exception as e:
-    st.error(f"🚫 Failed to load file: {e}")
+    st.error(f"❌ Could not load YouTube video dataset: {e}")
     st.stop()
+
 
 if df is None:
     st.error(

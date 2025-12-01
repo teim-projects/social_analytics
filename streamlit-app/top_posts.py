@@ -9,13 +9,22 @@ st.set_page_config(page_title="Top Posts Dashboard", page_icon="🏆", layout="w
 st.title("🏆 Instagram Top Posts Dashboard")
 
 # ────────────── Load dataset ──────────────
-load_dotenv()  # Load environment variables from .env file
-DATA_PATH = os.getenv("DATA_PATH")
+CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
+
+# data/ folder inside streamlit-app
+DATA_DIR = os.path.join(CURRENT_DIR, "data")
+
+# THE EXCEL FILE NAME YOU WANT TO LOAD
+DATA_PATH = os.path.join(DATA_DIR, "instagram_analytics_data.xlsx")   # <-- put correct file name here
+
+# Load dataset safely
 try:
     df = pd.read_excel(DATA_PATH)
-except FileNotFoundError:
-    st.error("🚫 File not found! Please check the path.")
+except Exception as e:
+    st.error(f"🚫 Error loading file: {e}")
+    st.write("Looking for file:", DATA_PATH)
     st.stop()
+
 
 # ────────────── Preprocessing ──────────────
 df['Total_Engagement'] = df['Likes'] + df['Comments'] + df['Shares'] + df['Saves']

@@ -20,13 +20,9 @@ urlpatterns = [
     path('callbacki/', views.instagram_callback, name='insta_callback'),  #
     path('instagram_info/', views.instagram_info, name='instagram_info'),
     path('', views.landing_view, name='landing'),  # Login Page
-<<<<<<< HEAD
-    path('youtubel/', views.youtube_login, name='login_page'),  # Login Page
-=======
 
     # path('youtubel/', views.youtube_login, name='login_page'),  # Login Page
     
->>>>>>> bdd25032e861245c83f7acf2431752f74402aeb1
     path('callbackyoutube/', views.youtube_callbackn, name='youtube_callback'),
     path('about/', views.about_view, name='about'),
     path('reddit/', views.reddit_login, name='reddit_login'),  # Home page where the Reddit login link is displayed
@@ -73,40 +69,28 @@ urlpatterns = [
     path('instagram-login/', views.instagram_login, name='instagram_login'),
     path('twitter-login1/', views.twitter_login, name='twitter_login1'),
     path('reddit-login/', views.reddit_login, name='reddit_login'),
-<<<<<<< HEAD
-    path('youtube-login/', views.youtube_login, name='youtube_login'),
-=======
 
     # path('youtube-login/', views.youtube_login, name='youtube_login'),
 
->>>>>>> bdd25032e861245c83f7acf2431752f74402aeb1
     path('linkedin-login/', views.linkedin_login, name='linkedin_login'),
     path('facebookll/', views.facebook_login_view, name='facebookll'),
     path('youtubell', views.youtube_loginn, name='youtube_login'),
     path('youtube/profile/', views.youtube_profile, name='youtube_profile'),
 
-<<<<<<< HEAD
-=======
     # path('instagram-analytics/', views.instagram_analytics, name='instagram_analytics'),
     # path('instagram-engagement/', views.instagram_engagement, name='instagram_engagement'),
     # path('engagement-rate/', views.engagement_rate, name='engagement_rate'),
     # path('top-posts/', views.top_posts, name='top_posts'),
 
->>>>>>> bdd25032e861245c83f7acf2431752f74402aeb1
     path('instagram-analytics/', views.instagram_analytics, name='instagram_analytics'),
     path('instagram-insights/', views.instagram_engagement, name='instagram_insights'),
     path('instagram-engagement/', views.engagement_rate, name='instagram_engagement'),
     path('instagram-top-posts/', views.top_posts, name='instagram_top_posts'),
    
-<<<<<<< HEAD
-
-=======
     path('youtube-login/', views.youtube_login, name='youtube_login'),
     path('callback-youtube/', views.youtube_callback, name='youtube_callback'),
 
     path('instagram-tab/', views.instagram_tab, name='instagram_tab'),
     path('youtube-tab/', views.youtube_tab, name='youtube_tab'),
     path('youtube-dashboard/', views.youtube_dashboard, name='youtube_dashboard'),
->>>>>>> bdd25032e861245c83f7acf2431752f74402aeb1
 ]
-

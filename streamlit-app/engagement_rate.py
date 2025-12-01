@@ -13,13 +13,25 @@ st.set_page_config(page_title="Engagement Rate Analysis", page_icon="📊", layo
 st.title("📊 Instagram Engagement Rate Analysis Dashboard")
 
 # ────────────── Load dataset ──────────────
-load_dotenv()  # Load environment variables from .env file
-DATA_PATH = os.getenv("DATA_PATH")
+# ────────────── Load dataset (Server-Safe Absolute Path) ──────────────
+
+# Absolute path to this file
+CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
+
+# data/ folder inside streamlit-app
+DATA_DIR = os.path.join(CURRENT_DIR, "data")
+
+# THE EXCEL FILE NAME YOU WANT TO LOAD
+DATA_PATH = os.path.join(DATA_DIR, "instagram_analytics_data.xlsx")   # <-- put correct file name here
+
+# Load dataset safely
 try:
     df = pd.read_excel(DATA_PATH)
-except FileNotFoundError:
-    st.error("🚫 File not found! Please check the path.")
+except Exception as e:
+    st.error(f"🚫 Error loading file: {e}")
+    st.write("Looking for file:", DATA_PATH)
     st.stop()
+
 
 # ────────────── Preprocessing ──────────────
 df['Reach'].replace(0, np.nan, inplace=True)

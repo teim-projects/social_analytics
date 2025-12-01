@@ -10,13 +10,16 @@ st.set_page_config(page_title="Instagram Analytics Dashboard", page_icon="📊",
 st.title("📊 Instagram Data Visualization Dashboard")
 
 # ────────────── Load dataset ──────────────
-load_dotenv()  # Load environment variables from .env file
-default_file_path = os.getenv("DATA_PATH")
+CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
+DATA_DIR = os.path.join(CURRENT_DIR, "data")
+DATA_PATH = os.path.join(DATA_DIR, "instagram_analytics_data.xlsx")
+
 try:
-    df = pd.read_excel(default_file_path)
-except FileNotFoundError:
-    st.error("🚫 Default file not found! Please check the file path.")
+    df = pd.read_excel(DATA_PATH)
+except Exception as e:
+    st.error(f"❌ Could not load Instagram dataset: {e}")
     st.stop()
+
 
 df['Post_Date'] = pd.to_datetime(df['Post_Date'], errors='coerce')
 

@@ -7,10 +7,17 @@ from dotenv import load_dotenv
 import os
 
 # 1. Load Data
-load_dotenv()
-default_file_path = os.getenv("Youtube_comment_data")
-df = pd.read_csv(default_file_path)
-df["Comment"] = df["Comment"].astype(str)
+CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
+DATA_DIR = os.path.join(CURRENT_DIR, "data")
+DATA_PATH = os.path.join(DATA_DIR, "Youtube_COMMENTS_DATA.csv")
+
+try:
+    df = pd.read_csv(DATA_PATH)
+except Exception as e:
+    print("Error loading comments file:", e)
+    exit()
+
+
 
 # 2. SUPER FAST SENTIMENT MODEL
 model_name = "distilbert-base-uncased-finetuned-sst-2-english" 

@@ -26,11 +26,7 @@ SECRET_KEY = 'django-insecure-ma8x4v7%zpo38em=@0^2^!()ox56wosr6bu*2dq4#9^=578afw
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-<<<<<<< HEAD
 ALLOWED_HOSTS = ["www.socialalytics.in","socialalytics.in", '127.0.0.1', 'localhost']
-=======
-ALLOWED_HOSTS = ["www.marketinganalytics.live","marketinganalytics.live", '127.0.0.1', 'localhost']
->>>>>>> bdd25032e861245c83f7acf2431752f74402aeb1
 
 
 # Application definition
@@ -143,11 +139,8 @@ USE_TZ = True
 # settings.py
 
 STATIC_URL = '/static/'
-<<<<<<< HEAD
-STATIC_ROOT = "/root/social_media_monitoring/Instagram/staticfiles"
-=======
+STATIC_ROOT = "/root/social_media_monitoring/social_analytics/staticfiles"
 
->>>>>>> bdd25032e861245c83f7acf2431752f74402aeb1
 # Optionally, add directories to search for static files
 # STATICFILES_DIRS = [
 #     BASE_DIR / 'static',
@@ -168,13 +161,9 @@ CORS_ALLOWED_ORIGINS = [
 # settings.py
 X_FRAME_OPTIONS = 'ALLOWALL'
 CSRF_TRUSTED_ORIGINS = [
-    "http://localhost:8501",  # Streamlit
-<<<<<<< HEAD
-
-    
-    ]
-
-
-=======
+    'https://socialalytics.in',
+    'http://socialalytics.in',
 ]
->>>>>>> bdd25032e861245c83f7acf2431752f74402aeb1
+
+
+
