@@ -1,7 +1,7 @@
 To run the project:
 
 Note: Before running any command check if you are in path 
-"...\Social_media_monitoring_platform\Instagram>" i.e. inside the Instagram folder
+"...\social_analytics>" i.e. inside the project's folder
 
 in the .env files inside Instagram update DATA_PATH and MODEL_PATH as per your system
 

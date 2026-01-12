@@ -1,0 +1,23 @@
+Ad schedule report
+All time
+Day & time,Campaign,Bid adj.,Impr.,Interactions,Interaction rate,Currency code,Avg. cost,Cost,Conv. rate,Conversions,Cost / conv.
+"Mondays, 7:00 AM - 11:00 PM",GULMOHOR | SEARCH, --,"6,819",571,8.37%,INR,13.37,7636.71,37.48%,214.00,35.69
+"Wednesdays, 7:00 AM - 11:00 PM",GULMOHOR | SEARCH, --,"8,927",659,7.38%,INR,12.27,8083.61,33.84%,223.00,36.25
+"Fridays, 7:00 AM - 11:00 PM",GULMOHOR | SEARCH, --,"7,461",691,9.26%,INR,12.14,8386.78,49.35%,341.00,24.59
+"Tuesdays, 7:00 AM - 11:00 PM",GULMOHOR | SEARCH, --,"8,534",740,8.67%,INR,10.84,8021.31,37.57%,278.00,28.85
+"Saturdays, 7:00 AM - 11:00 PM",GULMOHOR | SEARCH, --,"8,614",642,7.45%,INR,13.01,8353.98,48.75%,313.00,26.69
+"Mondays, 7:00 AM - 11:00 PM",Performance Max I GBH Feb-25, --,"28,406","3,029",10.66%,INR,0.91,2750.85,69.99%,"2,120.00",1.30
+"Saturdays, 7:00 AM - 11:00 PM",Performance Max I GBH Feb-25, --,"40,566","3,991",9.84%,INR,0.94,3766.30,74.57%,"2,976.00",1.27
+"Thursdays, 7:00 AM - 11:00 PM",GULMOHOR | SEARCH, --,"8,689",697,8.02%,INR,10.94,7626.86,35.87%,250.00,30.51
+"Wednesdays, 7:00 AM - 11:00 PM",Performance Max I GBH Feb-25, --,"38,248","3,764",9.84%,INR,1.14,4296.14,65.91%,"2,481.00",1.73
+"Tuesdays, 7:00 AM - 11:00 PM",Performance Max I GBH Feb-25, --,"32,305","3,604",11.16%,INR,1.10,3948.21,66.40%,"2,393.00",1.65
+"Thursdays, 7:00 AM - 11:00 PM",Performance Max I GBH Feb-25, --,"35,897","3,602",10.03%,INR,1.01,3630.50,68.07%,"2,452.00",1.48
+"Fridays, 7:00 AM - 11:00 PM",Performance Max I GBH Feb-25, --,"36,363","3,626",9.97%,INR,1.06,3829.91,74.43%,"2,699.00",1.42
+"Sundays, 7:00 AM - 11:00 PM",Performance Max I GBH Feb-25, --,"37,656","4,850",12.88%,INR,0.78,3786.58,80.82%,"3,920.00",0.97
+"Sundays, 7:00 AM - 11:00 PM",GULMOHOR | SEARCH, --,"8,737",872,9.98%,INR,10.51,9166.58,51.38%,448.00,20.46
+Total: Ad schedules,,,"307,222","31,338",10.20%,INR,2.66,83284.32,67.36%,"21,108.00",3.95
+Total: Account,,,"14,072,652","174,836",1.24%,INR,3.77,658461.21,26.69%,"46,656.00",14.11
+Total: Smart,,,"9,270,184","69,217",0.75%,INR,2.67,184798.96,21.19%,"14,664.00",12.60
+Total: Search,,,"2,695,520","45,636",1.69%,INR,8.36,381435.00,6.99%,"3,188.00",119.65
+Total: Performance Max,,,"402,682","37,925",9.42%,INR,1.48,55940.20,75.95%,"28,804.00",1.94
+Total: Display,,,"1,704,266","22,058",1.29%,INR,1.65,36287.05,0.00%,0.00,0.00

@@ -1,0 +1,13 @@
+Campaign report
+All time
+Campaign status,Campaign,Budget,Budget name,Budget type,Status,Status reasons,Optimization score,Campaign type,Impr.,Clicks,Currency code,Avg. CPC,Phone calls,Phone impr.,Cost,Value / all conv.,All conv.,Bid strategy type,Conv. rate,Conversions,Cost / conv.
+Enabled,Search campaign| wedding | Munj| Dec-25,200.00, --,Daily,Eligible,unknown,100.00,Search,"7,689","1,385",INR,1.04,0,97,1438.02,1.00,"1,347.00",Maximize Conversions,72.92%,"1,010.00",1.42
+Enabled,GULMOHOR | SEARCH,250.00, --,Daily,Eligible,some ads disapproved,100.00,Search,"2,687,824","44,248",INR,8.59,"1,208","1,856,631",379984.51,1.00,"12,237.00",Maximize Conversions,4.92%,"2,178.00",174.46
+Enabled,GULMOHOR | GMB,180.00, --,Daily,Eligible,, --,Smart,"9,270,095","69,216",INR,2.67,"1,984","133,971",184797.55,0.99,"39,528.00",Maximize clicks,21.19%,"14,664.00",12.60
+Enabled,Performance Max I GBH Feb-25,150.00, --,Daily,Eligible,unknown,100.00,Performance Max,"402,682","37,239",INR,1.50,42,"51,656",55939.61,1.01,"49,587.00",Maximize Conversions,75.95%,"28,804.00",1.94
+Total: Campaigns, --, --, --, --, --,, --, --,"12,368,277","152,088",INR,4.09,"3,234","2,042,355",622159.69,1.00,"102,699.00", --,30.54%,"46,656.00",13.34
+Total: Account,,,,,,,,,"14,072,556","174,146",INR,3.78,"3,268","2,972,432",658446.75,1.00,"102,749.00",,26.69%,"46,656.00",14.11
+Total: Display,,,,,,,,Display,"1,704,266","22,058",INR,1.65,34,"930,077",36287.05,1.00,50.00,,0.00%,0.00,0.00
+Total: Search,,,,,,,,Search,"2,695,513","45,633",INR,8.36,"1,208","1,856,728",381422.54,1.00,"13,584.00",,6.99%,"3,188.00",119.64
+Total: Performance Max,,,,,,,,Performance Max,"402,682","37,239",INR,1.50,42,"51,656",55939.61,1.01,"49,587.00",,75.95%,"28,804.00",1.94
+Total: Smart,,,,,,,,Smart,"9,270,095","69,216",INR,2.67,"1,984","133,971",184797.55,0.99,"39,528.00",,21.19%,"14,664.00",12.60

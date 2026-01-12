@@ -71,30 +71,6 @@
     </nav>
     <div class="home-content">
       <div class="overview-boxes">
-        <a href="{% url 'instagram_insights' %}" style="text-decoration: none; color: inherit;" class="box">
-          <div class="right-side">
-            <div class="box-topic">Prediction</div>
-            <div class="descriptive_text">Predict performance of posts</div>
-          </div>
-          <img src="/static/images/sentimental.png" class="acc" alt="Sentimental Analysis" />
-        </a>
-
-        <a href="{% url 'instagram_engagement' %}" style="text-decoration: none; color: inherit;" class="box">
-          <div class="right-side">
-            <div class="box-topic">Engagement Rate</div>
-            <div class="descriptive_text">Tracking User Interactions</div>
-          </div>
-          <img src="/static/images/content.png" class="acc" alt="Engagement Rate" />
-        </a>
-        <a href="{% url 'instagram_top_posts' %}" style="text-decoration: none; color: inherit;" class="box">
-            <div class="right-side">
-                <div class="box-topic">Top Performing Posts</div>
-                <div class="descriptive_text">
-                    <span class="dtext">Highlights of the Best Posts</span>
-                </div>
-            </div>
-            <img src="/static/images/predictive.png" class="acc" alt="Top Performing Posts" />
-        </a>
         <a href="{% url 'youtube_dashboard' %}" style="text-decoration: none; color: inherit;" class="box">
             <div class="right-side">
                 <div class="box-topic">Dashboard</div>
@@ -104,7 +80,31 @@
             </div>
             <img src="/static/images/predictive.png" class="acc" alt="Top Performing Posts" />
         </a>
-        <a href="{% url 'instagram_analytics' %}" style="text-decoration: none; color: inherit;" class="box">
+        <a href="{% url 'youtube_prediction' %}" style="text-decoration: none; color: inherit;" class="box">
+          <div class="right-side">
+            <div class="box-topic">Prediction</div>
+            <div class="descriptive_text">Predict performance of posts</div>
+          </div>
+          <img src="/static/images/sentimental.png" class="acc" alt="Sentimental Analysis" />
+        </a>
+
+        <a href="{% url 'youtube_engagement' %}" style="text-decoration: none; color: inherit;" class="box">
+          <div class="right-side">
+            <div class="box-topic">Engagement Rate</div>
+            <div class="descriptive_text">Tracking User Interactions</div>
+          </div>
+          <img src="/static/images/content.png" class="acc" alt="Engagement Rate" />
+        </a>
+        <a href="{% url 'youtube_top_posts' %}" style="text-decoration: none; color: inherit;" class="box">
+            <div class="right-side">
+                <div class="box-topic">Post Performance</div>
+                <div class="descriptive_text">
+                    <span class="dtext">Highlights of the Best and Worst Posts</span>
+                </div>
+            </div>
+            <img src="/static/images/predictive.png" class="acc" alt="Top Performing Posts" />
+        </a>
+        <a href="{% url 'youtube_sentiment' %}" style="text-decoration: none; color: inherit;" class="box">
             <div class="right-side">
                 <div class="box-topic">Sentiment Analysis</div>
                 <div class="descriptive_text">

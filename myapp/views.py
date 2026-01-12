@@ -94,16 +94,84 @@ load_dotenv()  # Load environment variables from .env file
 ADMIN_EMAIL = os.getenv("ADMIN_EMAIL")
 ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD")
 
+# View for Twitter Tab
+def twitter_tab(request):
+    if not request.session.get("logged_in"):
+        return redirect("login_tab")
+    return render(request, 'twitter_tab.html')     
+
+# View for Twitter Dashboard
+def twitter_dashboard(request):
+    return render(request, 'twitter_dashboard.html')
+
+# View for Twitter Top Tweets
+def twitter_top_tweets(request):
+    return render(request, 'twitter_top_tweets.html')
+
+# View for Twitter Prediction
+def twitter_prediction(request):
+    return render(request, 'twitter_prediction.html')
+
+# View for Twitter Engagement Analysis
+def twitter_engagement(request):
+    return render(request, 'twitter_engagement.html')
+
+# View for Twitter Sentiment Analysis
+def twitter_sentiment(request):
+    return render(request, 'twitter_sentiment.html')
+
+# View for LinkedIn Tab
+def linkedin_tab(request):
+    if not request.session.get("logged_in"):
+        return redirect("login_tab")
+    return render(request, 'linkedin_tab.html')
+
+# View for LinkedIn Dashboard
+def linkedin_dashboard(request):
+    return render(request, 'linkedin_dashboard.html')
+
+# View for LinkedIn Top Posts
+def linkedin_top_posts(request):
+    return render(request, 'linkedin_top_posts.html')
+
+# View for LinkedIn Prediction
+def linkedin_prediction(request):
+    return render(request, 'linkedin_prediction.html')
+
+# View for LinkedIn Engagement Analysis
+def linkedin_engagement(request):
+    return render(request, 'linkedin_engagement.html')
+
 # View for YouTube Tab
 def youtube_tab(request):
+    if not request.session.get("logged_in"):
+        return redirect("login_tab")
     return render(request, 'youtube_tab.html')
 
 # View for YouTube Dashboard
 def youtube_dashboard(request):
     return render(request, 'youtube_dashboard.html')
 
+# View for YouTube Sentiment Analysis
+def youtube_sentiment(request):
+    return render(request, 'youtube_sentiment.html')
+
+# View for YouTube Top Posts
+def youtube_top_posts(request):
+    return render(request, 'youtube_top_posts.html')
+
+# View for YouTube Prediction
+def youtube_prediction(request):
+    return render(request, 'youtube_prediction.html')
+
+# View for YouTube Engagement Analysis
+def youtube_engagement(request):
+    return render(request, 'youtube_engagement.html')
+
 # View for Instagram Tab
 def instagram_tab(request):
+    if not request.session.get("logged_in"):
+        return redirect("login_tab")
     return render(request, 'instagram_tab.html')
 
 # View for Instagram Analytics Dashboard
@@ -121,15 +189,151 @@ def engagement_rate(request):
 # View for Top Posts
 def top_posts(request):
     return render(request, 'top_posts.html')
+
+# View for Google Ads Tab
+def google_ads_tab(request):
+    if not request.session.get("logged_in"):
+        return redirect("login_tab")
+    return render(request, 'google_ads_tab.html')
+
+# View for Google Ads Strategic Level
+def ga_strategic_level(request):    
+    return render(request, 'ga_strategic_level.html')
+
+# View for Google Ads Tactical Level
+def ga_tactical_level(request):
+    return render(request, 'ga_tactical_level.html')
+
+# View for Google Ads Operational Level
+def ga_operational_level(request):
+    return render(request, 'ga_operational_level.html')
+
+# View for Google Ads Campaign Report
+def ga_campaign(request):
+    return render(request, 'ga_campaign.html')
+
+# View for Google Ads Targeted Content Report
+def ga_targeted_content(request):
+    return render(request, 'ga_targeted_content.html')
+
+# View for Google Ads Age Report
+def ga_age_report(request):
+    return render(request, 'ga_age_report.html')
+
+# View for Google Ads Asset Report
+def ga_asset_report(request):
+    return render(request, 'ga_asset_report.html')  
+
+# View for Google Ads Device Report
+def ga_device_report(request):
+    return render(request, 'ga_device_report.html')
+
+# View for Google Ads
+def ga_gender_report(request):
+    return render(request, 'ga_gender_report.html')
+
+# View for Google Ads Group Report
+def ga_group_report(request):
+    return render(request, 'ga_group_report.html')
+
+# View for Google Ads Household Income Report
+def ga_household_income(request):
+    return render(request, 'ga_household_income.html')
+
+# View for Google Ads Landing Page Report
+def ga_landing_page(request):
+    return render(request, 'ga_landing_page.html')
+
+# View for Google Ads Location Report
+def ga_location_report(request):
+    return render(request, 'ga_location_report.html')
+
+# View for Google Ads Report
+def ga_report(request):
+    return render(request, 'ga_report.html')
+
+# View for Google Ads Search Keyword Report
+def ga_search_keyword(request):
+    return render(request, 'ga_search_keyword.html')    
+
+# View for Google Ads Search Terms Report
+def ga_search_terms(request):
+    return render(request, 'ga_search_terms.html')
+
+# View for Google Ads Schedule Day Hour Report
+def ga_schedule(request):
+    return render(request, 'ga_schedule.html')
+
+# View for Google Ads Schedule Day Hour Report
+def ga_schedule_day_hour(request):
+    return render(request, 'ga_schedule_day_hour.html')
     
+from django.shortcuts import render, redirect
+from .credentials import USER_CREDENTIALS
+
+# Home page
+def home(request):
+    return render(request, "home.html")
+
+# Save platform and go to login
+def platform_click(request, platform):
+    request.session["platform"] = platform
+    return redirect("login_tab")
+
+# Mask password for console
+def mask_password(password):
+    return password[0] + "*" * (len(password) - 2) + password[-1]
+
+# Login page
+def login_tab(request):
+    if request.method == "POST":
+        username = request.POST["username"]
+        password = request.POST["password"]
+
+        if username not in USER_CREDENTIALS:
+            return render(request, "login_tab.html", {"error": "User not found"})
+
+        if USER_CREDENTIALS[username] != password:
+            return render(request, "login_tab.html", {"error": "Incorrect password"})
+
+        print("Username:", username)
+        print("Password:", mask_password(password))
+
+        request.session["logged_in"] = True
+        request.session["username"] = username
+
+        platform = request.session.get("platform")
+
+        if platform is None:
+            return redirect("dashboard")
+
+        PLATFORM_URLS = {
+            "instagram": "instagram_tab",
+            "facebook": "facebook_tab",
+            "youtube": "youtube_tab",
+            "twitter": "twitter_tab",
+            "linkedin": "linkedin_tab",
+            "google_ads": "google_ads_tab",
+        }
+
+        return redirect(PLATFORM_URLS.get(platform, "home"))
+
+    return render(request, "login_tab.html")
+
+# View for Facebook Tab
+def facebook_tab(request):
+    if not request.session.get("logged_in"):
+        return redirect("login_tab")
+    return render(request, 'facebook_tab.html')
+
 import os
 from django.shortcuts import redirect
 from urllib.parse import urlencode
 
 def youtube_login(request):
     YOUTUBE_CLIENT_ID = os.getenv("YOUTUBE_CLIENT_ID")
-    # redirect_uri = "http://127.0.0.1:8000/callback-youtube/"
-    redirect_uri = "https://socialalytics.in/callback-youtube/"
+    redirect_uri = "http://127.0.0.1:8000/callback-youtube/"
+    # redirect_uri = "https://socialalytics.in/callback-youtube/"
     
     scope = "https://www.googleapis.com/auth/youtube.readonly"
 
@@ -152,8 +356,8 @@ def youtube_callback(request):
     code = request.GET.get("code")
     YOUTUBE_CLIENT_ID = os.getenv("YOUTUBE_CLIENT_ID")
     YOUTUBE_CLIENT_SECRET = os.getenv("YOUTUBE_CLIENT_SECRET")
-    # redirect_uri = "http://127.0.0.1:8000/callback-youtube/"
-    redirect_uri = "https://socialalytics.in/callback-youtube/"
+    redirect_uri = "http://127.0.0.1:8000/callback-youtube/"
+    # redirect_uri = "https://socialalytics.in/callback-youtube/"
 
     token_url = "https://oauth2.googleapis.com/token"
 
@@ -192,56 +396,57 @@ def get_youtube_channel(request):
     r = requests.get(url, headers=headers)
     return JsonResponse(r.json())
 
-def facebook_insights(request):
-    if request.method == 'POST':
-        page_id = request.POST.get('page_id')
-        access_token = request.POST.get('access_token')
-        period = request.POST.get('period', 'day')  # Default to 'day'
+# def facebook_insights(request):
+#     if request.method == 'POST':
+#         page_id = request.POST.get('page_id')
+#         access_token = request.POST.get('access_token')
+#         period = request.POST.get('period', 'day')  # Default to 'day'
 
-        if not page_id or not access_token:
-            return JsonResponse({'error': 'Page ID or access token missing.'}, status=400)
+#         if not page_id or not access_token:
+#             return JsonResponse({'error': 'Page ID or access token missing.'}, status=400)
 
-        # Get page access token
-        pages_url = f"https://graph.facebook.com/me/accounts?access_token={access_token}"
-        pages_response = requests.get(pages_url)
-        pages_data = pages_response.json()
+#         # Get page access token
+#         pages_url = f"https://graph.facebook.com/me/accounts?access_token={access_token}"
+#         pages_response = requests.get(pages_url)
+#         pages_data = pages_response.json()
 
-        page_access_token = None
-        for page in pages_data.get('data', []):
-            if page['id'] == page_id:
-                page_access_token = page.get('access_token')
-                break
+#         page_access_token = None
+#         for page in pages_data.get('data', []):
+#             if page['id'] == page_id:
+#                 page_access_token = page.get('access_token')
+#                 break
 
-        if not page_access_token:
-            return JsonResponse({'error': 'Page access token not found.'}, status=400)
+#         if not page_access_token:
+#             return JsonResponse({'error': 'Page access token not found.'}, status=400)
 
-        # Calculate default `since` and `until` dates based on the selected period
-        since_date, until_date = calculate_dates(period)
-        since = since_date.strftime('%Y-%m-%d') if since_date else None
-        until = until_date.strftime('%Y-%m-%d')
+#         # Calculate default `since` and `until` dates based on the selected period
+#         since_date, until_date = calculate_dates(period)
+#         since = since_date.strftime('%Y-%m-%d') if since_date else None
+#         until = until_date.strftime('%Y-%m-%d')
 
-        # Fetch insights
-        page_insights = get_page_insights(page_access_token, page_id,'day', since, until)
-#        return JsonResponse(page_insights)
-        # Extract relevant data for graphing
-        metrics_data = {}
-        for item in page_insights.get('data', []):
-            metric_name = item['name']
-            metrics_data[metric_name] = [
-                {"date": value["end_time"][:10], "value": value["value"]}
-                  for value in item.get("values", [])
-            ]
+#         # Fetch insights
+#         page_insights = get_page_insights(page_access_token, page_id,'day', since, until)
+# #        return JsonResponse(page_insights)
+#         # Extract relevant data for graphing
+#         metrics_data = {}
+#         for item in page_insights.get('data', []):
+#             metric_name = item['name']
+#             metrics_data[metric_name] = [
+#                 {"date": value["end_time"][:10], "value": value["value"]}
+#                   for value in item.get("values", [])
+#             ]
 
-        return render(request, 'facebook_insights.html', {
-            'metrics': metrics_data,
-            'page_id': page_id,
-            'period': period,
-            'since': since,
-            'until': until
-        })
+#         return render(request, 'facebook_insights.html', {
+#             'metrics': metrics_data,
+#             'page_id': page_id,
+#             'period': period,
+#             'since': since,
+#             'until': until
+#         })
 
-    # For GET requests, render a form for user input
-    return render(request, 'insights_form.html')
+#     # For GET requests, render a form for user input
+#     return render(request, 'insights_form.html')
+
 def calculate_dates(period):
     """Calculate default since and until dates based on the selected period."""
     today = date.today()
@@ -908,16 +1113,28 @@ def reddit_login(request):
 #         return render(request, 'linkedin_login.html')
 #     else :
 #         return render(request, 'sign_in.html')
+
 def dashboard(request):
-    if request.session.get('is_authenticated', False):
-        return render(request, 'dashboard.html')
-    else:
-        return render(request, 'sign_in.html')
-def dashboard1(request):
-    if request.session.get('is_authenticated', False):
-        return render(request, 'dashboard1.html')
-    else:
-        return render(request, 'sign_in.html')
+    if not request.session.get('is_authenticated'):
+        return redirect('sign_in')
+    return render(request, 'dashboard.html')
+
+def admin_dashboard(request):
+    if not request.session.get('is_authenticated'):
+        return redirect('sign_in')
+    return render(request, 'dashboard1.html')
+
+
+# def dashboard(request):
+#     if request.session.get('is_authenticated', False):
+#         return render(request, 'dashboard.html')
+#     else:
+#         return render(request, 'sign_in.html')
+# def dashboard1(request):
+#     if request.session.get('is_authenticated', False):
+#         return render(request, 'dashboard1.html')
+#     else:
+#         return render(request, 'sign_in.html')
 def account(request):
     if request.session.get('is_authenticated', False):
         return render(request, 'account.html')
@@ -1021,38 +1238,76 @@ def register(request):
 
     return render(request, 'register.html')  # Render registration form
 
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from django.utils import timezone
+
 def sign_in(request):
     if request.method == 'POST':
         email = request.POST.get('email')
         password = request.POST.get('password')
+
+        # ---------- ADMIN LOGIN ----------
         if email == ADMIN_EMAIL and password == ADMIN_PASSWORD:
             request.session['is_authenticated'] = True
             request.session['user_name'] = "Admin"
             request.session['user_email'] = ADMIN_EMAIL
-            return render(request, 'dashboard1.html'  )
+            return redirect('admin_dashboard')  # ✅ REDIRECT
+
+        # ---------- NORMAL USER ----------
         try:
-            # Fetch user by email
             user = CustomUser.objects.get(email=email)
 
-            # Check password (without using check_password)
             if password == user.password:
-                user.last_login = timezone.now()  # Set the current time
-                user.save()  #
+                user.last_login = timezone.now()
+                user.save()
+
+                request.session['is_authenticated'] = True
                 request.session['user_name'] = user.name
                 request.session['user_email'] = user.email
-                request.session['is_authenticated'] = True
-                return render(request, 'dashboard.html' , {'user': user})  # Render the home page
+
+                return redirect('dashboard')  # ✅ REDIRECT
+
             else:
                 messages.error(request, "Email or password is incorrect.")
-                return render(request, 'sign_in.html')  # Render sign-in template again
+
         except CustomUser.DoesNotExist:
             messages.error(request, "Email or password is incorrect.")
-            return render(request, 'sign_in.html')  # Render sign-in template again
+
+    return render(request, 'sign_in.html')
+
+# def sign_in(request):
+#     if request.method == 'POST':
+#         email = request.POST.get('email')
+#         password = request.POST.get('password')
+#         if email == ADMIN_EMAIL and password == ADMIN_PASSWORD:
+#             request.session['is_authenticated'] = True
+#             request.session['user_name'] = "Admin"
+#             request.session['user_email'] = ADMIN_EMAIL
+#             return render(request, 'dashboard1.html'  )
+#         try:
+#             # Fetch user by email
+#             user = CustomUser.objects.get(email=email)
+
+#             # Check password (without using check_password)
+#             if password == user.password:
+#                 user.last_login = timezone.now()  # Set the current time
+#                 user.save()  #
+#                 request.session['user_name'] = user.name
+#                 request.session['user_email'] = user.email
+#                 request.session['is_authenticated'] = True
+#                 return render(request, 'dashboard.html' , {'user': user})  # Render the home page
+#             else:
+#                 messages.error(request, "Email or password is incorrect.")
+#                 return render(request, 'sign_in.html')  # Render sign-in template again
+#         except CustomUser.DoesNotExist:
+#             messages.error(request, "Email or password is incorrect.")
+#             return render(request, 'sign_in.html')  # Render sign-in template again
 
 def linkedin_login(request):
     linkedin_client_id = os.getenv('LINKEDIN_CLIENT_ID')
-    # redirect_uri = 'http://127.0.0.1:8000/callbacklin/'
-    redirect_uri = "https://socialalytics.in/callbacklin/"
+    redirect_uri = 'http://127.0.0.1:8000/callbacklin/'
+    # redirect_uri = "https://socialalytics.in/callbacklin/"
     scope = 'email openid profile   '  # Corrected scope
 
     # Generate a random state parameter to prevent CSRF attacks
@@ -1095,8 +1350,8 @@ def linkedin_callback(request):
     linkedin_client_id = os.getenv('LINKEDIN_CLIENT_ID')
     linkedin_client_secret = os.getenv('LINKEDIN_CLIENT_SECRET')
      # Use the same redirect URI as in the login view
-    # redirect_uri = 'http://127.0.0.1:8000/callbacklin/'
-    redirect_uri = "https://socialalytics.in/callbacklin/"
+    redirect_uri = 'http://127.0.0.1:8000/callbacklin/'
+    # redirect_uri = "https://socialalytics.in/callbacklin/"
     
     # Prepare token request data
     token_url = 'https://www.linkedin.com/oauth/v2/accessToken'
@@ -2557,37 +2812,75 @@ def fetch_facebook_metrics(page_access_token, page_id):
             metrics_data[metric] = [{"period": "Error", "value": 0}]
 
     return metrics_data
+
 # View to render the page
+# def facebook_insights(request):
+#     if request.method == 'POST':
+#         page_id = request.POST.get('page_id')
+#         access_token = request.POST.get('access_token')
+#         period = request.POST.get('period', 'day')  # Default to 'day' if no period is selected
+
+#         if not page_id or not access_token:
+#             return JsonResponse({'error': 'Page ID or access token missing.'}, status=400)
+
+#         # Get page access token
+#         pages_url = f"https://graph.facebook.com/me/accounts?access_token={access_token}"
+#         pages_response = requests.get(pages_url)
+#         pages_data = pages_response.json()
+
+#         page_access_token = None
+#         for page in pages_data.get('data', []):
+#             if page['id'] == page_id:
+#                 page_access_token = page.get('access_token')
+#                 break
+
+#         if not page_access_token:
+#             return JsonResponse({'error': 'Page access token not found.'}, status=400)
+
+#     # Fetch metrics
+#     metrics_data = fetch_facebook_metrics(page_access_token, page_id)
+     
+#         # Pass data to the template
+#     context = {
+
+#         "metrics": metrics_data,
+#         "metrics_json": metrics_data,  # Pass JSON for use in JavaScript
+#     }
+#     return render(request, "facebook_insights.html", context)
+
 def facebook_insights(request):
-     if request.method == 'POST':
+
+    if request.method == 'POST':
         page_id = request.POST.get('page_id')
         access_token = request.POST.get('access_token')
-        period = request.POST.get('period', 'day')  # Default to 'day' if no period is selected
+        period = request.POST.get('period', 'day')
 
         if not page_id or not access_token:
             return JsonResponse({'error': 'Page ID or access token missing.'}, status=400)
 
-        # Get page access token
         pages_url = f"https://graph.facebook.com/me/accounts?access_token={access_token}"
         pages_response = requests.get(pages_url)
         pages_data = pages_response.json()
 
         page_access_token = None
         for page in pages_data.get('data', []):
-            if page['id'] == page_id:
+            if page.get('id') == page_id:
                 page_access_token = page.get('access_token')
                 break
 
         if not page_access_token:
             return JsonResponse({'error': 'Page access token not found.'}, status=400)
 
-    # Fetch metrics
-     metrics_data = fetch_facebook_metrics(page_access_token, page_id)
-     
-        # Pass data to the template
-     context = {
+        metrics_data = fetch_facebook_metrics(page_access_token, page_id)
 
-        "metrics": metrics_data,
-        "metrics_json": metrics_data,  # Pass JSON for use in JavaScript
-    }
-     return render(request, "facebook_insights.html", context)
+        return render(
+            request,
+            "facebook_insights.html",
+            {
+                "metrics": metrics_data,
+                "metrics_json": metrics_data,
+            }
+        )
+
+    # 🔥 THIS LINE IS MANDATORY
+    return render(request, "insights_form.html")

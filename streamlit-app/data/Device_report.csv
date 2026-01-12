@@ -1,0 +1,17 @@
+Device report
+All time
+Device,Level,Campaign,Ad group,Bid adj.,Ad group bid adj.,Impr.,Interactions,Interaction rate,Currency code,Avg. cost,Cost,Conv. rate,Conversions,Cost / conv.
+Computers,Campaign,Performance Max I GBH Feb-25, --, --,None,"34,287",161,0.47%,INR,2.09,336.27,3.11%,5.00,67.25
+TV screens,Campaign,Performance Max I GBH Feb-25, --, --,None,48,32,66.67%,INR,0.18,5.92,0.00%,0.00,0.00
+Tablets,Campaign,Performance Max I GBH Feb-25, --, --,None,467,20,4.28%,INR,0.64,12.82,0.00%,0.00,0.00
+Mobile phones,Campaign,Performance Max I GBH Feb-25, --, --,None,"367,869","37,713",10.25%,INR,1.47,55585.78,76.36%,"28,799.00",1.93
+Mobile phones,Campaign,GULMOHOR | GMB, --, --,None,"8,712,874","65,501",0.75%,INR,2.62,171446.17,22.22%,"14,556.00",11.78
+Tablets,Campaign,GULMOHOR | GMB, --, --,None,"6,167",56,0.91%,INR,2.53,141.96,5.36%,3.00,47.32
+Computers,Campaign,GULMOHOR | GMB, --, --,None,"551,148","3,660",0.66%,INR,3.61,13210.83,2.87%,105.00,125.82
+Tablets,Campaign,GULMOHOR | SEARCH, --,-100%,None,"13,834",50,0.36%,INR,5.37,268.25,0.00%,0.00,0.00
+Computers,Campaign,GULMOHOR | SEARCH, --, --,None,"295,801","1,402",0.47%,INR,5.00,7003.95,0.00%,0.00,0.00
+Mobile phones,Campaign,GULMOHOR | SEARCH, --, --,None,"2,378,191","42,799",1.80%,INR,8.71,372724.77,5.09%,"2,178.00",171.13
+Mobile phones,Campaign,Search campaign| wedding | Munj| Dec-25, --, --,None,"7,604","1,384",18.20%,INR,1.04,1437.95,72.98%,"1,010.00",1.42
+Computers,Campaign,Search campaign| wedding | Munj| Dec-25, --, --,None,83,1,1.20%,INR,0.07,0.07,0.00%,0.00,0.00
+Tablets,Campaign,Search campaign| wedding | Munj| Dec-25, --, --,None,8,0,0.00%,INR,0,0.00,0.00%,0.00,0.00
+,,,,Total: Account,,"12,368,381","152,779",1.24%,INR,4.07,622174.74,30.54%,"46,656.00",13.34

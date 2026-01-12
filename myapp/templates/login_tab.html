@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+
+    <!-- SAME CSS FILE -->
+    <link rel="stylesheet" href="{% static 'css/signin.css' %}">
+</head>
+
+<body>
+<section class="bg-light py-3 py-md-5">
+  <div class="container">
+    <div class="card">
+
+      <div class="text-center mb-3">
+        <img
+          src="{% static 'images/logo.png' %}"
+          alt="Logo"
+          width="80"
+          height="70"
+          class="logo"
+        />
+      </div>
+
+      <h2 class="title">Login</h2>
+
+      {% if error %}
+        <p class="error">{{ error }}</p>
+      {% endif %}
+
+      <form method="post">
+        {% csrf_token %}
+
+        <div class="form-group">
+          <input
+            type="text"
+            name="username"
+            class="form-control"
+            placeholder="Username"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <input
+            type="password"
+            id="password"
+            name="password"
+            class="form-control"
+            placeholder="Password"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <input type="checkbox" id="show-password" onclick="togglePasswordVisibility()">
+          <label for="show-password">Show Password</label>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn-primary">Login</button>
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+</section>
+
+<script>
+  function togglePasswordVisibility() {
+    const password = document.getElementById("password");
+    password.type = password.type === "password" ? "text" : "password";
+  }
+</script>
+
+</body>
+</html>
+
+
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+</head>
+<body>
+
+<h2>Login</h2>
+
+{% if error %}
+<p style="color:red;">{{ error }}</p>
+{% endif %}
+
+<form method="post">
+    {% csrf_token %}
+    <input type="text" name="username" placeholder="Username" required><br><br>
+    <input type="password" name="password" placeholder="Password" required><br><br>
+    <button type="submit">Login</button>
+</form>
+
+</body>
+</html> -->

@@ -1,0 +1,13 @@
+Parental status report
+All time
+Demographic status,Parental status,Campaign,Ad group,Status,Bid adj.,Impr.,Interactions,Interaction rate,Currency code,Avg. cost,Cost,Conv. rate,Conversions,Cost / conv.
+Enabled,Not a parent,Performance Max I GBH Feb-25, --,Ad group not complete, --,"183,600","18,573",10.12%,INR,1.49,27648.39,78.11%,"14,508.00",1.91
+Enabled,Parent,Performance Max I GBH Feb-25, --,Ad group not complete, --,"80,254","9,303",11.59%,INR,1.46,13622.61,84.74%,"7,883.00",1.73
+Enabled,Unknown,Performance Max I GBH Feb-25, --,Ad group not complete, --,"138,828","10,049",7.24%,INR,1.46,14669.20,63.82%,"6,413.00",2.29
+Total: Parental statuses,,,,,,"402,682","37,925",9.42%,INR,1.48,55940.20,75.95%,"28,804.00",1.94
+Total: Display automatic targeting,,,,,,0,0, --,INR,0,0.00,0.00%,0.00,0.00
+Total: Account,,,,,,"14,072,652","174,836",1.24%,INR,3.77,658461.21,26.69%,"46,656.00",14.11
+Total: Smart,,,,,,"9,270,180","69,217",0.75%,INR,2.67,184798.96,21.19%,"14,664.00",12.60
+Total: Search,,,,,,"2,695,520","45,636",1.69%,INR,8.36,381435.00,6.99%,"3,188.00",119.65
+Total: Performance Max,,,,,,"402,682","37,925",9.42%,INR,1.48,55940.20,75.95%,"28,804.00",1.94
+Total: Display,,,,,,"1,704,266","22,058",1.29%,INR,1.65,36287.05,0.00%,0.00,0.00

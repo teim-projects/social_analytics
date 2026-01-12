@@ -78,13 +78,24 @@
       <div class="home-content">
         <p>Social Media Platforms</p>
         <div class="overview-boxes">
-          <div class="box">
+          <!-- <div class="box">
             <div class="right-side">
               <div class="box-topic">Facebook</div>
             </div>
             <img src="{% static 'images/facebook.png' %}" alt="" class="acc" />
-          </div>
-          <a href="{% url 'instagram_tab' %}" style="text-decoration: none; color: inherit;" class="box">
+          </div> -->
+
+          <a href="{% url 'platform_click' 'facebook' %}" style="text-decoration: none; color: inherit;" class="box">
+            <div class="right-side">
+              <div class="box-topic">Facebook</div>
+            </div>
+            <img
+              src="{% static 'images/facebook.png' %}"
+              alt="Facebook"
+              class="acc"
+            />
+          </a>
+          <a href="{% url 'platform_click' 'instagram' %}" style="text-decoration: none; color: inherit;" class="box">
             <div class="right-side">
               <div class="box-topic">Instagram</div>
             </div>
@@ -101,14 +112,29 @@
             </div>
             <img src="{% static 'images/instagram.png' %}" alt="" class="acc" />
           </div> -->
-          <div class="box">
+
+          <a href="{% url 'platform_click' 'twitter' %}" style="text-decoration: none; color: inherit;" class="box">
             <div class="right-side">
               <div class="box-topic">Twitter</div>
             </div>
-            <img src="{% static 'images/twitter.png' %}" alt="" class="acc" />
-          </div>
+            <img
+              src="{% static 'images/twitter.png' %}"
+              alt="Twitter"
+              class="acc"
+            />
+          </a>
 
-          <div class="box">
+          <a href="{% url 'platform_click' 'google_ads' %}" style="text-decoration: none; color: inherit;" class="box">
+            <div class="right-side">
+              <div class="box-topic">Google Ads</div>
+            </div>
+            <img
+              src="{% static 'images/gads.png' %}"
+              alt="Instagram"
+              class="acc"
+            />
+          </a>
+          <!-- <div class="box">
             <div class="right-side">
               <div class="box-topic">Reddit</div>
             </div>
@@ -117,8 +143,8 @@
               alt=""
               class="acc"
             />
-          </div>
-          <a href="{% url 'youtube_tab' %}" style="text-decoration: none; color: inherit;" class="box">
+          </div> -->
+          <a href="{% url 'platform_click' 'youtube' %}" style="text-decoration: none; color: inherit;" class="box">
             <div class="right-side">
               <div class="box-topic">Youtube</div>
             </div>
@@ -135,12 +161,16 @@
             </div>
             <img src="{% static 'images/yt.png' %}" alt="" class="acc" />
           </div> -->
-          <div class="box">
+          <a href="{% url 'platform_click' 'linkedin' %}" style="text-decoration: none; color: inherit;" class="box">
             <div class="right-side">
               <div class="box-topic">LinkedIn</div>
             </div>
-            <img src="{% static 'images/linkedin.png' %}" alt="" class="acc" />
-          </div>
+            <img
+              src="{% static 'images/linkedin.png' %}"
+              alt="LinkedIn"
+              class="acc"
+            />
+          </a>
         </div>
       </div>
     </section>

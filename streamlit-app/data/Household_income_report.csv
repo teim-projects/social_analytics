@@ -1,0 +1,52 @@
+Household income report
+All time
+Demographic status,Household income,Campaign,Ad group,Status,Bid adj.,Impr.,Interactions,Interaction rate,Currency code,Avg. cost,Cost,Conv. rate,Conversions,Cost / conv.
+Enabled,Unknown,Search campaign| wedding | Munj| Dec-25,Munj Ad group 2,Eligible, --,949,137,14.44%,INR,0.78,106.99,67.88%,93.00,1.15
+Enabled,11 - 20%,Search campaign| wedding | Munj| Dec-25,wedding ad group1,Eligible, --,749,146,19.49%,INR,0.87,126.99,81.51%,119.00,1.07
+Enabled,11 - 20%,Search campaign| wedding | Munj| Dec-25,Munj Ad group 2,Eligible, --,577,112,19.41%,INR,0.85,94.93,77.68%,87.00,1.09
+Enabled,Lower 50%,Search campaign| wedding | Munj| Dec-25,Munj Ad group 2,Eligible, --,380,78,20.53%,INR,0.97,75.88,80.77%,63.00,1.20
+Enabled,31 - 40%,Search campaign| wedding | Munj| Dec-25,wedding ad group1,Eligible, --,334,56,16.77%,INR,1.49,83.21,50.00%,28.00,2.97
+Enabled,41 - 50%,Search campaign| wedding | Munj| Dec-25,wedding ad group1,Eligible, --,170,29,17.06%,INR,0.81,23.60,55.17%,16.00,1.48
+Enabled,21 - 30%,Search campaign| wedding | Munj| Dec-25,wedding ad group1,Eligible, --,424,74,17.45%,INR,0.81,60.23,71.62%,53.00,1.14
+Enabled,31 - 40%,Search campaign| wedding | Munj| Dec-25,Munj Ad group 2,Eligible, --,232,54,23.28%,INR,1.05,56.49,83.33%,45.00,1.26
+Enabled,Top 10%,Search campaign| wedding | Munj| Dec-25,Munj Ad group 2,Eligible, --,704,156,22.16%,INR,1.10,171.10,75.64%,118.00,1.45
+Enabled,41 - 50%,Search campaign| wedding | Munj| Dec-25,Munj Ad group 2,Eligible, --,121,21,17.36%,INR,0.93,19.59,95.24%,20.00,0.98
+Enabled,21 - 30%,Search campaign| wedding | Munj| Dec-25,Munj Ad group 2,Eligible, --,354,60,16.95%,INR,1.10,66.09,83.33%,50.00,1.32
+Enabled,Lower 50%,Search campaign| wedding | Munj| Dec-25,wedding ad group1,Eligible, --,517,118,22.82%,INR,1.49,175.32,61.86%,73.00,2.40
+Enabled,Top 10%,Search campaign| wedding | Munj| Dec-25,wedding ad group1,Eligible, --,876,140,15.98%,INR,1.27,177.88,85.00%,119.00,1.49
+Enabled,Unknown,Search campaign| wedding | Munj| Dec-25,wedding ad group1,Eligible, --,"1,307",204,15.61%,INR,0.98,199.72,61.76%,126.00,1.59
+Enabled,11 - 20%,GULMOHOR | SEARCH,#Babyshower,Eligible, --,"3,221",267,8.29%,INR,10.40,2777.71,25.84%,69.00,40.26
+Enabled,11 - 20%,GULMOHOR | SEARCH,#Birthday,Eligible, --,"91,945","1,862",2.03%,INR,17.92,33375.16,16.40%,305.33,109.31
+Enabled,31 - 40%,GULMOHOR | SEARCH,#Engagement,Eligible, --,"10,455",293,2.80%,INR,5.99,1755.29,12.29%,36.00,48.76
+Removed,Unknown,GULMOHOR | SEARCH,#Babyshower,Excluded from ad group, --,"1,875",110,5.87%,INR,4.26,468.39,0.00%,0.00,0.00
+Enabled,Top 10%,GULMOHOR | SEARCH,#Engagement,Eligible, --,"26,008","1,165",4.48%,INR,9.65,11237.53,15.88%,185.00,60.74
+Enabled,Lower 50%,GULMOHOR | SEARCH,#Engagement,Eligible, --,"26,067",555,2.13%,INR,5.06,2807.36,11.89%,66.00,42.54
+Enabled,31 - 40%,GULMOHOR | SEARCH,#Birthday,Eligible, --,"39,007",713,1.83%,INR,15.24,10863.52,15.15%,108.00,100.59
+Enabled,41 - 50%,GULMOHOR | SEARCH,#Engagement,Eligible, --,"6,566",149,2.27%,INR,5.31,790.72,14.09%,21.00,37.65
+Removed,Unknown,GULMOHOR | SEARCH,#Birthday,Excluded from ad group, --,"305,992","3,129",1.02%,INR,6.52,20403.51,0.19%,6.00,3400.59
+Removed,Unknown,GULMOHOR | SEARCH,#Engagement,Excluded from ad group, --,"98,449","1,298",1.32%,INR,4.07,5280.37,0.00%,0.00,0.00
+Enabled,Top 10%,GULMOHOR | SEARCH,#Birthday,Eligible, --,"113,826","2,461",2.16%,INR,19.98,49181.55,11.09%,273.00,180.15
+Enabled,11 - 20%,GULMOHOR | SEARCH,#Engagement,Eligible, --,"22,508",839,3.73%,INR,9.11,7641.41,13.35%,112.00,68.23
+Enabled,21 - 30%,GULMOHOR | SEARCH,#Engagement,Eligible, --,"13,466",400,2.97%,INR,8.41,3364.27,12.75%,51.00,65.97
+Enabled,Top 10%,GULMOHOR | SEARCH,#Babyshower,Eligible, --,"4,370",389,8.90%,INR,11.94,4644.66,23.91%,93.00,49.94
+Enabled,21 - 30%,GULMOHOR | SEARCH,#Birthday,Eligible, --,"50,609","1,026",2.03%,INR,12.87,13206.72,19.49%,200.00,66.03
+Enabled,Lower 50%,GULMOHOR | SEARCH,#Babyshower,Eligible, --,"1,522",116,7.62%,INR,9.06,1050.54,30.17%,35.00,30.02
+Enabled,31 - 40%,GULMOHOR | SEARCH,#Babyshower,Eligible, --,892,97,10.87%,INR,8.04,780.00,40.21%,39.00,20.00
+Enabled,21 - 30%,GULMOHOR | SEARCH,#Babyshower,Eligible, --,"1,430",156,10.91%,INR,9.27,1446.63,37.18%,58.00,24.94
+Enabled,41 - 50%,GULMOHOR | SEARCH,#Babyshower,Eligible, --,488,57,11.68%,INR,15.17,864.90,26.32%,15.00,57.66
+Enabled,41 - 50%,GULMOHOR | SEARCH,#Birthday,Eligible, --,"24,419",385,1.58%,INR,13.03,5015.72,19.48%,75.00,66.88
+Enabled,Lower 50%,GULMOHOR | SEARCH,#Birthday,Eligible, --,"101,069","1,321",1.31%,INR,8.18,10801.29,10.52%,139.00,77.71
+Enabled,Lower 50%,Performance Max I GBH Feb-25, --,Ad group not complete, --,"35,064","4,096",11.68%,INR,1.32,5398.36,82.15%,"3,365.00",1.60
+Enabled,41 - 50%,Performance Max I GBH Feb-25, --,Ad group not complete, --,"10,685","1,375",12.87%,INR,1.48,2030.90,89.09%,"1,225.00",1.66
+Enabled,Top 10%,Performance Max I GBH Feb-25, --,Ad group not complete, --,"106,371","8,361",7.86%,INR,1.56,13016.58,72.84%,"6,090.00",2.14
+Enabled,Unknown,Performance Max I GBH Feb-25, --,Ad group not complete, --,"124,321","10,104",8.13%,INR,1.33,13456.84,67.56%,"6,826.00",1.97
+Enabled,21 - 30%,Performance Max I GBH Feb-25, --,Ad group not complete, --,"31,947","3,787",11.85%,INR,1.53,5797.20,86.93%,"3,292.00",1.76
+Enabled,11 - 20%,Performance Max I GBH Feb-25, --,Ad group not complete, --,"71,937","7,512",10.44%,INR,1.64,12319.00,75.25%,"5,653.00",2.18
+Enabled,31 - 40%,Performance Max I GBH Feb-25, --,Ad group not complete, --,"22,357","2,690",12.03%,INR,1.46,3921.32,87.47%,"2,353.00",1.67
+Total: Household incomes,,,,,,"1,354,560","56,098",4.14%,INR,4.37,245135.48,56.51%,"31,700.33",7.73
+Total: Display automatic targeting,,,,,,0,0, --,INR,0,0.00,0.00%,0.00,0.00
+Total: Account,,,,,,"14,072,652","174,836",1.24%,INR,3.77,658461.21,26.69%,"46,656.00",14.11
+Total: Search,,,,,,"2,695,520","45,636",1.69%,INR,8.36,381435.00,6.99%,"3,188.00",119.65
+Total: Performance Max,,,,,,"402,682","37,925",9.42%,INR,1.48,55940.20,75.95%,"28,804.00",1.94
+Total: Smart,,,,,,"9,270,184","69,217",0.75%,INR,2.67,184798.96,21.19%,"14,664.00",12.60
+Total: Display,,,,,,"1,704,266","22,058",1.29%,INR,1.65,36287.05,0.00%,0.00,0.00

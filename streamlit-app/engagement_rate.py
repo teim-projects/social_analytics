@@ -13,25 +13,13 @@ st.set_page_config(page_title="Engagement Rate Analysis", page_icon="📊", layo
 st.title("📊 Instagram Engagement Rate Analysis Dashboard")
 
 # ────────────── Load dataset ──────────────
-# ────────────── Load dataset (Server-Safe Absolute Path) ──────────────
-
-# Absolute path to this file
-CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
-
-# data/ folder inside streamlit-app
-DATA_DIR = os.path.join(CURRENT_DIR, "data")
-
-# THE EXCEL FILE NAME YOU WANT TO LOAD
-DATA_PATH = os.path.join(DATA_DIR, "instagram_analytics_data.xlsx")   # <-- put correct file name here
-
-# Load dataset safely
+load_dotenv()  # Load environment variables from .env file
+DATA_PATH = os.getenv("DATA_PATH")
 try:
     df = pd.read_excel(DATA_PATH)
-except Exception as e:
-    st.error(f"🚫 Error loading file: {e}")
-    st.write("Looking for file:", DATA_PATH)
+except FileNotFoundError:
+    st.error("🚫 File not found! Please check the path.")
     st.stop()
-
 
 # ────────────── Preprocessing ──────────────
 df['Reach'].replace(0, np.nan, inplace=True)
@@ -94,39 +82,19 @@ with col2:
     - Indicates that `{features[indices[0]]}` is most influential for engagement rate prediction.  
     """)
 
-# col1, col2 = st.columns([2,1])
-# with col1:
-#     # ────────────── Feature Importance ──────────────
-#     st.subheader("Feature Importance")
-#     importances = model.feature_importances_
-#     indices = np.argsort(importances)[::-1]
+# # ────────────── Engagement Table ──────────────
+# st.subheader("Top 20 Posts by Engagement Rate")
+# engagement_table = df[['Post_ID','Post_Type','Likes','Comments','Shares','Saves','Reach','Follower_Count',
+#                        'Total_Engagement','Engagement_Rate_Percent','Engagement_Rate_Follower']].sort_values(
+#                        by='Engagement_Rate_Percent', ascending=False)
+# engagement_table = engagement_table.head(20)
+# st.dataframe(engagement_table)
 
-#     fig, ax = plt.subplots(figsize=(10,5))
-#     ax.bar(range(X.shape[1]), importances[indices], align='center')
-#     ax.set_xticks(range(X.shape[1]))
-#     ax.set_xticklabels([features[i] for i in indices], rotation=45, ha='right')
-#     ax.set_title("Feature Importance for Engagement Rate Prediction")
-#     st.pyplot(fig)
-# with col2:
-#     # ────────────── Metrics ──────────────
-#     st.subheader("Model Performance Metrics")
-#     cola, colb = st.columns(2)
-#     cola.metric("R² Score", f"{r2:.3f}")
-#     colb.metric("MAE", f"{mae:.3f}")
-
-# ────────────── Engagement Table ──────────────
-st.subheader("Top 20 Posts by Engagement Rate")
-engagement_table = df[['Post_ID','Post_Type','Likes','Comments','Shares','Saves','Reach','Follower_Count',
-                       'Total_Engagement','Engagement_Rate_Percent','Engagement_Rate_Follower']].sort_values(
-                       by='Engagement_Rate_Percent', ascending=False)
-engagement_table = engagement_table.head(20)
-st.dataframe(engagement_table)
-
-# ────────────── Download CSV ──────────────
-csv = engagement_table.to_csv(index=False).encode('utf-8')
-st.download_button(
-    label="📥 Download Engagement Rate Report",
-    data=csv,
-    file_name="engagement_rate_report.csv",
-    mime='text/csv'
-)
+# # ────────────── Download CSV ──────────────
+# csv = engagement_table.to_csv(index=False).encode('utf-8')
+# st.download_button(
+#     label="📥 Download Engagement Rate Report",
+#     data=csv,
+#     file_name="engagement_rate_report.csv",
+#     mime='text/csv'
+# )

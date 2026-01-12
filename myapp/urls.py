@@ -49,7 +49,8 @@ urlpatterns = [
 
     path('signup/', views.signup, name='signup'),
     path('signin/', views.signin, name='signin'),
-    path('dashboard1/', views.dashboard1, name='dashboard1'),
+    # path('dashboard1/', views.dashboard1, name='dashboard1'),
+    path('admin-dashboard/', views.admin_dashboard, name='admin_dashboard'),
     path('dashboard/', views.dashboard, name='dashboard'),  # Homepage or Dashboard
     path('account/', views.account, name='account'),  # Account page
     path('account1/', views.account1, name='account1'),
@@ -70,6 +71,7 @@ urlpatterns = [
     path('twitter-login1/', views.twitter_login, name='twitter_login1'),
     path('reddit-login/', views.reddit_login, name='reddit_login'),
 
+    path('facebook-tab/', views.facebook_tab, name='facebook_tab'),
     # path('youtube-login/', views.youtube_login, name='youtube_login'),
 
     path('linkedin-login/', views.linkedin_login, name='linkedin_login'),
@@ -91,6 +93,48 @@ urlpatterns = [
     path('callback-youtube/', views.youtube_callback, name='youtube_callback'),
 
     path('instagram-tab/', views.instagram_tab, name='instagram_tab'),
+
     path('youtube-tab/', views.youtube_tab, name='youtube_tab'),
     path('youtube-dashboard/', views.youtube_dashboard, name='youtube_dashboard'),
+    path('youtube-sentiment/', views.youtube_sentiment, name='youtube_sentiment'),
+    path('youtube-top-posts/', views.youtube_top_posts, name='youtube_top_posts'),
+    path('youtube-prediction/', views.youtube_prediction, name='youtube_prediction'),
+    path('youtube-engagement/', views.youtube_engagement, name='youtube_engagement'),
+
+    path('twitter-tab/', views.twitter_tab, name='twitter_tab'),
+    path('twitter-dashboard/', views.twitter_dashboard, name='twitter_dashboard'),  
+    path('twitter-top-tweets/', views.twitter_top_tweets, name='twitter_top_tweets'),
+    path('twitter-prediction/', views.twitter_prediction, name='twitter_prediction'),
+    path('twitter-engagement/', views.twitter_engagement, name='twitter_engagement'),
+    path('twitter-sentiment/', views.twitter_sentiment, name='twitter_sentiment'),  
+
+    path('linkedin-tab/', views.linkedin_tab, name='linkedin_tab'),
+    path('linkedin-dashboard/', views.linkedin_dashboard, name='linkedin_dashboard'),   
+    path('linkedin-top-posts/', views.linkedin_top_posts, name='linkedin_top_posts'),
+    path('linkedin-prediction/', views.linkedin_prediction, name='linkedin_prediction'),
+    path('linkedin-engagement/', views.linkedin_engagement, name='linkedin_engagement'),
+
+    path("login-tab/", views.login_tab, name="login_tab"),
+    path('platform/<str:platform>/', views.platform_click, name='platform_click'),
+
+    path('ga-campaign/', views.ga_campaign, name='ga_campaign'),
+    path('ga-targeted-content/', views.ga_targeted_content, name='ga_targeted_content'),        
+    path('ga-group-report/', views.ga_group_report, name='ga_group_report'),    
+    path('ga-age-report/', views.ga_age_report, name='ga_age_report'),    
+    path('ga-location-report/', views.ga_location_report, name='ga_location_report'),
+    path('ga-landing-page/', views.ga_landing_page, name='ga_landing_page'),
+    path('ga-household-income/', views.ga_household_income, name='ga_household_income'),
+    path('ga-device-report/', views.ga_device_report, name='ga_device_report'),
+    path('ga-search-keyword/', views.ga_search_keyword, name='ga_search_keyword'),
+    path('ga-search-terms/', views.ga_search_terms, name='ga_search_terms'),
+    path('ga-schedule/', views.ga_schedule, name='ga_schedule'),
+    path('ga-schedule-day-hour/', views.ga_schedule_day_hour, name='ga_schedule_day_hour'),
+    path('ga-report/', views.ga_report, name='ga_report'),
+    path('ga-asset-report/', views.ga_asset_report, name='ga_asset_report'),
+    path('ga-gender-report/', views.ga_gender_report, name='ga_gender_report'),
+    path('google-ads-tab/', views.google_ads_tab, name='google_ads_tab'),
+    path('ga-strategic-level/', views.ga_strategic_level, name='ga_strategic_level'),
+    path('ga-tactical-level/', views.ga_tactical_level, name='ga_tactical_level'),
+    path('ga-operational-level/', views.ga_operational_level, name='ga_operational_level'),
+
 ]

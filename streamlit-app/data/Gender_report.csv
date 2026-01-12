@@ -1,0 +1,28 @@
+Gender report
+All time
+Demographic status,Gender,Campaign,Ad group,Status,Bid adj.,Impr.,Interactions,Interaction rate,Currency code,Avg. cost,Cost,Conv. rate,Conversions,Cost / conv.
+Enabled,Male,Performance Max I GBH Feb-25, --,Ad group not complete, --,"209,491","21,601",10.31%,INR,1.50,32434.52,84.46%,"18,244.00",1.78
+Enabled,Female,Performance Max I GBH Feb-25, --,Ad group not complete, --,"82,566","7,491",9.07%,INR,1.61,12084.42,60.55%,"4,536.00",2.66
+Enabled,Unknown,Performance Max I GBH Feb-25, --,Ad group not complete, --,"110,625","8,833",7.98%,INR,1.29,11421.25,68.20%,"6,024.00",1.90
+Enabled,Unknown,Search campaign| wedding | Munj| Dec-25,Munj Ad group 2,Eligible, --,822,125,15.21%,INR,0.78,97.62,71.20%,89.00,1.10
+Enabled,Male,Search campaign| wedding | Munj| Dec-25,Munj Ad group 2,Eligible, --,"1,866",372,19.94%,INR,1.02,377.87,78.76%,293.00,1.29
+Enabled,Female,Search campaign| wedding | Munj| Dec-25,Munj Ad group 2,Eligible, --,629,121,19.24%,INR,0.96,115.59,77.69%,94.00,1.23
+Enabled,Unknown,Search campaign| wedding | Munj| Dec-25,wedding ad group1,Eligible, --,"1,150",178,15.48%,INR,0.92,163.01,62.92%,112.00,1.46
+Enabled,Male,Search campaign| wedding | Munj| Dec-25,wedding ad group1,Eligible, --,"2,455",460,18.74%,INR,1.14,524.52,71.96%,331.00,1.58
+Enabled,Female,Search campaign| wedding | Munj| Dec-25,wedding ad group1,Eligible, --,772,129,16.71%,INR,1.24,159.42,70.54%,91.00,1.75
+Enabled,Female,GULMOHOR | SEARCH,#Birthday,Eligible, --,"225,092","3,753",1.67%,INR,17.29,64873.74,7.28%,273.33,237.34
+Removed,Unknown,GULMOHOR | SEARCH,#Engagement,Excluded from ad group, --,"50,861",708,1.39%,INR,5.28,3736.77,0.00%,0.00,0.00
+Enabled,Male,GULMOHOR | SEARCH,#Babyshower,Eligible, --,"6,974",713,10.22%,INR,8.42,6006.07,34.36%,245.00,24.51
+Enabled,Male,GULMOHOR | SEARCH,#Birthday,Eligible, --,"296,491","5,123",1.73%,INR,12.22,62588.15,16.18%,829.00,75.50
+Enabled,Female,GULMOHOR | SEARCH,#Babyshower,Eligible, --,"5,195",382,7.35%,INR,14.74,5632.19,16.75%,64.00,88.00
+Enabled,Female,GULMOHOR | SEARCH,#Engagement,Eligible, --,"45,320","1,352",2.98%,INR,9.34,12632.00,7.62%,103.00,122.64
+Enabled,Male,GULMOHOR | SEARCH,#Engagement,Eligible, --,"107,338","2,639",2.46%,INR,6.26,16508.19,13.94%,368.00,44.86
+Removed,Unknown,GULMOHOR | SEARCH,#Birthday,Excluded from ad group, --,"205,284","2,021",0.98%,INR,7.61,15385.58,0.20%,4.00,3846.39
+Removed,Unknown,GULMOHOR | SEARCH,#Babyshower,Excluded from ad group, --,"1,629",97,5.95%,INR,4.07,394.57,0.00%,0.00,0.00
+Total: Genders,,,,,,"1,354,560","56,098",4.14%,INR,4.37,245135.48,56.51%,"31,700.33",7.73
+Total: Display automatic targeting,,,,,,0,0, --,INR,0,0.00,0.00%,0.00,0.00
+Total: Account,,,,,,"14,072,648","174,836",1.24%,INR,3.77,658461.21,26.69%,"46,656.00",14.11
+Total: Display,,,,,,"1,704,266","22,058",1.29%,INR,1.65,36287.05,0.00%,0.00,0.00
+Total: Smart,,,,,,"9,270,180","69,217",0.75%,INR,2.67,184798.96,21.19%,"14,664.00",12.60
+Total: Search,,,,,,"2,695,520","45,636",1.69%,INR,8.36,381435.00,6.99%,"3,188.00",119.65
+Total: Performance Max,,,,,,"402,682","37,925",9.42%,INR,1.48,55940.20,75.95%,"28,804.00",1.94
