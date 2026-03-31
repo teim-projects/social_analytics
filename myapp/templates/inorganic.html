@@ -71,33 +71,7 @@
     </nav>
     <div class="home-content">
       <div class="overview-boxes">
-        <a href="{% url 'linkedin_dashboard' %}" style="text-decoration: none; color: inherit;" class="box">
-            <div class="right-side">
-                <div class="box-topic">Dashboard</div>
-                <div class="descriptive_text">
-                    <span class="dtext">Analysis of current content</span>
-                </div>
-            </div>
-            <img src="/static/images/predictive.png" class="acc" alt="Top Performing Posts" />
-        </a>
-        <a href="{% url 'linkedin_prediction' %}" style="text-decoration: none; color: inherit;" class="box">
-          <div class="right-side">
-            <div class="box-topic">Prediction</div>
-            <div class="descriptive_text">Predict performance of posts</div>
-          </div>
-          <img src="/static/images/sentimental.png" class="acc" alt="Sentimental Analysis" />
-        </a>
-        <a href="{% url 'linkedin_top_posts' %}" style="text-decoration: none; color: inherit;" class="box">
-            <div class="right-side">
-                <div class="box-topic">Post Performance</div>
-                <div class="descriptive_text">
-                    <span class="dtext">Highlights of the Best and Worst Posts</span>
-                </div>
-            </div>
-            <img src="/static/images/predictive.png" class="acc" alt="Top Performing Posts" />
-        </a>
-
-        <a href="{% url 'linkedin_strategic' %}" style="text-decoration: none; color: inherit;" class="box">
+        <a href="{% url 'ga_strategic_level' %}" style="text-decoration: none; color: inherit;" class="box">
             <div class="right-side">
                 <div class="box-topic">Strategic Level</div>
                 <div class="descriptive_text">
@@ -106,7 +80,7 @@
             </div>
             <img src="/static/images/predictive.png" class="acc" alt="Top Performing Posts" />
         </a>
-        <a href="{% url 'linkedin_tactical' %}" style="text-decoration: none; color: inherit;" class="box">
+        <a href="{% url 'ga_tactical_level' %}" style="text-decoration: none; color: inherit;" class="box">
             <div class="right-side">
                 <div class="box-topic">Tactical Level</div>
                 <div class="descriptive_text">
@@ -115,7 +89,7 @@
             </div>
           <img src="/static/images/sentimental.png" class="acc" alt="Sentimental Analysis" />
         </a>
-        <a href="{% url 'linkedin_operational' %}" style="text-decoration: none; color: inherit;" class="box">
+        <a href="{% url 'ga_operational_level' %}" style="text-decoration: none; color: inherit;" class="box">
             <div class="right-side">
                 <div class="box-topic">Operational Level</div>
                 <div class="descriptive_text">

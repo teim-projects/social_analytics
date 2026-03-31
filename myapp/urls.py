@@ -137,4 +137,27 @@ urlpatterns = [
     path('ga-tactical-level/', views.ga_tactical_level, name='ga_tactical_level'),
     path('ga-operational-level/', views.ga_operational_level, name='ga_operational_level'),
 
+    path('content-performance/', views.content_performance, name='content_performance'),
+    path('monetization-dashboard/', views.monetization_dashboard, name='monetization_dashboard'),
+    path('inorganic1/', views.inorganic1, name='inorganic1'),
+    path('inorganic2/', views.inorganic2, name='inorganic2'),
+    path('inorganic3/', views.inorganic3, name='inorganic3'),
+
+    path('linkedin-operational/', views.linkedin_operational, name='linkedin_operational'),
+    path('linkedin-tactical/', views.linkedin_tactical, name='linkedin_tactical'),
+    path('linkedin-strategic/', views.linkedin_strategic, name='linkedin_strategic'),
+
+    path('facebook-operational/', views.facebook_operational, name='facebook_operational'),
+    path('facebook-tactical/', views.facebook_tactical, name='facebook_tactical'),
+    path('facebook-strategic/', views.facebook_strategic, name='facebook_strategic'),
+
+    path('cm/', views.cm, name='cm'),
+    path('cm-operational/', views.cm_operational, name='cm_operational'),
+    path('cm-tactical/', views.cm_tactical, name='cm_tactical'),
+    path('cm-strategic/', views.cm_strategic, name='cm_strategic'),
+
+    path('inorganic/', views.inorganic, name='inorganic'),
+    path('inorganic-operational/', views.inorganic_operational, name='inorganic_operational'),
+    path('inorganic-tactical/', views.inorganic_tactical, name='inorganic_tactical'),
+    path('inorganic-strategic/', views.inorganic_strategic, name='inorganic_strategic'),
 ]

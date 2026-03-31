@@ -20,7 +20,7 @@ def load_data(path):
     return df
 
 load_dotenv()
-DATA_PATH = os.getenv("GA_AGE_REPORT_PATH")
+DATA_PATH = os.getenv("GA_AGE_REPORT")
 age_df = load_data(DATA_PATH)
 
 # ───────────────── Data Cleaning ─────────────────

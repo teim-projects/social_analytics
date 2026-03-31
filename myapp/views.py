@@ -267,13 +267,90 @@ def ga_schedule(request):
 # View for Google Ads Schedule Day Hour Report
 def ga_schedule_day_hour(request):
     return render(request, 'ga_schedule_day_hour.html')
+
+# View for Content Performance Dashboard
+def content_performance(request):
+    return render(request, 'content_performance.html')
+
+# View for Monetization Dashboard
+def monetization_dashboard(request):
+    return render(request, 'monetization_dashboard.html')
+
+# View for Inorganic Analysis 1
+def inorganic1(request):
+    return render(request, 'inorganic1.html')
+
+# View for Inorganic Analysis 2 
+def inorganic2(request):
+    return render(request, 'inorganic2.html')
+
+# View for Inorganic Analysis 3
+def inorganic3(request):
+    return render(request, 'inorganic3.html')
+
+# View for LinkedIn Operational Analysis Dashboard
+def linkedin_operational(request):
+    return render(request, 'linkedin_operational.html')
+
+# View for LinkedIn Tactical Analysis Dashboard
+def linkedin_tactical(request):
+    return render(request, 'linkedin_tactical.html')
+
+# View for LinkedIn Strategic Analysis Dashboard
+def linkedin_strategic(request):
+    return render(request, 'linkedin_strategic.html')
+
+# View for Facebook Operational Analysis Dashboard
+def facebook_operational(request):
+    return render(request, 'facebook_operational.html')
+
+# View for Facebook Tactical Analysis Dashboard
+def facebook_tactical(request):
+    return render(request, 'facebook_tactical.html')
+
+# View for Facebook Strategic Analysis Dashboard
+def facebook_strategic(request):
+    return render(request, 'facebook_strategic.html')
+
+# View for Content and Monetization Tab
+def cm(request):
+    return render(request, 'cm_tab.html')
+
+# View for Content and Monetization Operational Analysis Dashboard
+def cm_operational(request):
+    return render(request, 'cm_operational.html')
+
+# View for Content and Monetization Tactical Analysis Dashboard
+def cm_tactical(request):
+    return render(request, 'cm_tactical.html')
+
+# View for Content and Monetization Strategic Analysis Dashboard
+def cm_strategic(request):
+    return render(request, 'cm_strategic.html')
+
+# View for Inorganic Tab
+def inorganic(request):
+    return render(request, 'inorganic_tab.html')    
+
+# View for Inorganic Operational Analysis Dashboard
+def inorganic_operational(request):
+    return render(request, 'inorganic_operational.html')
+
+# View for Inorganic Tactical Analysis Dashboard
+def inorganic_tactical(request):
+    return render(request, 'inorganic_tactical.html')
+
+# View for Inorganic Strategic Analysis Dashboard
+def inorganic_strategic(request):
+    return render(request, 'inorganic_strategic.html')
+
     
 from django.shortcuts import render, redirect
 from .credentials import USER_CREDENTIALS
 
-# Home page
-def home(request):
-    return render(request, "home.html")
+# # Home page
+# def home(request):
+#     return render(request, "home.html")
 
 # Save platform and go to login
 def platform_click(request, platform):
@@ -314,6 +391,8 @@ def login_tab(request):
             "twitter": "twitter_tab",
             "linkedin": "linkedin_tab",
             "google_ads": "google_ads_tab",
+            "inorganic": "inorganic_tab",
+            "cm": "cm_tab",
         }
 
         return redirect(PLATFORM_URLS.get(platform, "home"))
