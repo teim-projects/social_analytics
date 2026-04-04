@@ -3,7 +3,6 @@ import pandas as pd
 import plotly.express as px
 import re
 import os
-from dotenv import load_dotenv
 
 # ───────────────── Streamlit Setup ─────────────────
 st.set_page_config(
@@ -14,8 +13,9 @@ st.set_page_config(
 st.title("💼 LinkedIn Top & Bottom Posts Dashboard")
 
 # ───────────────── Load Environment & Data ─────────────────
-load_dotenv()
-LINKEDIN_DATA_PATH = os.getenv("LINKEDIN_POSTS_DATA")
+CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
+DATA_DIR = os.path.join(CURRENT_DIR, "data")
+LINKEDIN_DATA_PATH = os.path.join(DATA_DIR, "linkedin_new.csv")
 
 try:
     df = pd.read_csv(LINKEDIN_DATA_PATH)

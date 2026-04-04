@@ -1,12 +1,11 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
-from dotenv import load_dotenv
 import os
 
-load_dotenv()
-
-DATA_PATH = os.getenv("GA_SCHEDULE")
+CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
+DATA_DIR = os.path.join(CURRENT_DIR, "data")
+DATA_PATH = os.path.join(DATA_DIR, "Ad_schedule_report.csv")
 
 # ───────────────── Streamlit Page Setup ─────────────────
 st.set_page_config(

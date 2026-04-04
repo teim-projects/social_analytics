@@ -2,7 +2,6 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 import os
-from dotenv import load_dotenv
 
 # ───────────────── Page Setup ─────────────────
 st.set_page_config(
@@ -13,8 +12,9 @@ st.set_page_config(
 
 st.title("📊 Google Ads Demographic Performance Dashboard")
 
-load_dotenv()
-DATA_PATH = os.getenv("GA_GENDER_REPORT_PATH")
+CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
+DATA_DIR = os.path.join(CURRENT_DIR, "data")
+DATA_PATH = os.path.join(DATA_DIR, "Gender_report.csv")
 
 # ───────────────── Load Data ─────────────────
 try:

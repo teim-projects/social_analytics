@@ -5,7 +5,6 @@ from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import r2_score, mean_absolute_error
 import matplotlib.pyplot as plt
-from dotenv import load_dotenv
 import os
 
 # ────────────── Streamlit page setup ──────────────
@@ -13,8 +12,9 @@ st.set_page_config(page_title="Engagement Rate Analysis", page_icon="📊", layo
 st.title("📊 Instagram Engagement Rate Analysis Dashboard")
 
 # ────────────── Load dataset ──────────────
-load_dotenv()  # Load environment variables from .env file
-DATA_PATH = os.getenv("DATA_PATH")
+CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
+DATA_DIR = os.path.join(CURRENT_DIR, "data")
+DATA_PATH = os.path.join(DATA_DIR, "instagram_analytics_data.xlsx")
 try:
     df = pd.read_excel(DATA_PATH)
 except FileNotFoundError:

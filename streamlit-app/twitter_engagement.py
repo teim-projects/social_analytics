@@ -6,7 +6,6 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import r2_score, mean_absolute_error
 import plotly.express as px
 import os
-from dotenv import load_dotenv
 
 # ────────────── Page Setup ──────────────
 st.set_page_config(
@@ -17,8 +16,9 @@ st.set_page_config(
 st.title("🐦 Twitter Engagement Rate Analysis Dashboard")
 
 # ────────────── Load Dataset ──────────────
-load_dotenv()
-DATA_PATH = os.getenv("TWITTER_DATA_PATH")  # set in .env
+CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
+DATA_DIR = os.path.join(CURRENT_DIR, "data")
+DATA_PATH = os.path.join(DATA_DIR, "twitter_data.csv")
 
 try:
     df = pd.read_csv(DATA_PATH)

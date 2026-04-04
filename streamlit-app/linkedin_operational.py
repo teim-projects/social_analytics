@@ -19,8 +19,6 @@ st.set_page_config(layout="wide")
 
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_DIR = os.path.join(CURRENT_DIR, "data")
-# DATA_PATH = os.path.join(DATA_DIR, "Shree-Laxmi-Stone-Depot-Ad-sets-1-Jan-2025-1-Jan-2026.csv")
-# df_ads = pd.read_csv(DATA_PATH)
 
 # ============================
 # SESSION STATE

@@ -6,7 +6,6 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import plotly.express as px
-from dotenv import load_dotenv
 import os
 
 # =====================================
@@ -18,8 +17,9 @@ st.set_page_config(
 )
 st.title("💰 Google Ads Household Income Report Dashboard")
 
-load_dotenv()
-DATA_PATH = os.getenv("GA_HOUSEHOLD_INCOME")
+CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
+DATA_DIR = os.path.join(CURRENT_DIR, "data")
+DATA_PATH = os.path.join(DATA_DIR, "Household_income_report.csv")
 
 # =====================================
 # 2. LOAD DATA SAFELY

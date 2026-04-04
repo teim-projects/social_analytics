@@ -8,7 +8,6 @@ import numpy as np
 import plotly.express as px
 from io import StringIO
 import os
-from dotenv import load_dotenv
 
 # =====================================
 # 1. STREAMLIT PAGE SETUP
@@ -16,8 +15,9 @@ from dotenv import load_dotenv
 st.set_page_config(page_title="Google Ads Location Report", layout="wide")
 st.title("📍 Google Ads Location Performance Dashboard")
 
-load_dotenv()
-DATA_PATH = os.getenv("GA_LOCATION_REPORT")
+CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
+DATA_DIR = os.path.join(CURRENT_DIR, "data")
+DATA_PATH = os.path.join(DATA_DIR, "Location_report.csv")
 
 # =====================================
 # 2. LOAD & CLEAN DATA

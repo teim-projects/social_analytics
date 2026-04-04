@@ -2,7 +2,6 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 import numpy as np
-from dotenv import load_dotenv
 import os
 
 # ───────────────────────── PAGE SETUP ─────────────────────────
@@ -15,8 +14,9 @@ st.set_page_config(
 st.title("📊 Google Ads Asset Performance Dashboard")
 
 # ───────────────────────── ENV SETUP ─────────────────────────
-load_dotenv()
-DATA_PATH = os.getenv("GA_ASSET_REPORT_PATH")
+CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
+DATA_DIR = os.path.join(CURRENT_DIR, "data")
+DATA_PATH = os.path.join(DATA_DIR, "Ad_asset_report.csv")
 
 if not DATA_PATH:
     st.error("Environment variable GA_ASSET_REPORT_PATH is not set.")

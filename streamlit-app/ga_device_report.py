@@ -1,7 +1,6 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
-from dotenv import load_dotenv
 import os
 
 # ───────────────── Page Config ─────────────────
@@ -12,9 +11,9 @@ st.set_page_config(
 
 st.title("📱 Google Ads Device Performance Dashboard")
 
-load_dotenv()
-
-DATA_PATH = os.getenv("GA_DEVICE_REPORT_PATH")
+CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
+DATA_DIR = os.path.join(CURRENT_DIR, "data")
+DATA_PATH = os.path.join(DATA_DIR, "Device_report.csv")
 
 # ───────────────── Load Data ─────────────────
 @st.cache_data

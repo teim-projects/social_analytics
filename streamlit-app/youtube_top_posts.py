@@ -1,7 +1,6 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
-from dotenv import load_dotenv
 import os
 
 # ───────────────── Streamlit Setup ─────────────────
@@ -9,11 +8,11 @@ st.set_page_config(page_title="YouTube Top & Bottom Videos Dashboard", page_icon
 st.title("🎬 YouTube Top & Bottom Videos Dashboard")
 
 # ───────────────── Load dataset ─────────────────
-load_dotenv()
+CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 
-VIDEO_DATA_PATH = os.getenv("Youtube_video_data")
-CHANNEL_DATA_PATH = os.getenv("Youtube_channel_data")
-COMMENTS_DATA_PATH = os.getenv("Youtube_comment_data")
+VIDEO_DATA_PATH = os.path.join(CURRENT_DIR, "data", "ALL_VIDEO_DETAILS.csv")
+CHANNEL_DATA_PATH = os.path.join(CURRENT_DIR, "data", "Youtube_CHANNEL_DETAILS.csv")
+COMMENTS_DATA_PATH = os.path.join(CURRENT_DIR, "data", "Youtube_COMMENT_DETAILS.csv")
 
 try:
     df_videos = pd.read_csv(VIDEO_DATA_PATH)

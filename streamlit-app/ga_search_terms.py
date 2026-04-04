@@ -2,7 +2,6 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 from collections import Counter
-from dotenv import load_dotenv
 import os
 
 # ───────────────── Page Config (MUST BE first) ─────────────────
@@ -13,8 +12,9 @@ st.set_page_config(
 )
 
 # ───────────────── Load ENV & Data Path ─────────────────
-load_dotenv()
-DATA_PATH = os.getenv("GA_SEARCH_TERMS")
+CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
+DATA_DIR = os.path.join(CURRENT_DIR, "data")
+DATA_PATH = os.path.join(DATA_DIR, "Search_terms_report.csv")
 
 st.title("🔎 Google Ads Search Terms Performance Dashboard")
 

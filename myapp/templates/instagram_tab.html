@@ -71,6 +71,15 @@
     </nav>
     <div class="home-content">
       <div class="overview-boxes">
+        <a href="{% url 'instagram_analytics' %}" style="text-decoration: none; color: inherit;" class="box">
+            <div class="right-side">
+                <div class="box-topic">Dashboard</div>
+                <div class="descriptive_text">
+                    <span class="dtext">Analysis of current content</span>
+                </div>
+            </div>
+            <img src="/static/images/predictive.png" class="acc" alt="Top Performing Posts" />
+        </a>
         <a href="{% url 'instagram_insights' %}" style="text-decoration: none; color: inherit;" class="box">
           <div class="right-side">
             <div class="box-topic">Prediction</div>
@@ -91,15 +100,6 @@
                 <div class="box-topic">Post Performance</div>
                 <div class="descriptive_text">
                     <span class="dtext">Highlights of the Best and Worst Posts</span>
-                </div>
-            </div>
-            <img src="/static/images/predictive.png" class="acc" alt="Top Performing Posts" />
-        </a>
-        <a href="{% url 'instagram_analytics' %}" style="text-decoration: none; color: inherit;" class="box">
-            <div class="right-side">
-                <div class="box-topic">Dashboard</div>
-                <div class="descriptive_text">
-                    <span class="dtext">Analysis of current content</span>
                 </div>
             </div>
             <img src="/static/images/predictive.png" class="acc" alt="Top Performing Posts" />

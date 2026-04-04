@@ -2,7 +2,6 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 import os
-from dotenv import load_dotenv
 
 # ───────────────── Page Setup ─────────────────
 st.set_page_config(
@@ -19,8 +18,9 @@ def load_data(path):
     df = df[~df.iloc[:, 0].astype(str).str.startswith("Total")].reset_index(drop=True)
     return df
 
-load_dotenv()
-DATA_PATH = os.getenv("GA_AGE_REPORT")
+CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
+DATA_DIR = os.path.join(CURRENT_DIR, "data")
+DATA_PATH = os.path.join(DATA_DIR, "Age_report.csv")
 age_df = load_data(DATA_PATH)
 
 # ───────────────── Data Cleaning ─────────────────

@@ -5,8 +5,8 @@ Note: Before running any command check if you are in path
 
 in the .env files inside Instagram update DATA_PATH and MODEL_PATH as per your system
 
-To install all requirments run the following command:
-pip install -r requirments.txt
+To install all requirments and dependencies run the following command:
+pip install -r dependencies.txt
 
 To run the project run the following command:
 python manage.py run-all

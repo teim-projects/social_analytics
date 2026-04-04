@@ -3,7 +3,6 @@ import pandas as pd
 import numpy as np
 import plotly.express as px
 import re
-from dotenv import load_dotenv
 import os
 
 st.set_page_config(page_title="YouTube Dashboard", page_icon="🎥", layout="wide")
@@ -16,8 +15,8 @@ BRIGHT_CATEGORY_COLORS = px.colors.qualitative.Prism     # category bars
 BRIGHT_CONTINUOUS = px.colors.sequential.Turbo           # continuous heatmaps
 
 # ------------------ Load dataset ------------------
-load_dotenv()
-default_file_path = os.getenv("Youtube_video_data")
+CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
+default_file_path = os.path.join(CURRENT_DIR, "data", "ALL_VIDEO_DETAILS.csv")
 
 try:
     df = pd.read_csv(default_file_path)

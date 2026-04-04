@@ -2,7 +2,6 @@ import streamlit as st
 import pandas as pd
 import pickle
 import os
-from dotenv import load_dotenv
 
 # ───────────────────────────────
 # Page Config
@@ -22,9 +21,9 @@ st.write(
 # ───────────────────────────────
 # Load Model
 # ───────────────────────────────
-load_dotenv()
-
-PIPELINE_PATH = os.getenv("LINKEDIN_MODEL_PATH")
+CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
+MODEL_DIR = os.path.join(CURRENT_DIR, "models")
+PIPELINE_PATH = os.path.join(MODEL_DIR, "linkedin_engagement_model.pkl")
 
 @st.cache_resource
 def load_pipeline(path):

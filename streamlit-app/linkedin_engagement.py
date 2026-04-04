@@ -4,7 +4,6 @@ import numpy as np
 import plotly.express as px
 import re
 import os
-from dotenv import load_dotenv
 
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestRegressor
@@ -19,8 +18,9 @@ st.set_page_config(
 st.title("💼 LinkedIn Engagement Rate Analysis Dashboard")
 
 # ────────────── Load Dataset ──────────────
-load_dotenv()
-DATA_PATH = os.getenv("LINKEDIN_POSTS_DATA")
+CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
+DATA_DIR = os.path.join(CURRENT_DIR, "data")
+DATA_PATH = os.path.join(DATA_DIR, "linkedin_new.csv")
 
 try:
     df = pd.read_csv(DATA_PATH)

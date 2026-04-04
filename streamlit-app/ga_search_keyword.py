@@ -9,13 +9,12 @@ st.set_page_config(
 # ===================== IMPORTS =====================
 import pandas as pd
 import plotly.express as px
-from dotenv import load_dotenv
 import os
 
-load_dotenv()
-
 # ===================== DATA LOADING =====================
-DATA_PATH = os.getenv("GA_SEARCH_KEYWORD_PATH")
+CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
+DATA_DIR = os.path.join(CURRENT_DIR, "data")
+DATA_PATH = os.path.join(DATA_DIR, "Search_keyword_report.csv")
 
 @st.cache_data
 def load_data(path):

@@ -1,299 +1,3 @@
-# import streamlit as st
-# import pandas as pd
-# import numpy as np
-# import plotly.express as px
-# import re
-# from datetime import datetime, timedelta
-
-# # ───────────────── Page Setup ─────────────────
-# st.set_page_config(
-#     page_title="LinkedIn Engagement EDA",
-#     page_icon="💼",
-#     layout="wide"
-# )
-
-# st.title("💼 LinkedIn Engagement EDA Dashboard")
-
-# # ───────────────── Load Data ─────────────────
-# @st.cache_data
-# def load_data():
-#     return pd.read_csv(r"C:\TEIM Project\social_analytics\streamlit-app\data\linkedin_new.csv")
-
-# df_raw = load_data()
-
-# # ───────────────── LinkedIn Relative Date Conversion ─────────────────
-# def linkedin_date_to_datetime(date_str):
-#     if pd.isna(date_str):
-#         return np.nan
-
-#     date_str = str(date_str).lower()
-#     now = datetime.now()
-
-#     match = re.search(r"(\d+)\s*(d|w|mo|yr)", date_str)
-#     if not match:
-#         return np.nan
-
-#     value, unit = int(match.group(1)), match.group(2)
-
-#     if unit == "d":
-#         return now - timedelta(days=value)
-#     if unit == "w":
-#         return now - timedelta(weeks=value)
-#     if unit == "mo":
-#         return now - timedelta(days=value * 30)
-#     if unit == "yr":
-#         return now - timedelta(days=value * 365)
-
-#     return np.nan
-
-# df_raw["date_parsed"] = df_raw["date"].apply(linkedin_date_to_datetime)
-# df = df_raw[df_raw["date_parsed"].notna()].copy()
-
-# # ───────────────── Numeric Cleaning ─────────────────
-# for col in ["likes","comments_count","shares","impressions"]:
-#     if col in df.columns:
-#         df[col] = pd.to_numeric(df[col], errors="coerce").fillna(0)
-
-# df["total_engagement"] = df["likes"] + df["comments_count"] + df["shares"]
-
-# # ───────────────── Time Features ─────────────────
-# df["date_only"] = df["date_parsed"].dt.date
-# df["hour"] = df["date_parsed"].dt.hour
-# df["weekday"] = df["date_parsed"].dt.day_name()
-
-# # ───────────────── Sidebar Filters ─────────────────
-# st.sidebar.header("🔍 Filters")
-
-# min_date, max_date = df["date_only"].min(), df["date_only"].max()
-# c1, c2 = st.sidebar.columns(2)
-
-# with c1:
-#     from_date = st.date_input("From", min_date)
-# with c2:
-#     to_date = st.date_input("To", max_date)
-
-# likes_range = st.sidebar.slider("Likes", int(df.likes.min()), int(df.likes.max()),
-#                                 (int(df.likes.min()), int(df.likes.max())))
-# comments_range = st.sidebar.slider("Comments", int(df.comments_count.min()), int(df.comments_count.max()),
-#                                    (int(df.comments_count.min()), int(df.comments_count.max())))
-# shares_range = st.sidebar.slider("Shares", int(df.shares.min()), int(df.shares.max()),
-#                                  (int(df.shares.min()), int(df.shares.max())))
-# eng_range = st.sidebar.slider("Total Engagement", int(df.total_engagement.min()),
-#                               int(df.total_engagement.max()),
-#                               (int(df.total_engagement.min()), int(df.total_engagement.max())))
-
-# # ───────────────── Apply Filters ─────────────────
-# df_filtered = df[
-#     (df.date_only.between(from_date, to_date)) &
-#     (df.likes.between(*likes_range)) &
-#     (df.comments_count.between(*comments_range)) &
-#     (df.shares.between(*shares_range)) &
-#     (df.total_engagement.between(*eng_range))
-# ]
-
-# if df_filtered.empty:
-#     st.warning("⚠ No data after applying filters")
-#     st.stop()
-
-# # ───────────────── Session Management ─────────────────
-# if "selected_graphs" not in st.session_state:
-#     st.session_state.selected_graphs = [
-#         "Distribution of Likes","Distribution of Comments","Distribution of Shares",
-#         "Distribution of Impressions","Total Engagement Distribution",
-#         "Outlier Detection","Engagement Drivers","Engagement Over Time",
-#         "7-Day Smoothed Trend","Engagement by Hour","Engagement by Weekday","Viral Posts Analysis"
-#     ]
-
-# # ───────────────── Helper Layout ─────────────────
-# def plot_with_summary(fig, summary):
-#     c1, c2 = st.columns([3, 1])
-#     with c1:
-#         st.plotly_chart(fig, use_container_width=True)
-#     with c2:
-#         st.markdown(summary)
-
-# # ───────────────── 1️⃣ Distribution of Likes ─────────────────
-# st.subheader("1️⃣ Distribution of Likes")
-# likes_stats = df_filtered["likes"].describe()
-# fig = px.histogram(df_filtered, x="likes", nbins=30, marginal="box")
-# plot_with_summary(fig, f"""
-# ### 📌 Graph Summary
-# {likes_stats.to_frame().to_markdown()}
-
-# ### 🔍 Key Insight
-# Likes show a heavy right-skew, indicating a few highly popular posts.
-
-# ### ✅ Conclusion
-# Engagement on LinkedIn is driven by a limited number of high-performing posts.
-# """)
-
-# # ───────────────── 2️⃣ Distribution of Comments ─────────────────
-# st.subheader("2️⃣ Distribution of Comments")
-# comments_stats = df_filtered["comments_count"].describe()
-# fig = px.histogram(df_filtered, x="comments_count", nbins=30, marginal="box")
-# plot_with_summary(fig, f"""
-# ### 📌 Graph Summary
-# {comments_stats.to_frame().to_markdown()}
-
-# ### 🔍 Key Insight
-# Most posts receive minimal comments, reflecting selective user participation.
-
-# ### ✅ Conclusion
-# Comments indicate deeper engagement and are concentrated on discussion-driven posts.
-# """)
-
-# # ───────────────── 3️⃣ Distribution of Shares ─────────────────
-# st.subheader("3️⃣ Distribution of Shares")
-# shares_stats = df_filtered["shares"].describe()
-# fig = px.histogram(df_filtered, x="shares", nbins=30, marginal="box")
-# plot_with_summary(fig, f"""
-# ### 📌 Graph Summary
-# {shares_stats.to_frame().to_markdown()}
-
-# ### 🔍 Key Insight
-# Sharing behavior is rare and limited to high-value content.
-
-# ### ✅ Conclusion
-# Shares represent strong content relevance rather than casual interaction.
-# """)
-
-# # ───────────────── 4️⃣ Distribution of Impressions ─────────────────
-# st.subheader("4️⃣ Distribution of Impressions")
-# fig = px.histogram(df_filtered, x="impressions", nbins=30, marginal="box")
-# plot_with_summary(fig, """
-# ### 📌 Graph Summary
-# Impressions distribution across posts.
-
-# ### 🔍 Key Insight
-# Visibility varies widely due to algorithmic amplification.
-
-# ### ✅ Conclusion
-# Not all posts receive equal exposure on LinkedIn feeds.
-# """)
-
-# # ───────────────── 5️⃣ Total Engagement Distribution ─────────────────
-# st.subheader("5️⃣ Total Engagement Distribution")
-# eng_stats = df_filtered["total_engagement"].describe()
-# fig = px.histogram(df_filtered, x="total_engagement", nbins=30, marginal="box")
-# plot_with_summary(fig, f"""
-# ### 📌 Graph Summary
-# {eng_stats.to_frame().to_markdown()}
-
-# ### 🔍 Key Insight
-# Total engagement is dominated by a few viral posts.
-
-# ### ✅ Conclusion
-# Overall engagement distribution is highly skewed.
-# """)
-
-# # ───────────────── 6️⃣ Outlier Detection ─────────────────
-# st.subheader("6️⃣ Outlier Detection")
-# fig = px.box(df_filtered, y=["likes","comments_count","shares"])
-# plot_with_summary(fig, """
-# ### 📌 Graph Summary
-# Boxplots highlight extreme engagement values.
-
-# ### 🔍 Key Insight
-# Outliers correspond to viral or high-impact posts.
-
-# ### ✅ Conclusion
-# Outlier analysis helps identify top-performing content.
-# """)
-
-# # ───────────────── 7️⃣ Engagement Drivers ─────────────────
-# st.subheader("7️⃣ Engagement Drivers")
-# corr = df_filtered[["likes","comments_count","shares","total_engagement"]].corr()["total_engagement"].drop("total_engagement")
-# fig = px.bar(corr, orientation="h")
-# plot_with_summary(fig, """
-# ### 📌 Graph Summary
-# Correlation between engagement metrics.
-
-# ### 🔍 Key Insight
-# Likes contribute most to total engagement.
-
-# ### ✅ Conclusion
-# Optimizing for likes yields the highest engagement returns.
-# """)
-
-# # ───────────────── 8️⃣ Engagement Over Time ─────────────────
-# st.subheader("8️⃣ Engagement Over Time")
-# daily = df_filtered.groupby("date_only")["total_engagement"].mean().reset_index()
-# fig = px.line(daily, x="date_only", y="total_engagement")
-# plot_with_summary(fig, """
-# ### 📌 Graph Summary
-# Average engagement trend over time.
-
-# ### 🔍 Key Insight
-# Engagement fluctuates with content strategy and audience behavior.
-
-# ### ✅ Conclusion
-# Temporal trends assist in planning posting schedules.
-# """)
-
-# # ───────────────── 9️⃣ 7-Day Smoothed Trend ─────────────────
-# st.subheader("9️⃣ 7-Day Smoothed Engagement Trend")
-# daily["rolling"] = daily["total_engagement"].rolling(7).mean()
-# fig = px.line(daily, x="date_only", y="rolling")
-# plot_with_summary(fig, """
-# ### 📌 Graph Summary
-# Smoothed engagement trend using rolling average.
-
-# ### 🔍 Key Insight
-# Short-term volatility is reduced.
-
-# ### ✅ Conclusion
-# Smoothed trends reveal long-term engagement patterns.
-# """)
-
-# # ───────────────── 🔟 Engagement by Hour ─────────────────
-# st.subheader("🔟 Engagement by Hour")
-# hourly = df_filtered.groupby("hour")["total_engagement"].mean().reset_index()
-# best_hour = hourly.loc[hourly.total_engagement.idxmax(), "hour"]
-# fig = px.line(hourly, x="hour", y="total_engagement", markers=True)
-# plot_with_summary(fig, f"""
-# ### 📌 Graph Summary
-# Engagement across posting hours.
-
-# ### 🔍 Key Insight
-# Peak engagement occurs around {best_hour}:00.
-
-# ### ✅ Conclusion
-# Posting time significantly influences performance.
-# """)
-
-# # ───────────────── 1️⃣1️⃣ Engagement by Weekday ─────────────────
-# st.subheader("1️⃣1️⃣ Engagement by Weekday")
-# weekday = df_filtered.groupby("weekday")["total_engagement"].mean().reset_index()
-# best_day = weekday.loc[weekday.total_engagement.idxmax(), "weekday"]
-# fig = px.bar(weekday, x="weekday", y="total_engagement")
-# plot_with_summary(fig, f"""
-# ### 📌 Graph Summary
-# Engagement variation across weekdays.
-
-# ### 🔍 Key Insight
-# Highest engagement is observed on {best_day}.
-
-# ### ✅ Conclusion
-# Weekday choice impacts post visibility and interaction.
-# """)
-
-# # ───────────────── 1️⃣2️⃣ Viral Posts Analysis ─────────────────
-# st.subheader("1️⃣2️⃣ Viral Posts Analysis")
-# threshold = df_filtered.total_engagement.quantile(0.95)
-# viral = df_filtered[df_filtered.total_engagement >= threshold]
-# fig = px.scatter(viral, x="hour", y="total_engagement", color="weekday")
-# plot_with_summary(fig, """
-# ### 📌 Graph Summary
-# Posts above 95th percentile engagement.
-
-# ### 🔍 Key Insight
-# Viral posts cluster around specific times and days.
-
-# ### ✅ Conclusion
-# Strategic timing improves chances of virality.
-# """)
-
-
 # --------------------------------------------------------------------------------------------------
 # -------------------------------------INITIAL LINKEDIN DASHBOARD-----------------------------------
 # --------------------------------------------------------------------------------------------------
@@ -305,9 +9,6 @@ import numpy as np
 import plotly.express as px
 import re
 from datetime import datetime, timedelta
-from dotenv import load_dotenv
-
-load_dotenv()
 
 # ───────────────── Page Setup ─────────────────
 st.set_page_config(
@@ -317,7 +18,9 @@ st.set_page_config(
 )
 
 st.title("💼 LinkedIn Engagement EDA Dashboard")
-DATA_PATH = os.getenv("LINKEDIN_POSTS_DATA")
+CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
+DATA_DIR = os.path.join(CURRENT_DIR, "data")
+DATA_PATH = os.path.join(DATA_DIR, "linkedin_new.csv")
 
 # ───────────────── Load Data ─────────────────
 @st.cache_data
@@ -668,6 +371,303 @@ if "Viral Posts Analysis" in st.session_state.selected_graphs:
 Viral posts cluster around specific hours and weekdays, confirming timing effects.
 """
     plot_with_summary(fig, summary)
+
+# ---------------------------------------------------------------------------------------------------
+
+# import streamlit as st
+# import pandas as pd
+# import numpy as np
+# import plotly.express as px
+# import re
+# from datetime import datetime, timedelta
+
+# # ───────────────── Page Setup ─────────────────
+# st.set_page_config(
+#     page_title="LinkedIn Engagement EDA",
+#     page_icon="💼",
+#     layout="wide"
+# )
+
+# st.title("💼 LinkedIn Engagement EDA Dashboard")
+
+# # ───────────────── Load Data ─────────────────
+# @st.cache_data
+# def load_data():
+#     return pd.read_csv(r"C:\TEIM Project\social_analytics\streamlit-app\data\linkedin_new.csv")
+
+# df_raw = load_data()
+
+# # ───────────────── LinkedIn Relative Date Conversion ─────────────────
+# def linkedin_date_to_datetime(date_str):
+#     if pd.isna(date_str):
+#         return np.nan
+
+#     date_str = str(date_str).lower()
+#     now = datetime.now()
+
+#     match = re.search(r"(\d+)\s*(d|w|mo|yr)", date_str)
+#     if not match:
+#         return np.nan
+
+#     value, unit = int(match.group(1)), match.group(2)
+
+#     if unit == "d":
+#         return now - timedelta(days=value)
+#     if unit == "w":
+#         return now - timedelta(weeks=value)
+#     if unit == "mo":
+#         return now - timedelta(days=value * 30)
+#     if unit == "yr":
+#         return now - timedelta(days=value * 365)
+
+#     return np.nan
+
+# df_raw["date_parsed"] = df_raw["date"].apply(linkedin_date_to_datetime)
+# df = df_raw[df_raw["date_parsed"].notna()].copy()
+
+# # ───────────────── Numeric Cleaning ─────────────────
+# for col in ["likes","comments_count","shares","impressions"]:
+#     if col in df.columns:
+#         df[col] = pd.to_numeric(df[col], errors="coerce").fillna(0)
+
+# df["total_engagement"] = df["likes"] + df["comments_count"] + df["shares"]
+
+# # ───────────────── Time Features ─────────────────
+# df["date_only"] = df["date_parsed"].dt.date
+# df["hour"] = df["date_parsed"].dt.hour
+# df["weekday"] = df["date_parsed"].dt.day_name()
+
+# # ───────────────── Sidebar Filters ─────────────────
+# st.sidebar.header("🔍 Filters")
+
+# min_date, max_date = df["date_only"].min(), df["date_only"].max()
+# c1, c2 = st.sidebar.columns(2)
+
+# with c1:
+#     from_date = st.date_input("From", min_date)
+# with c2:
+#     to_date = st.date_input("To", max_date)
+
+# likes_range = st.sidebar.slider("Likes", int(df.likes.min()), int(df.likes.max()),
+#                                 (int(df.likes.min()), int(df.likes.max())))
+# comments_range = st.sidebar.slider("Comments", int(df.comments_count.min()), int(df.comments_count.max()),
+#                                    (int(df.comments_count.min()), int(df.comments_count.max())))
+# shares_range = st.sidebar.slider("Shares", int(df.shares.min()), int(df.shares.max()),
+#                                  (int(df.shares.min()), int(df.shares.max())))
+# eng_range = st.sidebar.slider("Total Engagement", int(df.total_engagement.min()),
+#                               int(df.total_engagement.max()),
+#                               (int(df.total_engagement.min()), int(df.total_engagement.max())))
+
+# # ───────────────── Apply Filters ─────────────────
+# df_filtered = df[
+#     (df.date_only.between(from_date, to_date)) &
+#     (df.likes.between(*likes_range)) &
+#     (df.comments_count.between(*comments_range)) &
+#     (df.shares.between(*shares_range)) &
+#     (df.total_engagement.between(*eng_range))
+# ]
+
+# if df_filtered.empty:
+#     st.warning("⚠ No data after applying filters")
+#     st.stop()
+
+# # ───────────────── Session Management ─────────────────
+# if "selected_graphs" not in st.session_state:
+#     st.session_state.selected_graphs = [
+#         "Distribution of Likes","Distribution of Comments","Distribution of Shares",
+#         "Distribution of Impressions","Total Engagement Distribution",
+#         "Outlier Detection","Engagement Drivers","Engagement Over Time",
+#         "7-Day Smoothed Trend","Engagement by Hour","Engagement by Weekday","Viral Posts Analysis"
+#     ]
+
+# # ───────────────── Helper Layout ─────────────────
+# def plot_with_summary(fig, summary):
+#     c1, c2 = st.columns([3, 1])
+#     with c1:
+#         st.plotly_chart(fig, use_container_width=True)
+#     with c2:
+#         st.markdown(summary)
+
+# # ───────────────── 1️⃣ Distribution of Likes ─────────────────
+# st.subheader("1️⃣ Distribution of Likes")
+# likes_stats = df_filtered["likes"].describe()
+# fig = px.histogram(df_filtered, x="likes", nbins=30, marginal="box")
+# plot_with_summary(fig, f"""
+# ### 📌 Graph Summary
+# {likes_stats.to_frame().to_markdown()}
+
+# ### 🔍 Key Insight
+# Likes show a heavy right-skew, indicating a few highly popular posts.
+
+# ### ✅ Conclusion
+# Engagement on LinkedIn is driven by a limited number of high-performing posts.
+# """)
+
+# # ───────────────── 2️⃣ Distribution of Comments ─────────────────
+# st.subheader("2️⃣ Distribution of Comments")
+# comments_stats = df_filtered["comments_count"].describe()
+# fig = px.histogram(df_filtered, x="comments_count", nbins=30, marginal="box")
+# plot_with_summary(fig, f"""
+# ### 📌 Graph Summary
+# {comments_stats.to_frame().to_markdown()}
+
+# ### 🔍 Key Insight
+# Most posts receive minimal comments, reflecting selective user participation.
+
+# ### ✅ Conclusion
+# Comments indicate deeper engagement and are concentrated on discussion-driven posts.
+# """)
+
+# # ───────────────── 3️⃣ Distribution of Shares ─────────────────
+# st.subheader("3️⃣ Distribution of Shares")
+# shares_stats = df_filtered["shares"].describe()
+# fig = px.histogram(df_filtered, x="shares", nbins=30, marginal="box")
+# plot_with_summary(fig, f"""
+# ### 📌 Graph Summary
+# {shares_stats.to_frame().to_markdown()}
+
+# ### 🔍 Key Insight
+# Sharing behavior is rare and limited to high-value content.
+
+# ### ✅ Conclusion
+# Shares represent strong content relevance rather than casual interaction.
+# """)
+
+# # ───────────────── 4️⃣ Distribution of Impressions ─────────────────
+# st.subheader("4️⃣ Distribution of Impressions")
+# fig = px.histogram(df_filtered, x="impressions", nbins=30, marginal="box")
+# plot_with_summary(fig, """
+# ### 📌 Graph Summary
+# Impressions distribution across posts.
+
+# ### 🔍 Key Insight
+# Visibility varies widely due to algorithmic amplification.
+
+# ### ✅ Conclusion
+# Not all posts receive equal exposure on LinkedIn feeds.
+# """)
+
+# # ───────────────── 5️⃣ Total Engagement Distribution ─────────────────
+# st.subheader("5️⃣ Total Engagement Distribution")
+# eng_stats = df_filtered["total_engagement"].describe()
+# fig = px.histogram(df_filtered, x="total_engagement", nbins=30, marginal="box")
+# plot_with_summary(fig, f"""
+# ### 📌 Graph Summary
+# {eng_stats.to_frame().to_markdown()}
+
+# ### 🔍 Key Insight
+# Total engagement is dominated by a few viral posts.
+
+# ### ✅ Conclusion
+# Overall engagement distribution is highly skewed.
+# """)
+
+# # ───────────────── 6️⃣ Outlier Detection ─────────────────
+# st.subheader("6️⃣ Outlier Detection")
+# fig = px.box(df_filtered, y=["likes","comments_count","shares"])
+# plot_with_summary(fig, """
+# ### 📌 Graph Summary
+# Boxplots highlight extreme engagement values.
+
+# ### 🔍 Key Insight
+# Outliers correspond to viral or high-impact posts.
+
+# ### ✅ Conclusion
+# Outlier analysis helps identify top-performing content.
+# """)
+
+# # ───────────────── 7️⃣ Engagement Drivers ─────────────────
+# st.subheader("7️⃣ Engagement Drivers")
+# corr = df_filtered[["likes","comments_count","shares","total_engagement"]].corr()["total_engagement"].drop("total_engagement")
+# fig = px.bar(corr, orientation="h")
+# plot_with_summary(fig, """
+# ### 📌 Graph Summary
+# Correlation between engagement metrics.
+
+# ### 🔍 Key Insight
+# Likes contribute most to total engagement.
+
+# ### ✅ Conclusion
+# Optimizing for likes yields the highest engagement returns.
+# """)
+
+# # ───────────────── 8️⃣ Engagement Over Time ─────────────────
+# st.subheader("8️⃣ Engagement Over Time")
+# daily = df_filtered.groupby("date_only")["total_engagement"].mean().reset_index()
+# fig = px.line(daily, x="date_only", y="total_engagement")
+# plot_with_summary(fig, """
+# ### 📌 Graph Summary
+# Average engagement trend over time.
+
+# ### 🔍 Key Insight
+# Engagement fluctuates with content strategy and audience behavior.
+
+# ### ✅ Conclusion
+# Temporal trends assist in planning posting schedules.
+# """)
+
+# # ───────────────── 9️⃣ 7-Day Smoothed Trend ─────────────────
+# st.subheader("9️⃣ 7-Day Smoothed Engagement Trend")
+# daily["rolling"] = daily["total_engagement"].rolling(7).mean()
+# fig = px.line(daily, x="date_only", y="rolling")
+# plot_with_summary(fig, """
+# ### 📌 Graph Summary
+# Smoothed engagement trend using rolling average.
+
+# ### 🔍 Key Insight
+# Short-term volatility is reduced.
+
+# ### ✅ Conclusion
+# Smoothed trends reveal long-term engagement patterns.
+# """)
+
+# # ───────────────── 🔟 Engagement by Hour ─────────────────
+# st.subheader("🔟 Engagement by Hour")
+# hourly = df_filtered.groupby("hour")["total_engagement"].mean().reset_index()
+# best_hour = hourly.loc[hourly.total_engagement.idxmax(), "hour"]
+# fig = px.line(hourly, x="hour", y="total_engagement", markers=True)
+# plot_with_summary(fig, f"""
+# ### 📌 Graph Summary
+# Engagement across posting hours.
+
+# ### 🔍 Key Insight
+# Peak engagement occurs around {best_hour}:00.
+
+# ### ✅ Conclusion
+# Posting time significantly influences performance.
+# """)
+
+# # ───────────────── 1️⃣1️⃣ Engagement by Weekday ─────────────────
+# st.subheader("1️⃣1️⃣ Engagement by Weekday")
+# weekday = df_filtered.groupby("weekday")["total_engagement"].mean().reset_index()
+# best_day = weekday.loc[weekday.total_engagement.idxmax(), "weekday"]
+# fig = px.bar(weekday, x="weekday", y="total_engagement")
+# plot_with_summary(fig, f"""
+# ### 📌 Graph Summary
+# Engagement variation across weekdays.
+
+# ### 🔍 Key Insight
+# Highest engagement is observed on {best_day}.
+
+# ### ✅ Conclusion
+# Weekday choice impacts post visibility and interaction.
+# """)
+
+# # ───────────────── 1️⃣2️⃣ Viral Posts Analysis ─────────────────
+# st.subheader("1️⃣2️⃣ Viral Posts Analysis")
+# threshold = df_filtered.total_engagement.quantile(0.95)
+# viral = df_filtered[df_filtered.total_engagement >= threshold]
+# fig = px.scatter(viral, x="hour", y="total_engagement", color="weekday")
+# plot_with_summary(fig, """
+# ### 📌 Graph Summary
+# Posts above 95th percentile engagement.
+
+# ### 🔍 Key Insight
+# Viral posts cluster around specific times and days.
+
+# ### ✅ Conclusion
+# Strategic timing improves chances of virality.
+# """)
 
 # --------------------------------------------------------------------------------------------------
 

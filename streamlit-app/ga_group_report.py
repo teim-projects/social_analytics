@@ -7,7 +7,6 @@ import pandas as pd
 import numpy as np
 import plotly.express as px
 import os
-from dotenv import load_dotenv
 
 # =====================================
 # 1. PAGE SETUP
@@ -19,8 +18,9 @@ st.set_page_config(
 
 st.title("📊 Google Ads Ad Group Performance Dashboard")
 
-load_dotenv()
-DATA_PATH = os.getenv("GA_GROUP_REPORT")  # set in .env
+CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
+DATA_DIR = os.path.join(CURRENT_DIR, "data")
+DATA_PATH = os.path.join(DATA_DIR, "Ad_group_report.csv")
 
 # =====================================
 # 2. LOAD & CLEAN DATA

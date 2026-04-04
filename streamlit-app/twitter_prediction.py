@@ -7,7 +7,6 @@ from scipy.sparse import hstack
 from datetime import datetime
 import os
 import datetime as dt
-from dotenv import load_dotenv
 
 # ───────────────────────────────
 # Page Config
@@ -27,10 +26,9 @@ st.write(
 # ───────────────────────────────
 # Load Models
 # ───────────────────────────────
-load_dotenv()
-
-MODEL_PATH = os.getenv("TWITTER_MODEL_PATH")
-TFIDF_PATH = os.getenv("TWITTER_TFIDF_PATH")
+CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
+MODEL_PATH = os.path.join(CURRENT_DIR, "models/twitter_engagement_model.pkl")
+TFIDF_PATH = os.path.join(CURRENT_DIR, "models/twitter_tfidf.pkl")
 
 @st.cache_resource
 def load_pickle(path):

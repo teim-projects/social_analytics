@@ -3,7 +3,6 @@ import pandas as pd
 import plotly.express as px
 import re
 import os
-from dotenv import load_dotenv
 
 # ───────────────── Streamlit Setup ─────────────────
 st.set_page_config(
@@ -14,8 +13,9 @@ st.set_page_config(
 st.title("🐦 Twitter Top & Bottom Tweets Dashboard")
 
 # ───────────────── Load Environment & Data ─────────────────
-load_dotenv()
-TWITTER_DATA_PATH = os.getenv("TWITTER_DATA_PATH")
+CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
+DATA_DIR = os.path.join(CURRENT_DIR, "data")
+TWITTER_DATA_PATH = os.path.join(DATA_DIR, "twitter_data.csv")
 
 try:
     df = pd.read_csv(TWITTER_DATA_PATH)

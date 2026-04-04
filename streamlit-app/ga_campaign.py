@@ -3,7 +3,6 @@ import pandas as pd
 import numpy as np
 import plotly.express as px
 from io import StringIO
-from dotenv import load_dotenv
 import os
 
 # ───────────────── Page Setup ─────────────────
@@ -68,8 +67,9 @@ def load_campaign_data(path):
     df["CTR"] = (df["Clicks"] / df["Impressions"]) * 100
     return df
 
-load_dotenv()
-DATA_PATH = os.getenv("GA_CAMPAIGN_REPORT")
+CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
+DATA_DIR = os.path.join(CURRENT_DIR, "data")
+DATA_PATH = os.path.join(DATA_DIR, "Campaign_report.csv")
 df = load_campaign_data(DATA_PATH)
 
 # ───────────────── Sidebar Filters ─────────────────

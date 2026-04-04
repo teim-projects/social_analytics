@@ -55,8 +55,8 @@ def load_data(path):
 
     return df
 
-
-DATA_PATH = "C:\\TEIM Project\\social_analytics\\streamlit-app\\data\\twitter_data.csv"
+CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
+DATA_PATH = os.path.join(CURRENT_DIR, "data", "twitter_data.csv")
 
 if "df" not in st.session_state:
     st.session_state.df = load_data(DATA_PATH)

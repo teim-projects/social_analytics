@@ -2,9 +2,6 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 import os
-from dotenv import load_dotenv
-
-load_dotenv()
 
 # ────────────── Page Setup ──────────────
 st.set_page_config(
@@ -19,7 +16,9 @@ st.caption("RoBERTa-based sentiment analysis (cardiffnlp)")
 # ────────────── Load Data ──────────────
 @st.cache_data(show_spinner=False)
 def load_data():
-    path = os.getenv("TWITTER_SENTIMENT_MODEL_PATH")
+    CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
+    DATA_DIR = os.path.join(CURRENT_DIR, "data")
+    path = os.path.join(DATA_DIR, "twitter_sentiment.pkl")
 
     if not os.path.exists(path):
         st.error(f"❌ Pickle file not found: {path}")

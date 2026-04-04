@@ -3,7 +3,6 @@ import pandas as pd
 import numpy as np
 import plotly.express as px
 from io import StringIO
-from dotenv import load_dotenv
 import os
 
 # ───────────────── Page Setup ─────────────────
@@ -71,10 +70,11 @@ def load_targeted_content_data(path):
     return df
 
 # ───────────────── Load Data ─────────────────
-load_dotenv()
-DATA_PATH = os.getenv("GA_TARGETED_CONTENT_REPORT")
+CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
+DATA_DIR = os.path.join(CURRENT_DIR, "data")
+DATA_PATH = os.path.join(DATA_DIR, "Targeted_content_report.csv")
 if not DATA_PATH:
-    st.error("❌ GA_TARGETED_CONTENT_REPORT not set")
+    st.error("❌ Targeted content report file not found")
     st.stop()
 
 df = load_targeted_content_data(DATA_PATH)

@@ -8,15 +8,15 @@ from sklearn.metrics import r2_score, mean_absolute_error
 import plotly.express as px
 import isodate
 import os
-from dotenv import load_dotenv
 
 # ────────────── Streamlit Page Setup ──────────────
 st.set_page_config(page_title="YouTube Engagement Rate Dashboard", page_icon="📊", layout="wide")
 st.title("🎥 YouTube Engagement Rate Analysis Dashboard")
 
 # ────────────── Load Dataset ──────────────
-load_dotenv()  # Load environment variables from .env file
-DATA_PATH = os.getenv("Youtube_video_data")
+CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
+DATA_DIR = os.path.join(CURRENT_DIR, "data")
+DATA_PATH = os.path.join(DATA_DIR, "ALL_VIDEO_DETAILS.csv")
 try:
     df = pd.read_csv(DATA_PATH)
 except FileNotFoundError:
